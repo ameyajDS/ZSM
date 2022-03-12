@@ -1,0 +1,4 @@
+ The date field should detect the date from teh day part alone. Also it should sense in dd-mm-yyyy
+
+
+Modified on server

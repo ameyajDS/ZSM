@@ -1,0 +1,13 @@
+﻿<root>
+  <CrossTabColumn Direction="Vertical" IsOriginal="True" Caption="Requisition Date" Visible="True" DataUnitColumnName="requisition_dt" Distribution="None">
+    <CrossTabColumn IsOriginal="False" Visible="Ture" Distribution="DateToQtr">
+      <CrossTabColumn IsOriginal="False" Visible="Ture" Distribution="QtrToWeek">
+      </CrossTabColumn>
+    </CrossTabColumn>
+  </CrossTabColumn>
+  <CrossTabColumn Direction="Horizontal" IsOriginal="True" Caption="Department" Visible="True" DataUnitColumnname="department_nm" Distribution="None">
+    <CrossTabColumn IsOriginal="False" Visible="True" Distribution="DiscreteValues">
+      <CrossTabColumn IsOriginal="True" Visible="True" DataUnitColumnName="quantity" Caption="Qty" Distribution="None" />
+    </CrossTabColumn>
+  </CrossTabColumn>
+</root>

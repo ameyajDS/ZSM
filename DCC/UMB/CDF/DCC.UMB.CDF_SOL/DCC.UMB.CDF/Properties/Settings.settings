@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DCC.UMB.CDF.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DCC_CMN_CDF_DbManagerWebService_DbManagerWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/DCC.UMB.CDFWS/DBManager/DbManagerWS.asmx</Value>
+    </Setting>
+    <Setting Name="UN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="PW" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sa</Value>
+    </Setting>
+    <Setting Name="SN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(local)</Value>
+    </Setting>
+    <Setting Name="AID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SAM</Value>
+    </Setting>
+    <Setting Name="PDP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\</Value>
+    </Setting>
+    <Setting Name="DEBUG" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"C:\CruiseControlBase\WorkingBase\DERA_APPS\DCC\SSM\RMS\Branches\v2.00\DCC.SSM.RMS_SOL\DCC.SSM.RMS\DCC.SSM.RMS.csproj"</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

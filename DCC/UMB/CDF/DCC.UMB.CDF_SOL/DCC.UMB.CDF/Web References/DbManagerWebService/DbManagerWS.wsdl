@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Ping">
+        <s:complexType />
+      </s:element>
+      <s:element name="PingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateConnection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serverName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="clientName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateConnectionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="NotifyClientStillActive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="NotifyClientStillActiveResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DisposeConnection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisposeConnectionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BeginTrans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BeginTransResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BeginTransWithIsolationLevel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="isolationLevel" type="tns:IsolationLevel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="IsolationLevel">
+        <s:restriction base="s:string">
+          <s:enumeration value="Unspecified" />
+          <s:enumeration value="Chaos" />
+          <s:enumeration value="ReadUncommitted" />
+          <s:enumeration value="ReadCommitted" />
+          <s:enumeration value="RepeatableRead" />
+          <s:enumeration value="Serializable" />
+          <s:enumeration value="Snapshot" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="BeginTransWithIsolationLevelResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CommitTrans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CommitTransResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RollbackTrans">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RollbackTransResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExecuteSQL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sqlString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteSQLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteSQLResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteStoredProc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storedProcedureName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfSqlParameter" />
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSqlParameter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SqlParameter" nillable="true" type="tns:SqlParameter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SqlParameter">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DbParameter">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="CompareInfo" type="tns:SqlCompareOptions" />
+              <s:element minOccurs="0" maxOccurs="1" name="XmlSchemaCollectionDatabase" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="XmlSchemaCollectionOwningSchema" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="XmlSchemaCollectionName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="LocaleId" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" default="0" name="Precision" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" default="0" name="Scale" type="s:unsignedByte" />
+              <s:element minOccurs="1" maxOccurs="1" name="SqlDbType" type="tns:SqlDbType" />
+              <s:element minOccurs="0" maxOccurs="1" name="SqlValue" />
+              <s:element minOccurs="0" maxOccurs="1" name="UdtTypeName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TypeName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Offset" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DbParameter" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MarshalByRefObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DbType" type="tns:DbType" />
+              <s:element minOccurs="0" maxOccurs="1" default="Input" name="Direction" type="tns:ParameterDirection" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsNullable" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" default="" name="ParameterName" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Size" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" default="" name="SourceColumn" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" default="false" name="SourceColumnNullMapping" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" default="Current" name="SourceVersion" type="tns:DataRowVersion" />
+              <s:element minOccurs="0" maxOccurs="1" name="Value" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MarshalByRefObject" abstract="true" />
+      <s:simpleType name="DbType">
+        <s:restriction base="s:string">
+          <s:enumeration value="AnsiString" />
+          <s:enumeration value="Binary" />
+          <s:enumeration value="Byte" />
+          <s:enumeration value="Boolean" />
+          <s:enumeration value="Currency" />
+          <s:enumeration value="Date" />
+          <s:enumeration value="DateTime" />
+          <s:enumeration value="Decimal" />
+          <s:enumeration value="Double" />
+          <s:enumeration value="Guid" />
+          <s:enumeration value="Int16" />
+          <s:enumeration value="Int32" />
+          <s:enumeration value="Int64" />
+          <s:enumeration value="Object" />
+          <s:enumeration value="SByte" />
+          <s:enumeration value="Single" />
+          <s:enumeration value="String" />
+          <s:enumeration value="Time" />
+          <s:enumeration value="UInt16" />
+          <s:enumeration value="UInt32" />
+          <s:enumeration value="UInt64" />
+          <s:enumeration value="VarNumeric" />
+          <s:enumeration value="AnsiStringFixedLength" />
+          <s:enumeration value="StringFixedLength" />
+          <s:enumeration value="Xml" />
+          <s:enumeration value="DateTime2" />
+          <s:enumeration value="DateTimeOffset" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="ParameterDirection">
+        <s:restriction base="s:string">
+          <s:enumeration value="Input" />
+          <s:enumeration value="Output" />
+          <s:enumeration value="InputOutput" />
+          <s:enumeration value="ReturnValue" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="DataRowVersion">
+        <s:restriction base="s:string">
+          <s:enumeration value="Original" />
+          <s:enumeration value="Current" />
+          <s:enumeration value="Proposed" />
+          <s:enumeration value="Default" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SqlCompareOptions">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="None" />
+              <s:enumeration value="IgnoreCase" />
+              <s:enumeration value="IgnoreNonSpace" />
+              <s:enumeration value="IgnoreKanaType" />
+              <s:enumeration value="IgnoreWidth" />
+              <s:enumeration value="BinarySort" />
+              <s:enumeration value="BinarySort2" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:simpleType name="SqlDbType">
+        <s:restriction base="s:string">
+          <s:enumeration value="BigInt" />
+          <s:enumeration value="Binary" />
+          <s:enumeration value="Bit" />
+          <s:enumeration value="Char" />
+          <s:enumeration value="DateTime" />
+          <s:enumeration value="Decimal" />
+          <s:enumeration value="Float" />
+          <s:enumeration value="Image" />
+          <s:enumeration value="Int" />
+          <s:enumeration value="Money" />
+          <s:enumeration value="NChar" />
+          <s:enumeration value="NText" />
+          <s:enumeration value="NVarChar" />
+          <s:enumeration value="Real" />
+          <s:enumeration value="UniqueIdentifier" />
+          <s:enumeration value="SmallDateTime" />
+          <s:enumeration value="SmallInt" />
+          <s:enumeration value="SmallMoney" />
+          <s:enumeration value="Text" />
+          <s:enumeration value="Timestamp" />
+          <s:enumeration value="TinyInt" />
+          <s:enumeration value="VarBinary" />
+          <s:enumeration value="VarChar" />
+          <s:enumeration value="Variant" />
+          <s:enumeration value="Xml" />
+          <s:enumeration value="Udt" />
+          <s:enumeration value="Structured" />
+          <s:enumeration value="Date" />
+          <s:enumeration value="Time" />
+          <s:enumeration value="DateTime2" />
+          <s:enumeration value="DateTimeOffset" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="DBNull" />
+      <s:element name="ExecuteStoredProcResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteStoredProcResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteStoredProcWithNoParameter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storedProcedureName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteStoredProcWithNoParameterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteStoredProcWithNoParameterResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteScalar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sqlString" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteScalarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteScalarResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReaderClosed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReaderClosedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsReaderClosedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSchemaTableOfCurrentReader">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSchemaTableOfCurrentReaderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSchemaTableOfCurrentReaderResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadNextBucketFromDataReader">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bucketSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ReadNextBucketFromDataReaderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ReadNextBucketFromDataReaderResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteReader">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="storedProcedureName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfSqlParameter" />
+            <s:element minOccurs="1" maxOccurs="1" name="bucketSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteReaderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteReaderResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteReaderSQL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sqlString" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bucketSize" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteReaderSQLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteReaderSQLResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseReaderAndConnection">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="guid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloseReaderAndConnectionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsReportFileExisting">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relativeReportFilePath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsReportFileExistingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsReportFileExistingResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="packageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="relativePathStartingWithBackSlash" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reportFileContents" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadReportResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetReportOutput">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="relativeReportFilePath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameterValues">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="serverName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dbName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userRoleId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="applicationId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReportOutputResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReportOutputResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="PingSoapIn">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="PingSoapOut">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateConnection" />
+  </wsdl:message>
+  <wsdl:message name="CreateConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="NotifyClientStillActiveSoapIn">
+    <wsdl:part name="parameters" element="tns:NotifyClientStillActive" />
+  </wsdl:message>
+  <wsdl:message name="NotifyClientStillActiveSoapOut">
+    <wsdl:part name="parameters" element="tns:NotifyClientStillActiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="DisposeConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:DisposeConnection" />
+  </wsdl:message>
+  <wsdl:message name="DisposeConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:DisposeConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="BeginTransSoapIn">
+    <wsdl:part name="parameters" element="tns:BeginTrans" />
+  </wsdl:message>
+  <wsdl:message name="BeginTransSoapOut">
+    <wsdl:part name="parameters" element="tns:BeginTransResponse" />
+  </wsdl:message>
+  <wsdl:message name="BeginTransWithIsolationLevelSoapIn">
+    <wsdl:part name="parameters" element="tns:BeginTransWithIsolationLevel" />
+  </wsdl:message>
+  <wsdl:message name="BeginTransWithIsolationLevelSoapOut">
+    <wsdl:part name="parameters" element="tns:BeginTransWithIsolationLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="CommitTransSoapIn">
+    <wsdl:part name="parameters" element="tns:CommitTrans" />
+  </wsdl:message>
+  <wsdl:message name="CommitTransSoapOut">
+    <wsdl:part name="parameters" element="tns:CommitTransResponse" />
+  </wsdl:message>
+  <wsdl:message name="RollbackTransSoapIn">
+    <wsdl:part name="parameters" element="tns:RollbackTrans" />
+  </wsdl:message>
+  <wsdl:message name="RollbackTransSoapOut">
+    <wsdl:part name="parameters" element="tns:RollbackTransResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteSQLSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteSQL" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteSQLSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteSQLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteStoredProcSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteStoredProc" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteStoredProcSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteStoredProcResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteStoredProcWithNoParameterSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteStoredProcWithNoParameter" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteStoredProcWithNoParameterSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteStoredProcWithNoParameterResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteScalarSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteScalar" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteScalarSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteScalarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsReaderClosedSoapIn">
+    <wsdl:part name="parameters" element="tns:IsReaderClosed" />
+  </wsdl:message>
+  <wsdl:message name="IsReaderClosedSoapOut">
+    <wsdl:part name="parameters" element="tns:IsReaderClosedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSchemaTableOfCurrentReaderSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSchemaTableOfCurrentReader" />
+  </wsdl:message>
+  <wsdl:message name="GetSchemaTableOfCurrentReaderSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSchemaTableOfCurrentReaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ReadNextBucketFromDataReaderSoapIn">
+    <wsdl:part name="parameters" element="tns:ReadNextBucketFromDataReader" />
+  </wsdl:message>
+  <wsdl:message name="ReadNextBucketFromDataReaderSoapOut">
+    <wsdl:part name="parameters" element="tns:ReadNextBucketFromDataReaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteReaderSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteReader" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteReaderSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteReaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteReaderSQLSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteReaderSQL" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteReaderSQLSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteReaderSQLResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseReaderAndConnectionSoapIn">
+    <wsdl:part name="parameters" element="tns:CloseReaderAndConnection" />
+  </wsdl:message>
+  <wsdl:message name="CloseReaderAndConnectionSoapOut">
+    <wsdl:part name="parameters" element="tns:CloseReaderAndConnectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsReportFileExistingSoapIn">
+    <wsdl:part name="parameters" element="tns:IsReportFileExisting" />
+  </wsdl:message>
+  <wsdl:message name="IsReportFileExistingSoapOut">
+    <wsdl:part name="parameters" element="tns:IsReportFileExistingResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadReportSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadReport" />
+  </wsdl:message>
+  <wsdl:message name="UploadReportSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReportOutputSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReportOutput" />
+  </wsdl:message>
+  <wsdl:message name="GetReportOutputSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReportOutputResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DBManagerWSSoap">
+    <wsdl:operation name="Ping">
+      <wsdl:input message="tns:PingSoapIn" />
+      <wsdl:output message="tns:PingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateConnection">
+      <wsdl:input message="tns:CreateConnectionSoapIn" />
+      <wsdl:output message="tns:CreateConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyClientStillActive">
+      <wsdl:input message="tns:NotifyClientStillActiveSoapIn" />
+      <wsdl:output message="tns:NotifyClientStillActiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisposeConnection">
+      <wsdl:input message="tns:DisposeConnectionSoapIn" />
+      <wsdl:output message="tns:DisposeConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BeginTrans">
+      <wsdl:input message="tns:BeginTransSoapIn" />
+      <wsdl:output message="tns:BeginTransSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BeginTransWithIsolationLevel">
+      <wsdl:input message="tns:BeginTransWithIsolationLevelSoapIn" />
+      <wsdl:output message="tns:BeginTransWithIsolationLevelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CommitTrans">
+      <wsdl:input message="tns:CommitTransSoapIn" />
+      <wsdl:output message="tns:CommitTransSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RollbackTrans">
+      <wsdl:input message="tns:RollbackTransSoapIn" />
+      <wsdl:output message="tns:RollbackTransSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteSQL">
+      <wsdl:input message="tns:ExecuteSQLSoapIn" />
+      <wsdl:output message="tns:ExecuteSQLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteStoredProc">
+      <wsdl:input message="tns:ExecuteStoredProcSoapIn" />
+      <wsdl:output message="tns:ExecuteStoredProcSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteStoredProcWithNoParameter">
+      <wsdl:input message="tns:ExecuteStoredProcWithNoParameterSoapIn" />
+      <wsdl:output message="tns:ExecuteStoredProcWithNoParameterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteScalar">
+      <wsdl:input message="tns:ExecuteScalarSoapIn" />
+      <wsdl:output message="tns:ExecuteScalarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsReaderClosed">
+      <wsdl:input message="tns:IsReaderClosedSoapIn" />
+      <wsdl:output message="tns:IsReaderClosedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSchemaTableOfCurrentReader">
+      <wsdl:input message="tns:GetSchemaTableOfCurrentReaderSoapIn" />
+      <wsdl:output message="tns:GetSchemaTableOfCurrentReaderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadNextBucketFromDataReader">
+      <wsdl:input message="tns:ReadNextBucketFromDataReaderSoapIn" />
+      <wsdl:output message="tns:ReadNextBucketFromDataReaderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteReader">
+      <wsdl:input message="tns:ExecuteReaderSoapIn" />
+      <wsdl:output message="tns:ExecuteReaderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteReaderSQL">
+      <wsdl:input message="tns:ExecuteReaderSQLSoapIn" />
+      <wsdl:output message="tns:ExecuteReaderSQLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseReaderAndConnection">
+      <wsdl:input message="tns:CloseReaderAndConnectionSoapIn" />
+      <wsdl:output message="tns:CloseReaderAndConnectionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsReportFileExisting">
+      <wsdl:input message="tns:IsReportFileExistingSoapIn" />
+      <wsdl:output message="tns:IsReportFileExistingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadReport">
+      <wsdl:input message="tns:UploadReportSoapIn" />
+      <wsdl:output message="tns:UploadReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReportOutput">
+      <wsdl:input message="tns:GetReportOutputSoapIn" />
+      <wsdl:output message="tns:GetReportOutputSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DBManagerWSSoap" type="tns:DBManagerWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateConnection">
+      <soap:operation soapAction="http://tempuri.org/CreateConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyClientStillActive">
+      <soap:operation soapAction="http://tempuri.org/NotifyClientStillActive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisposeConnection">
+      <soap:operation soapAction="http://tempuri.org/DisposeConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BeginTrans">
+      <soap:operation soapAction="http://tempuri.org/BeginTrans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BeginTransWithIsolationLevel">
+      <soap:operation soapAction="http://tempuri.org/BeginTransWithIsolationLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommitTrans">
+      <soap:operation soapAction="http://tempuri.org/CommitTrans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RollbackTrans">
+      <soap:operation soapAction="http://tempuri.org/RollbackTrans" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteSQL">
+      <soap:operation soapAction="http://tempuri.org/ExecuteSQL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteStoredProc">
+      <soap:operation soapAction="http://tempuri.org/ExecuteStoredProc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteStoredProcWithNoParameter">
+      <soap:operation soapAction="http://tempuri.org/ExecuteStoredProcWithNoParameter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteScalar">
+      <soap:operation soapAction="http://tempuri.org/ExecuteScalar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReaderClosed">
+      <soap:operation soapAction="http://tempuri.org/IsReaderClosed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchemaTableOfCurrentReader">
+      <soap:operation soapAction="http://tempuri.org/GetSchemaTableOfCurrentReader" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadNextBucketFromDataReader">
+      <soap:operation soapAction="http://tempuri.org/ReadNextBucketFromDataReader" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteReader">
+      <soap:operation soapAction="http://tempuri.org/ExecuteReader" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteReaderSQL">
+      <soap:operation soapAction="http://tempuri.org/ExecuteReaderSQL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseReaderAndConnection">
+      <soap:operation soapAction="http://tempuri.org/CloseReaderAndConnection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReportFileExisting">
+      <soap:operation soapAction="http://tempuri.org/IsReportFileExisting" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadReport">
+      <soap:operation soapAction="http://tempuri.org/UploadReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportOutput">
+      <soap:operation soapAction="http://tempuri.org/GetReportOutput" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DBManagerWSSoap12" type="tns:DBManagerWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap12:operation soapAction="http://tempuri.org/Ping" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateConnection">
+      <soap12:operation soapAction="http://tempuri.org/CreateConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyClientStillActive">
+      <soap12:operation soapAction="http://tempuri.org/NotifyClientStillActive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisposeConnection">
+      <soap12:operation soapAction="http://tempuri.org/DisposeConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BeginTrans">
+      <soap12:operation soapAction="http://tempuri.org/BeginTrans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BeginTransWithIsolationLevel">
+      <soap12:operation soapAction="http://tempuri.org/BeginTransWithIsolationLevel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CommitTrans">
+      <soap12:operation soapAction="http://tempuri.org/CommitTrans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RollbackTrans">
+      <soap12:operation soapAction="http://tempuri.org/RollbackTrans" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteSQL">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteSQL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteStoredProc">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteStoredProc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteStoredProcWithNoParameter">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteStoredProcWithNoParameter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteScalar">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteScalar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReaderClosed">
+      <soap12:operation soapAction="http://tempuri.org/IsReaderClosed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchemaTableOfCurrentReader">
+      <soap12:operation soapAction="http://tempuri.org/GetSchemaTableOfCurrentReader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadNextBucketFromDataReader">
+      <soap12:operation soapAction="http://tempuri.org/ReadNextBucketFromDataReader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteReader">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteReader" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteReaderSQL">
+      <soap12:operation soapAction="http://tempuri.org/ExecuteReaderSQL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseReaderAndConnection">
+      <soap12:operation soapAction="http://tempuri.org/CloseReaderAndConnection" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsReportFileExisting">
+      <soap12:operation soapAction="http://tempuri.org/IsReportFileExisting" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadReport">
+      <soap12:operation soapAction="http://tempuri.org/UploadReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportOutput">
+      <soap12:operation soapAction="http://tempuri.org/GetReportOutput" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DBManagerWS">
+    <wsdl:port name="DBManagerWSSoap" binding="tns:DBManagerWSSoap">
+      <soap:address location="http://localhost:1935/DBManager/DBManagerWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DBManagerWSSoap12" binding="tns:DBManagerWSSoap12">
+      <soap12:address location="http://localhost:1935/DBManager/DBManagerWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

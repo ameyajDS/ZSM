@@ -1,0 +1,22 @@
+-Provide a button for "Select" mode when the current screen is opened as a link which has calling control as not null (that means it is invoked on the top of some other screen)
+-Provide plumbing for the report display within MDI Main
+-Provide mechanism for parameters mode.
+-fix the constraint issue(pick up the new constraints from RMS). Also provide mechanism for reading extended properties.
+-The mandatory grid should have the grid header in mandatory colors. As of now, we are selectively making the headers in different colors. However, the headers should be used only if the grid is mandatory. For mandatory columns the respective column cells should have appropriate background colors.
+-Parameter sequence (displayMember and valuemember) of DCCComboBox and DCCComboBoxGridColumn (in respective methods where we add datasources to dropdowns) are not in same order. Changing it would cause break of the entire code base of the CDF based project. Hence the whole code needs to be refactored if this change has to be implemented.
+-Provide shortcut keys in grid to move rows up and down. (Ctrl+Up Arrow)
+-If a screen is in browse mode and that is the only screen opened. If we close such a screen (to have MDI Main in NONE mode) the tool bar and menu bar does not show NONE mode.
+-Grid Validation on Save? Remove Blank Rows
+Write a note as to how to implement retrieval of lookup result in grid with the data import mechanism
+Write a note as to how to implement clear control on the screen using ClearAllControlsOfContainer() method.
+Add mnemonics to dcccheckbox
+API-documentation
+Modify the Lookup code to use the connection of the calling screen, as the screens can be invoked from multiple projects.
+The screens are making use of the DBFacade and DBFacade connects to the database for which it was generated. So the inter-app operability for screens will work. However the lookup functionality is different. LookupManager expects a connection string property to be set before the showlookup() method is invoked on it. In current implementation the connection string property is being set in the DCCTextField control and the value being set is the connection string to the application of the application context. So even if the lookup controls of an application are packed into assembly, they will try to make connection to the application of the target application context. Somehow we need to use the connection object from the dbfacade of the application in which the lookups are being developed. Also this will help us using the functions(the functions which will be used commonly in qry and in lookups)...WIP...
+In query mode the lookup fields (the DCCTextField)should not do the validation (on leave event), but it should continue to have the lookup behavior when enter key is pressed or when lookup icon is pressed. This will allow users to either select an exact value of select a *similar* value for that foreign key fields.
+Call Close Session at the time of normal exit.
+lookup dialog columns are not taking up correct width
+The message for the unique constraint is not correct (form a new message code for the same)
+query mode from lookup (without showing lookup)
+confirmation message on "delete" in "operation Menu" and in "Summary Detail Panel"
+The menu shortcut keys are too cumbersome as it goes through all levels of menu hierarchy. make arrangements for direct shortcut keys (like CTRL_F1 etc)

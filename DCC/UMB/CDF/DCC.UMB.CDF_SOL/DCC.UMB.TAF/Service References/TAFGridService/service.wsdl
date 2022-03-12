@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TAFGridService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_ITAFGridService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITAFGridService_GetRowCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRowCount" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetRowCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRowCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetCellInFocus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCellInFocus" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetCellInFocus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCellInFocusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_InsertRowLast_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertRowLast" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_InsertRowLast_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertRowLastResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_InsertRowAbove_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertRowAbove" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_InsertRowAbove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertRowAboveResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_InsertRowBelow_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertRowBelow" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_InsertRowBelow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertRowBelowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_DeleteRow_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRow" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_DeleteRow_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRowResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsStr_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsStr" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsStr_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsStrResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsInt_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsInt" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsInt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsIntResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsShort_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsShort" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsShort_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsShortResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsDouble_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsDouble" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsDouble_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsDoubleResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsDateTime_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsDateTime" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetValueAsDateTime_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValueAsDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetStringValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetStringValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetStringValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetStringValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetDropDownValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDropDownValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetDropDownValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDropDownValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetIntValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetIntValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetIntValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetIntValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetDoubleValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDoubleValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetDoubleValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDoubleValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetDateTimeValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDateTimeValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetDateTimeValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDateTimeValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetShortValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetShortValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetShortValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetShortValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetCheckboxValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCheckboxValue" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_SetCheckboxValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCheckboxValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_FindText_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindText" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_FindText_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetRowCountForState_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRowCountForState" />
+  </wsdl:message>
+  <wsdl:message name="ITAFGridService_GetRowCountForState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRowCountForStateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITAFGridService">
+    <wsdl:operation name="GetRowCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetRowCount" message="tns:ITAFGridService_GetRowCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetRowCountResponse" message="tns:ITAFGridService_GetRowCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCellInFocus">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetCellInFocus" message="tns:ITAFGridService_SetCellInFocus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetCellInFocusResponse" message="tns:ITAFGridService_SetCellInFocus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRowLast">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/InsertRowLast" message="tns:ITAFGridService_InsertRowLast_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/InsertRowLastResponse" message="tns:ITAFGridService_InsertRowLast_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRowAbove">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/InsertRowAbove" message="tns:ITAFGridService_InsertRowAbove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/InsertRowAboveResponse" message="tns:ITAFGridService_InsertRowAbove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertRowBelow">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/InsertRowBelow" message="tns:ITAFGridService_InsertRowBelow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/InsertRowBelowResponse" message="tns:ITAFGridService_InsertRowBelow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRow">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/DeleteRow" message="tns:ITAFGridService_DeleteRow_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/DeleteRowResponse" message="tns:ITAFGridService_DeleteRow_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsStr">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsStr" message="tns:ITAFGridService_GetValueAsStr_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsStrResponse" message="tns:ITAFGridService_GetValueAsStr_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsInt">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsInt" message="tns:ITAFGridService_GetValueAsInt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsIntResponse" message="tns:ITAFGridService_GetValueAsInt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsShort">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsShort" message="tns:ITAFGridService_GetValueAsShort_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsShortResponse" message="tns:ITAFGridService_GetValueAsShort_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsDouble">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsDouble" message="tns:ITAFGridService_GetValueAsDouble_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsDoubleResponse" message="tns:ITAFGridService_GetValueAsDouble_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsDateTime">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsDateTime" message="tns:ITAFGridService_GetValueAsDateTime_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetValueAsDateTimeResponse" message="tns:ITAFGridService_GetValueAsDateTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetStringValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetStringValue" message="tns:ITAFGridService_SetStringValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetStringValueResponse" message="tns:ITAFGridService_SetStringValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDropDownValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetDropDownValue" message="tns:ITAFGridService_SetDropDownValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetDropDownValueResponse" message="tns:ITAFGridService_SetDropDownValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetIntValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetIntValue" message="tns:ITAFGridService_SetIntValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetIntValueResponse" message="tns:ITAFGridService_SetIntValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDoubleValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetDoubleValue" message="tns:ITAFGridService_SetDoubleValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetDoubleValueResponse" message="tns:ITAFGridService_SetDoubleValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDateTimeValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetDateTimeValue" message="tns:ITAFGridService_SetDateTimeValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetDateTimeValueResponse" message="tns:ITAFGridService_SetDateTimeValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShortValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetShortValue" message="tns:ITAFGridService_SetShortValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetShortValueResponse" message="tns:ITAFGridService_SetShortValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCheckboxValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/SetCheckboxValue" message="tns:ITAFGridService_SetCheckboxValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/SetCheckboxValueResponse" message="tns:ITAFGridService_SetCheckboxValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindText">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/FindText" message="tns:ITAFGridService_FindText_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/FindTextResponse" message="tns:ITAFGridService_FindText_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRowCountForState">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITAFGridService/GetRowCountForState" message="tns:ITAFGridService_GetRowCountForState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITAFGridService/GetRowCountForStateResponse" message="tns:ITAFGridService_GetRowCountForState_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetNamedPipeBinding_ITAFGridService" type="tns:ITAFGridService">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_ITAFGridService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="GetRowCount">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetRowCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCellInFocus">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetCellInFocus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRowLast">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/InsertRowLast" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRowAbove">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/InsertRowAbove" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertRowBelow">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/InsertRowBelow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRow">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/DeleteRow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsStr">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetValueAsStr" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsInt">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetValueAsInt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsShort">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetValueAsShort" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsDouble">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetValueAsDouble" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValueAsDateTime">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetValueAsDateTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetStringValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetStringValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDropDownValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetDropDownValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetIntValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetIntValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDoubleValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetDoubleValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDateTimeValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetDateTimeValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShortValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetShortValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCheckboxValue">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/SetCheckboxValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindText">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/FindText" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRowCountForState">
+      <soap12:operation soapAction="http://tempuri.org/ITAFGridService/GetRowCountForState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TAFGridService">
+    <wsdl:port name="NetNamedPipeBinding_ITAFGridService" binding="tns:NetNamedPipeBinding_ITAFGridService">
+      <soap12:address location="net.pipe://localhost/TAFPipe/TAFGridService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/TAFPipe/TAFGridService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>GAR\nbharti</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

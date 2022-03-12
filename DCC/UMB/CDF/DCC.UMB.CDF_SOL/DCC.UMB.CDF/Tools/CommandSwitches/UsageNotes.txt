@@ -1,0 +1,20 @@
+Usage Notes:
+DCC.UMB.CDF.exe <Command Switch> <Options>
+Where Command Switch can be one of the following
+-GENERATE_FACADE_COMMAND_LINE: For Generating Facade on Command Line (writing the facade into the output file)
+-GENERATE_FACADE_WINDOW: For Generating Facade in a window (the generated facade is printed in a text box on a application window)
+-GENERATE_GRID_COLUMNS: For Generating Code for adding columns to a grid.
+-GENERATE_DB_PROCEDURE: For Generating Stored procedures from sql tables
+-GENERATE_DB_BATCH_WINDOW: For Generating a single file in a window interface, which appens(recursively) all the sql files of a given directory
+-GENERATE_DB_BATCH_COMMAND_LINE: For Generating a single file in a command console, which appens(recursively) all the sql files of a given directory
+-GENERATE_PACKAGE_SETUP_SCRIPTS: For Generating scripts for the package setup
+	
+Options Can be one of the following
+-UN	- A string spefifying user name to connect to database
+-PW	- A string specifying the password to connect to databaes (caution: this is in clear text)
+-SN	- A string the database server name
+-AID - A string specifying application id
+-PDP - A string specifying directory name where procedures are stored(may be in nested directories)
+-FFP - A string specifying the path where the facade file will be generated
+
+EXAMPLE DCC.UMB.CDF.exe "-GENERATE_FACADE_COMMAND_LINE" "-UN=sa" "-PW=sa" "-SN=." "-AID=RES_APP" "-FFP=c:\aneeraj\somefacade.cs"

@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <UsingTask TaskName="AutoIncrementAssembly.AutoIncrementAssemblyVerion" AssemblyFile="AutoIncrementAssembly.dll" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B630ABDD-90D9-4D4D-9B7B-02DF342EFCF0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.UMB.CDF</RootNamespace>
+    <AssemblyName>DCC.UMB.CDF</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\nbharti\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1587,1591,1573,0168</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <FileAlignment>4096</FileAlignment>
+    <NoWarn>1587,1591,1573,0168</NoWarn>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\Constants.cs" />
+    <Compile Include="Configuration\MsgCodes.cs" />
+    <Compile Include="DB\DCCSqlDataReader.cs" />
+    <Compile Include="DB\DCCWebSqlDataReader.cs" />
+    <Compile Include="DB\WebDbManager.cs" />
+    <Compile Include="DB\Constants.cs" />
+    <Compile Include="DB\DbConnectionFactory.cs" />
+    <Compile Include="DB\DbManager.cs" />
+    <Compile Include="DB\IDbManager.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="MGMT\Modal\DCCException.cs" />
+    <Compile Include="MGMT\View\CursorManager.cs" />
+    <Compile Include="MGMT\View\MessageBarLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MGMT\View\MessageDetailViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MGMT\View\MessageDetailViewer.Designer.cs">
+      <DependentUpon>MessageDetailViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MGMT\View\TabOrderManager.cs" />
+    <Compile Include="Report\AbstractReportContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\CrystalReportContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\MSRSReportContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\AbstractParametersScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resources\ResourceFinder.cs" />
+    <Compile Include="Sound\SoundMessages.cs" />
+    <Compile Include="Lookup\Controller\LookupPredicates.cs" />
+    <Compile Include="Lookup\LookupManager.cs" />
+    <Compile Include="Lookup\Modal\LookupColumn.cs" />
+    <Compile Include="Lookup\Modal\LookupConstants.cs" />
+    <Compile Include="Lookup\Modal\LookupDataProvider.cs" />
+    <Compile Include="Lookup\Modal\LookupResult.cs" />
+    <Compile Include="Lookup\View\LookupDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Lookup\View\LookupDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Lookup\View\LookupDialog.Designer.cs">
+      <DependentUpon>LookupDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MGMT\Controller\UIManager.cs" />
+    <Compile Include="MGMT\Global\GlobalAppVariables.cs" />
+    <Compile Include="MGMT\Modal\AppContext.cs" />
+    <Compile Include="MGMT\Modal\Chain.cs" />
+    <Compile Include="MGMT\Modal\ILink.cs" />
+    <Compile Include="MGMT\Modal\KeyArgsEventList.cs" />
+    <Compile Include="MGMT\Modal\Link.cs" />
+    <Compile Include="MGMT\View\MDIMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MGMT\View\MDIMain.Designer.cs">
+      <DependentUpon>MDIMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MGMT\View\Menu\DCCMenuInterface.cs" />
+    <Compile Include="MGMT\View\Menu\DCCToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MGMT\View\Menu\DCCToolStripMenuItemGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MGMT\View\Menu\DCCToolStripMenuItemPredicate.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\CommandSwitches\CommandSwitchManager.cs" />
+    <Compile Include="Tools\Common\CodeWriter.cs" />
+    <Compile Include="Tools\DBFacadeGenerator\FacadeGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\DBFacadeGenerator\FacadeGenerator.Designer.cs">
+      <DependentUpon>FacadeGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\DBFacadeGenerator\Method\APIDocExtractor.cs" />
+    <Compile Include="Tools\DBFacadeGenerator\Method\Method.cs" />
+    <Compile Include="Tools\DBFacadeGenerator\Method\MethodParameter.cs" />
+    <Compile Include="Tools\DBFacadeGenerator\Utils\TypeConvertor.cs" />
+    <Compile Include="Tools\GenerateDBBatch\GenerateBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\GenerateDBBatch\GenerateBatch.Designer.cs">
+      <DependentUpon>GenerateBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\GenerateGridColumns\GenerateGridColumns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\GenerateGridColumns\GenerateGridColumns.Designer.cs">
+      <DependentUpon>GenerateGridColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\GeneratePackageSetupScripts\IObjectProvider.cs" />
+    <Compile Include="Tools\GeneratePackageSetupScripts\PackageSetupScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\GeneratePackageSetupScripts\PackageSetupScriptGenerator.Designer.cs">
+      <DependentUpon>PackageSetupScriptGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\GeneratePackageSetupScripts\SimpleObjectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\GeneratePackageSetupScripts\SimpleObjectEditor.Designer.cs">
+      <DependentUpon>SimpleObjectEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\GenerateSQLProcsFromTable\GenerateProc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\GenerateSQLProcsFromTable\GenerateProc.Designer.cs">
+      <DependentUpon>GenerateProc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Containers\DCCPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Containers\DCCTableLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Containers\ListDetailViewPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DCCCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DCCCheckBox.Designer.cs">
+      <DependentUpon>DCCCheckBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\DCCGridColumnTemplate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\DCCLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\DCCLabel.Designer.cs">
+      <DependentUpon>DCCLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Grid\Column\DCCGridCell.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\Grid\Column\DCCGridColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\Grid\Column\DCCGridColumnDefinitions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\Grid\DCCDataView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\Grid\DCCGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\Grid\DCCGrid.Designer.cs">
+      <DependentUpon>DCCGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Grid\DCCGridToolStrip.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\Grid\DCCGridToolStrip.Designer.cs">
+      <DependentUpon>DCCGridToolStrip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\Grid\DCCGridUniqueConstraint.cs">
+    </Compile>
+    <Compile Include="UIControls\Grid\GridDataModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\IDCCDataBinder.cs" />
+    <Compile Include="UIControls\SummaryDetailButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\SummaryDetailNavigator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\SummaryDetailNavigator.Designer.cs">
+      <DependentUpon>SummaryDetailNavigator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\BaseMasterLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\CalendarDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\CalendarDialog.Designer.cs">
+      <DependentUpon>CalendarDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DateRangePair.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DateRangePair.Designer.cs">
+      <DependentUpon>DateRangePair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCImageBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCImageBox.Designer.cs">
+      <DependentUpon>DCCImageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCSuggestionToolStripItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCListBox.Designer.cs">
+      <DependentUpon>DCCListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCTextEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCTextEditor.Designer.cs">
+      <DependentUpon>DCCTextEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCTextField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCTextField.Designer.cs">
+      <DependentUpon>DCCTextField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCComboBox.Designer.cs">
+      <DependentUpon>DCCComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCDateTimeField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCDateTimeField.Designer.cs">
+      <DependentUpon>DCCDateTimeField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCDoubleFloatField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCDoubleFloatField.Designer.cs">
+      <DependentUpon>DCCDoubleFloatField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCLongIntegerField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCLongIntegerField.Designer.cs">
+      <DependentUpon>DCCLongIntegerField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCTextArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DCCTextArea.Designer.cs">
+      <DependentUpon>DCCTextArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\DropDownItem.cs" />
+    <Compile Include="UIControls\TextControls\LookupEventArgs.cs" />
+    <Compile Include="UIControls\TextControls\Lookup\ConnectionStringParametersDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\Lookup\ConnectionStringParametersDialog.Designer.cs">
+      <DependentUpon>ConnectionStringParametersDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\Lookup\LokupColumnsPropertyEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\Lookup\LokupColumnsPropertyEditor.designer.cs">
+      <DependentUpon>LokupColumnsPropertyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextControls\Lookup\LookupPropertyColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\Lookup\LookupPropertyColumnPredicate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextControls\Lookup\TableCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UIControls\UIAutomation\IUIAutomationCodeProvider.cs" />
+    <Compile Include="UIControls\Windows\AbstractScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\Windows\DCCBrowsableScreenItemTemplate\SampleScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIControls\Windows\DCCBrowsableScreenItemTemplate\SampleScreen.Designer.cs">
+      <DependentUpon>SampleScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\EncryptDecrypt.cs" />
+    <Compile Include="Utils\UtilityManager.cs" />
+    <Compile Include="Tools\WebQueryAnalyzer\QueryAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\WebQueryAnalyzer\QueryAnalyzer.Designer.cs">
+      <DependentUpon>QueryAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\WebQueryAnalyzer\UserCredentials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\WebQueryAnalyzer\UserCredentials.Designer.cs">
+      <DependentUpon>UserCredentials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\DbManagerWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Lookup\View\LookupDialog.resx">
+      <DependentUpon>LookupDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MGMT\View\MDIMain.resx">
+      <DependentUpon>MDIMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\DBFacadeGenerator\FacadeGenerator.resx">
+      <DependentUpon>FacadeGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\WebQueryAnalyzer\QueryAnalyzer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>QueryAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\WebQueryAnalyzer\UserCredentials.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UserCredentials.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="CrossTabReportXmlStructure.xml" />
+    <Content Include="HTMLPage1.htm" />
+    <Content Include="Ideas.txt" />
+    <EmbeddedResource Include="MGMT\View\MessageDetailViewer.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MessageDetailViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\CrystalReportContainer.resx">
+      <DependentUpon>CrystalReportContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\MSRSReportContainer.resx">
+      <DependentUpon>MSRSReportContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Anchor.ico" />
+    <EmbeddedResource Include="Resources\Calendar12_12.ico" />
+    <EmbeddedResource Include="Resources\DataGridViewImageColumn.bmp" />
+    <EmbeddedResource Include="Resources\DataGridViewLinkColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCButtonGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCCheckBoxGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCComboBox.bmp" />
+    <EmbeddedResource Include="Resources\DCCComboboxGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCDateGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCDateTimeField.bmp" />
+    <EmbeddedResource Include="Resources\DCCDoubleFloatField.bmp" />
+    <EmbeddedResource Include="Resources\DCCDoubleFloatGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCGrid.bmp" />
+    <EmbeddedResource Include="Resources\DCCLabelGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCLongIntegerField.bmp" />
+    <EmbeddedResource Include="Resources\DCCLongIntegerGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCObjectGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\DCCTextArea.bmp" />
+    <EmbeddedResource Include="Resources\DCCTextField.bmp" />
+    <EmbeddedResource Include="Resources\DCCTextFieldGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\Query12_12.ico" />
+    <EmbeddedResource Include="Resources\Reference.ico" />
+    <EmbeddedResource Include="Resources\Retrieve.ico" />
+    <EmbeddedResource Include="Resources\Search.ico" />
+    <EmbeddedResource Include="Resources\Select.ico" />
+    <EmbeddedResource Include="Resources\SummaryDetailNavigator.bmp" />
+    <EmbeddedResource Include="Resources\Update.ico" />
+    <EmbeddedResource Include="Sound\casaultyMessage.wav" />
+    <EmbeddedResource Include="Sound\errorMessage.wav" />
+    <EmbeddedResource Include="Sound\plainMessage.wav" />
+    <EmbeddedResource Include="Sound\warningMessage.wav" />
+    <EmbeddedResource Include="Tools\GenerateDBBatch\GenerateBatch.resx">
+      <DependentUpon>GenerateBatch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\GenerateGridColumns\GenerateGridColumns.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GenerateGridColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\GeneratePackageSetupScripts\PackageSetupScriptGenerator.resx">
+      <DependentUpon>PackageSetupScriptGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\GeneratePackageSetupScripts\SimpleObjectEditor.resx">
+      <DependentUpon>SimpleObjectEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\GenerateSQLProcsFromTable\GenerateProc.resx">
+      <DependentUpon>GenerateProc.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Containers\ListDetailViewPanel.resx">
+      <DependentUpon>ListDetailViewPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\DCCLabel.resx">
+      <DependentUpon>DCCLabel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Grid\DCCGrid.resx">
+      <DependentUpon>DCCGrid.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Grid\DCCGridToolStrip.resx">
+      <DependentUpon>DCCGridToolStrip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\SummaryDetailNavigator.resx">
+      <DependentUpon>SummaryDetailNavigator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\BaseMasterLookup.resx">
+      <DependentUpon>BaseMasterLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\CalendarDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CalendarDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DateRangePair.resx">
+      <DependentUpon>DateRangePair.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCComboBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DCCComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCListBox.resx">
+      <DependentUpon>DCCListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCImageBox.resx">
+      <DependentUpon>DCCImageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCTextEditor.resx">
+      <DependentUpon>DCCTextEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCTextArea.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DCCTextArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCTextField.resx">
+      <DependentUpon>DCCTextField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\DCCDateTimeField.resx">
+      <DependentUpon>DCCDateTimeField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\Lookup\ConnectionStringParametersDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConnectionStringParametersDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\TextControls\Lookup\LokupColumnsPropertyEditor.resx">
+      <DependentUpon>LokupColumnsPropertyEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Windows\AbstractScreen.resx">
+      <DependentUpon>AbstractScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\Windows\DCCBrowsableScreenItemTemplate\SampleScreen.resx">
+      <DependentUpon>SampleScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\DCCCheckBox.bmp" />
+    <EmbeddedResource Include="Resources\DCCLabel.bmp" />
+    <EmbeddedResource Include="Resources\DCCTableLayoutPanel.bmp" />
+    <EmbeddedResource Include="Resources\DCCLinklGridColumn.bmp" />
+    <EmbeddedResource Include="Resources\Back_24x24.ico" />
+    <EmbeddedResource Include="Resources\Close_24x24.ico" />
+    <EmbeddedResource Include="Resources\DCCListBox.bmp" />
+    <EmbeddedResource Include="Resources\Delete.png" />
+    <EmbeddedResource Include="Resources\Delete_24x24.ico" />
+    <EmbeddedResource Include="Resources\Down_24x24.PNG" />
+    <EmbeddedResource Include="Resources\Erase_24x24.ico" />
+    <EmbeddedResource Include="Resources\Excel_24x24.ico" />
+    <EmbeddedResource Include="Resources\Exit_24x24.ico" />
+    <EmbeddedResource Include="Resources\First_24x24.ico" />
+    <EmbeddedResource Include="Resources\Insert After.png" />
+    <EmbeddedResource Include="Resources\Insert Before.png" />
+    <EmbeddedResource Include="Resources\Insert Last.png" />
+    <EmbeddedResource Include="Resources\Insert_24x24.ico" />
+    <EmbeddedResource Include="Resources\Last_24x24.ico" />
+    <EmbeddedResource Include="Resources\List_24x24.ico" />
+    <EmbeddedResource Include="Resources\Move Down.png" />
+    <EmbeddedResource Include="Resources\Move Up.png" />
+    <EmbeddedResource Include="Resources\New_12x12.ico" />
+    <EmbeddedResource Include="Resources\Next_24x24.ico" />
+    <EmbeddedResource Include="Resources\Preview_24x24.Ico" />
+    <EmbeddedResource Include="Resources\Printer_24x24.ico" />
+    <EmbeddedResource Include="Resources\Query_24x24.ico" />
+    <EmbeddedResource Include="Resources\Save_24x24.ico" />
+    <EmbeddedResource Include="Resources\Wait.gif" />
+    <EmbeddedResource Include="Resources\Show Next.png" />
+    <EmbeddedResource Include="Resources\Show Previous.png" />
+    <EmbeddedResource Include="Resources\SD Show Summary.png" />
+    <EmbeddedResource Include="Resources\SD Show Details.png" />
+    <EmbeddedResource Include="Resources\Up_24x24.PNG" />
+    <None Include="Resources\Wait1.gif" />
+    <None Include="Resources\Excel-16.gif" />
+    <Content Include="SQL\package_header_groups.sql" />
+    <Content Include="SQL\package_menus.sql" />
+    <Content Include="Todo.txt" />
+    <Content Include="Tools.DBFacadeGenerator.htm" />
+    <EmbeddedResource Include="Tools\CommandSwitches\UsageNotes.txt" />
+    <Content Include="Tools\DBFacadeGenerator\Method\APISampleDocs.txt" />
+    <None Include="Tools\DBFacadeGenerator\Sample Procedure Structure with Doc Comments.sql" />
+    <None Include="Web References\DbManagerWebService\DbManagerWS.disco" />
+    <None Include="Web References\DbManagerWebService\DbManagerWS.wsdl" />
+    <None Include="Web References\DbManagerWebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:1935/DBManager/DBManagerWS.asmx">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\DbManagerWebService\</RelPath>
+      <UpdateFromURL>http://localhost:1935/DBManager/DBManagerWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DCC_CMN_CDF_DbManagerWebService_DbManagerWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UIControls\Icons\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.-->
+  <!--   <Target Name="BeforeBuild">
+    <AutoIncrementAssemblyVerion AssemblyFileLocation="$(MSBuildProjectDirectory)\Properties\AssemblyInfo.cs">
+    </AutoIncrementAssemblyVerion>
+  </Target>-->
+  <!--   <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

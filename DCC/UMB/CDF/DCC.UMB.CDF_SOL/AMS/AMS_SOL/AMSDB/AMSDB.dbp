@@ -1,0 +1,56 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "AMSDB"
+   MSDTVersion = "80"
+   DefDBRef = "nbharti-mobl3.AMS.dbo"
+   Begin Folder = "Create Scripts"
+      Begin Folder = "100_Schema"
+         Script = "1_Primitives.sql"
+         Script = "2_Schema.sql"
+      End
+      Begin Folder = "200_AppSetup"
+         Script = "10_Setup_Package_And_Aplications.sql"
+         Script = "20_SetupPackageRoles.sql"
+         Script = "30_SetupPackageScreens.sql"
+         Script = "40_SetupPackageScreenPrivileges.sql"
+         Script = "50_SetupPackageActions.sql"
+         Script = "60_SetupPackageActionPriveleges.sql"
+         Script = "70_SetupPackageMenus.sql"
+      End
+      Begin Folder = "300_MasterData"
+         Script = "3_setup_data.sql"
+      End
+      Begin Folder = "400_Procedures"
+         Begin Folder = "100_Items"
+            Script = "deltem.sql"
+            Script = "fnGetAssetTypes.sql"
+            Script = "fnGetIems.sql"
+            Script = "insItem.sql"
+            Script = "qryItems.sql"
+            Script = "updtem.sql"
+         End
+         Begin Folder = "200_SatsangCentres"
+            Script = "delSatsangCentre.sql"
+            Script = "fnGetSatsangCentres.sql"
+            Script = "insSatsangCentre.sql"
+            Script = "qrySatsangCentre.sql"
+            Script = "updSatsangCentre.sql"
+         End
+         Begin Folder = "300_Assets"
+            Script = "100_insAssets.sql"
+            Script = "200_fnGetAllAssets.sql"
+            Script = "300_qryAssets.sql"
+            Script = "qryAssets.sql"
+         End
+      End
+      Begin Folder = "500_Permissions"
+         Script = "AutoPermissions.sql"
+      End
+   End
+   Begin DBRefFolder = "Database References"
+      Begin DBRefNode = "nbharti-mobl3.AMS.dbo"
+         ConnectStr = "Data Source=nbharti-mobl3;Initial Catalog=AMS;Integrated Security=True"
+         Provider = "{91510608-8809-4020-8897-FBA057E22D54}"
+         Colorizer = 5
+      End
+   End
+End

@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetRowCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRowCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRowCountResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCellInFocus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPositon" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCellInFocusResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertRowLast">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertRowLastResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertRowLastResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertRowAbove">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertRowAboveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertRowAboveResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertRowBelow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertRowBelowResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="InsertRowBelowResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRowResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsStr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsStrResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetValueAsStrResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsInt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsIntResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetValueAsIntResult" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsShort">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsShortResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetValueAsShortResult" nillable="true" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsDouble">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsDoubleResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetValueAsDoubleResult" nillable="true" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsDateTime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetValueAsDateTimeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetValueAsDateTimeResult" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetStringValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetStringValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDropDownValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDropDownValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetIntValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetIntValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDoubleValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:double" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDoubleValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDateTimeValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDateTimeValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetShortValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" nillable="true" type="xs:short" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetShortValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCheckboxValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="rowPosition" type="xs:int" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isChecked" type="xs:boolean" />
+        <xs:element minOccurs="0" name="tabOut" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetCheckboxValueResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindText">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="columnName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="searchText" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ignoreCase" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindTextResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FindTextResult" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRowCountForState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gridAutomationId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRowCountForStateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetRowCountForStateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,5 @@
+-The row state of the gridDataModel table can be updated in the setCellValue() method. Compare the current vlaue with the existing value of the cell. If the value differ mark the current row of the datagrid to be updated. For this write a method which checks for equality.
+-We will end up with the problem of softing. To do that dont use the GetValue() of the gridDataModel table. Instead, have a view of this datatable, which represnts the current sort and at the same time does not contain the deleted rows and at the same time does not contain the hidden rows (which might be required for the summary, detail stuff)
+- In the abstract form itself, have the listviewgrid in a panel and a panel for the browseView. and return the listviewobject from the abstract window itself.
+- Implement the row selection changed event on the list view grid.
+-  

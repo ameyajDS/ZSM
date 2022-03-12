@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB12B141-FAF1-44A2-8D14-9681C2738968}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.UMB.CDF.Tools</RootNamespace>
+    <AssemblyName>DCC.UMB.CDF.Tools</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>DCC.UMB.CDF.Tools.CDFToolsMain</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>LIB\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandSwitches\CommandSwitchManager.cs" />
+    <Compile Include="Common\CodeWriter.cs" />
+    <Compile Include="DBFacadeGenerator\FacadeGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBFacadeGenerator\FacadeGenerator.Designer.cs">
+      <DependentUpon>FacadeGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DBFacadeGenerator\Method\APIDocExtractor.cs" />
+    <Compile Include="DBFacadeGenerator\Method\Method.cs" />
+    <Compile Include="DBFacadeGenerator\Method\MethodParameter.cs" />
+    <Compile Include="GenerateAppSetup\AppSetupGenerator.cs" />
+    <Compile Include="GenerateAppSetup\OdsReaderWriter.cs" />
+    <Compile Include="GenerateDBBatch\GenerateBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateDBBatch\GenerateBatch.Designer.cs">
+      <DependentUpon>GenerateBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateGridColumns\GenerateGridColumns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateGridColumns\GenerateGridColumns.Designer.cs">
+      <DependentUpon>GenerateGridColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratePackageSetupScripts\IObjectProvider.cs" />
+    <Compile Include="GeneratePackageSetupScripts\PackageSetupScriptGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GeneratePackageSetupScripts\PackageSetupScriptGenerator.Designer.cs">
+      <DependentUpon>PackageSetupScriptGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratePackageSetupScripts\SimpleObjectEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GeneratePackageSetupScripts\SimpleObjectEditor.Designer.cs">
+      <DependentUpon>SimpleObjectEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerateSQLProcsFromTable\GenerateProc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateSQLProcsFromTable\GenerateProc.Designer.cs">
+      <DependentUpon>GenerateProc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CDFToolsMain.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebQueryAnalyzer\QueryAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WebQueryAnalyzer\QueryAnalyzer.Designer.cs">
+      <DependentUpon>QueryAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebQueryAnalyzer\UserCredentials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WebQueryAnalyzer\UserCredentials.Designer.cs">
+      <DependentUpon>UserCredentials.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DBFacadeGenerator\FacadeGenerator.resx">
+      <DependentUpon>FacadeGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateDBBatch\GenerateBatch.resx">
+      <DependentUpon>GenerateBatch.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateGridColumns\GenerateGridColumns.resx">
+      <DependentUpon>GenerateGridColumns.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneratePackageSetupScripts\PackageSetupScriptGenerator.resx">
+      <DependentUpon>PackageSetupScriptGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneratePackageSetupScripts\SimpleObjectEditor.resx">
+      <DependentUpon>SimpleObjectEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateSQLProcsFromTable\GenerateProc.resx">
+      <DependentUpon>GenerateProc.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="WebQueryAnalyzer\QueryAnalyzer.resx">
+      <DependentUpon>QueryAnalyzer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebQueryAnalyzer\UserCredentials.resx">
+      <DependentUpon>UserCredentials.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UsageNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBFacadeGenerator\Method\APISampleDocs.txt" />
+    <Content Include="LIB\Ionic.Zip.Reduced.dll" />
+    <None Include="DBFacadeGenerator\Sample Procedure Structure with Doc Comments.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DCC.UMB.CDF\DCC.UMB.CDF.csproj">
+      <Project>{B630ABDD-90D9-4D4D-9B7B-02DF342EFCF0}</Project>
+      <Name>DCC.UMB.CDF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
