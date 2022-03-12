@@ -1,0 +1,1101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D57DA14-2A42-46AC-BD12-193AD537C531}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.ZOS.ZSM</RootNamespace>
+    <AssemblyName>DCC.ZOS.ZSM</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>false</SignAssembly>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>4786825A97EC6B0D6A5A47E0858CFECF683DFF37</ManifestCertificateThumbprint>
+    <ManifestKeyFile>DCC.ZOS.ZSM_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>C:\CruiseControlBase\WorkingBase\DERA_APPS\DCC\UMB\CDF\Trunk\DCC.UMB.CDF_SOL\DCC.UMB.CDF.Web.Launcher\apps\zsm\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>Z  S M</ProductName>
+    <PublisherName>Dera Computer Centre</PublisherName>
+    <SuiteName>Zonal Sewadar Management System</SuiteName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <AutorunEnabled>true</AutorunEnabled>
+    <TrustUrlParameters>true</TrustUrlParameters>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.2202.2011.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageProcessor">
+      <HintPath>..\Libs\ImageProcessor.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=3.8.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <HintPath>..\Libs\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Synchronization, Version=1.0.0.0" />
+    <Reference Include="Microsoft.Synchronization.Data, Version=2.0.0.0" />
+    <Reference Include="Microsoft.Synchronization.Data.Server, Version=2.0.0.0" />
+    <Reference Include="Microsoft.Synchronization.Data.SqlServerCe, Version=2.0.0.0" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\umb\CDB\DCC.UMB.CDBControls\DCC.UMB.CDBControls.csproj">
+      <Project>{71442424-d2c6-46fc-ad3b-3c39da76fae5}</Project>
+      <Name>DCC.UMB.CDBControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\UMB\CDF\DCC.UMB.CDF_SOL\DCC.UMB.CDF\DCC.UMB.CDF.csproj">
+      <Project>{b630abdd-90d9-4d4d-9b7b-02df342efcf0}</Project>
+      <Name>DCC.UMB.CDF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DCC.ZOS.ZSM.Controls\DCC.ZOS.ZSM.Controls.csproj">
+      <Project>{24853cc2-b0bf-4656-bae2-4716b9a0764d}</Project>
+      <Name>DCC.ZOS.ZSM.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EDSDKLib\EDSDKLib.csproj">
+      <Project>{15e99248-6161-46a4-9183-609ca62406a6}</Project>
+      <Name>EDSDKLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ACT\BadgeScan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\BadgeScan.Designer.cs">
+      <DependentUpon>BadgeScan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\ImportProgressDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\ImportProgressDialog.Designer.cs">
+      <DependentUpon>ImportProgressDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\ImportScannedBadgesForJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\ImportScannedBadgesForJob.Designer.cs">
+      <DependentUpon>ImportScannedBadgesForJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\DataUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\DataUpload.designer.cs">
+      <DependentUpon>DataUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\ImportFingerprintAttendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\ImportFingerprintAttendance.Designer.cs">
+      <DependentUpon>ImportFingerprintAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\ImportSewadarList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\ImportSewadarList.designer.cs">
+      <DependentUpon>ImportSewadarList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\RegisterSewadarsInBulk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\RegisterSewadarsInBulk.designer.cs">
+      <DependentUpon>RegisterSewadarsInBulk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarApplications.Designer.cs">
+      <DependentUpon>SewadarApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarPhotoClicking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarPhotoClicking.Designer.cs">
+      <DependentUpon>SewadarPhotoClicking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarReferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarReferences.Designer.cs">
+      <DependentUpon>SewadarReferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\Speakers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\Speakers.Designer.cs">
+      <DependentUpon>Speakers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\GuideSewadarsInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\TraineeSewadarsInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\OpenSewadarsInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\OpenTraineeSewadarsInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\OpenTraineeSewadarsInformation.designer.cs">
+      <DependentUpon>OpenTraineeSewadarsInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\ScanningControlDates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\ScanningControlDates.designer.cs">
+      <DependentUpon>ScanningControlDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SatsangCentreTransfers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SatsangCentreTransfers.designer.cs">
+      <DependentUpon>SatsangCentreTransfers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarsInSewadarLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarsInSewadarLists.Designer.cs">
+      <DependentUpon>SewadarsInSewadarLists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\MergeSewadars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\MergeSewadars.designer.cs">
+      <DependentUpon>MergeSewadars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarLists.Designer.cs">
+      <DependentUpon>SewadarLists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarsInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarsInformation.designer.cs">
+      <DependentUpon>SewadarsInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\Sewadars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\Sewadars.designer.cs">
+      <DependentUpon>Sewadars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarsDetails.designer.cs">
+      <DependentUpon>SewadarsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarsParticulars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarsParticulars.designer.cs">
+      <DependentUpon>SewadarsParticulars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewadarTeamTransfers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewadarTeamTransfers.designer.cs">
+      <DependentUpon>SewadarTeamTransfers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ACT\SewaTeams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\SewaTeams.Designer.cs">
+      <DependentUpon>SewaTeams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppStateVariables.cs" />
+    <Compile Include="ATT\ArbitraryDailyPresences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATT\ArbitraryDailyPresences.designer.cs">
+      <DependentUpon>ArbitraryDailyPresences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ATT\ArbitrarySummarisedExemptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATT\ArbitrarySummarisedExemptions.designer.cs">
+      <DependentUpon>ArbitrarySummarisedExemptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ATT\ArbitraryShiftPresences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATT\ArbitraryShiftPresences.designer.cs">
+      <DependentUpon>ArbitraryShiftPresences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ATT\SewadarWiseSewaSummaries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATT\SewadarWiseSewaSummaries.designer.cs">
+      <DependentUpon>SewadarWiseSewaSummaries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ATT\SewaTeamAttendence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATT\SewaTeamAttendence.designer.cs">
+      <DependentUpon>SewaTeamAttendence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ATT\TeamDailyAttendence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ATT\TeamDailyAttendence.designer.cs">
+      <DependentUpon>TeamDailyAttendence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CDBAbstractScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\DepartmentTransfers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ACT\DepartmentTransfers.designer.cs">
+      <DependentUpon>DepartmentTransfers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\MedicalDisabilities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\MedicalDisabilities.designer.cs">
+      <DependentUpon>MedicalDisabilities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\CopyCreditSpecifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\CopyCreditSpecifications.Designer.cs">
+      <DependentUpon>CopyCreditSpecifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Departments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Departments.designer.cs">
+      <DependentUpon>Departments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MSC\CreateTeamUsingSewadarListAndSewa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSC\CreateTeamUsingSewadarListAndSewa.Designer.cs">
+      <DependentUpon>CreateTeamUsingSewadarListAndSewa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MSC\MergeSewaTeamsForASewa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSC\MergeSewaTeamsForASewa.Designer.cs">
+      <DependentUpon>MergeSewaTeamsForASewa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PHT\PhotoClicking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PHT\PhotoClicking.designer.cs">
+      <DependentUpon>PhotoClicking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PHT\Webcam.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\GenerateDailyAttendanceReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\GenerateDailyAttendanceReports.Designer.cs">
+      <DependentUpon>GenerateDailyAttendanceReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\ShowLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\ShowLogs.Designer.cs">
+      <DependentUpon>ShowLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\MigrateSewadars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\MigrateSewadars.designer.cs">
+      <DependentUpon>MigrateSewadars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\ImportPhotoErrorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\ImportPhotoErrorWindow.Designer.cs">
+      <DependentUpon>ImportPhotoErrorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\PrintSewadarDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\GenericAttributes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\GenericAttributes.designer.cs">
+      <DependentUpon>GenericAttributes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETUP\PhotoSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\PhotoSettings.Designer.cs">
+      <DependentUpon>PhotoSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETUP\ScanningJobsValidations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\ScanningJobsValidations.designer.cs">
+      <DependentUpon>ScanningJobsValidations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETUP\ScanningJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\ScanningJobs.designer.cs">
+      <DependentUpon>ScanningJobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETUP\Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\Users.Designer.cs">
+      <DependentUpon>Users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ZSMAbstractScreen2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\BadgeTemplates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\BadgeTemplates.designer.cs">
+      <DependentUpon>BadgeTemplates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Colours.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Colours.designer.cs">
+      <DependentUpon>Colours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\CreditSpecifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\CreditSpecifications.designer.cs">
+      <DependentUpon>CreditSpecifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\WeeklySewaLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\WeeklySewaLocations.designer.cs">
+      <DependentUpon>WeeklySewaLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\PostOfficesOrCities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\PostOfficesOrCities.designer.cs">
+      <DependentUpon>PostOfficesOrCities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\SewaExemptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\SewaExemptions.designer.cs">
+      <DependentUpon>SewaExemptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\QualificationSubjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\QualificationSubjects.designer.cs">
+      <DependentUpon>QualificationSubjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Qualifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Qualifications.designer.cs">
+      <DependentUpon>Qualifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\DistrictOrCities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\DistrictOrCities.designer.cs">
+      <DependentUpon>DistrictOrCities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\InitiationPlaces.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\InitiationPlaces.designer.cs">
+      <DependentUpon>InitiationPlaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Relations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Relations.designer.cs">
+      <DependentUpon>Relations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Occupations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Occupations.designer.cs">
+      <DependentUpon>Occupations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Countries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Countries.designer.cs">
+      <DependentUpon>Countries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\SatsangCentresDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\SatsangCentresDetails.designer.cs">
+      <DependentUpon>SatsangCentresDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\Skills.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\Skills.designer.cs">
+      <DependentUpon>Skills.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ENT\States.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ENT\States.designer.cs">
+      <DependentUpon>States.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MSC\SewaSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSC\SewaSummary.designer.cs">
+      <DependentUpon>SewaSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MSC\SewadarHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSC\SewadarHistory.designer.cs">
+      <DependentUpon>SewadarHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MSC\History.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSC\History.designer.cs">
+      <DependentUpon>History.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\MiscellaneousReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\MiscellaneousReports.Designer.cs">
+      <DependentUpon>MiscellaneousReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\DiscrepancyReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\DiscrepancyReports.Designer.cs">
+      <DependentUpon>DiscrepancyReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\PhotoReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\PhotoReports.Designer.cs">
+      <DependentUpon>PhotoReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\AttendanceReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\AttendanceReports.Designer.cs">
+      <DependentUpon>AttendanceReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\ImportExistingSewadarsPhotos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\ImportExistingSewadarsPhotos.designer.cs">
+      <DependentUpon>ImportExistingSewadarsPhotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\ImportNewSewadarsPhotos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\ImportNewSewadarsPhotos.designer.cs">
+      <DependentUpon>ImportNewSewadarsPhotos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\SewadarReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\SewadarReports.Designer.cs">
+      <DependentUpon>SewadarReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ZSMBaseParametersScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\BadgePrinting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\BadgePrinting.Designer.cs">
+      <DependentUpon>BadgePrinting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\RosterPrinting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\RosterPrinting.designer.cs">
+      <DependentUpon>RosterPrinting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RPT\PostBadgePrintingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\PostBadgePrintingDialog.designer.cs">
+      <DependentUpon>PostBadgePrintingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETUP\Sewas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\Sewas.designer.cs">
+      <DependentUpon>Sewas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SETUP\SystemInformationCodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SETUP\SystemInformationCodes.designer.cs">
+      <DependentUpon>SystemInformationCodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="RPT\GenericReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RPT\GenericReports.designer.cs">
+      <DependentUpon>GenericReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ZSMAbstractScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZSMStoredProcParamCreator.cs" />
+    <Compile Include="ZSM_GenericReportPortrait_DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZSM_GenericReportPortrait_DataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DCC.ZOS.ZSM_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\DCC.ZOS.ZSM.SETUP.Users.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="publishZSM.bat" />
+    <Content Include="..\EDSDKLib\Libs\DPPDLL.dll">
+      <Link>DPPDLL.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EDSDKLib\Libs\DPPLibCom.dll">
+      <Link>DPPLibCom.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EDSDKLib\Libs\DPPRSC.dll">
+      <Link>DPPRSC.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EDSDKLib\Libs\EDSDK.dll">
+      <Link>EDSDK.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EDSDKLib\Libs\EdsImage.dll">
+      <Link>EdsImage.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EDSDKLib\Libs\Mlib.dll">
+      <Link>Mlib.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\TraineeSewadarsBadge.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\GenericListReportPortrait.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\GenericReportPortraitWODept.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="RPT\GenericGroupReportPortrait.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="RPT\IDCardBadge.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalQASewadarFront.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalDarshanSewaFront.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalDarshanSewaSeriesFront.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalQASewadarBack.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalDarshanSewaBack.rpt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\SewadarsReportingCard.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalSSCDSewadarFront.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\GuideSewadarBadge.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\GenericReportPortraitPhotos.rpt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="ZSM_GenericReportPortrait_DataSet.xsc">
+      <DependentUpon>ZSM_GenericReportPortrait_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ZSM_GenericReportPortrait_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ZSM_GenericReportPortrait_DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ZSM_GenericReportPortrait_DataSet.xss">
+      <DependentUpon>ZSM_GenericReportPortrait_DataSet.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ACT\BadgeScan.resx">
+      <DependentUpon>BadgeScan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\ImportProgressDialog.resx">
+      <DependentUpon>ImportProgressDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\ImportScannedBadgesForJob.resx">
+      <DependentUpon>ImportScannedBadgesForJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\DataUpload.resx">
+      <DependentUpon>DataUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\ImportFingerprintAttendance.resx">
+      <DependentUpon>ImportFingerprintAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\ImportSewadarList.resx">
+      <DependentUpon>ImportSewadarList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\OpenTraineeSewadarsInformation.resx">
+      <DependentUpon>OpenTraineeSewadarsInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\RegisterSewadarsInBulk.resx">
+      <DependentUpon>RegisterSewadarsInBulk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\ScanningControlDates.resx">
+      <DependentUpon>ScanningControlDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SatsangCentreTransfers.resx">
+      <DependentUpon>SatsangCentreTransfers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarApplications.resx">
+      <DependentUpon>SewadarApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarPhotoClicking.resx">
+      <DependentUpon>SewadarPhotoClicking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarReferences.resx">
+      <DependentUpon>SewadarReferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarsInSewadarLists.resx">
+      <DependentUpon>SewadarsInSewadarLists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\MergeSewadars.resx">
+      <DependentUpon>MergeSewadars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarLists.resx">
+      <DependentUpon>SewadarLists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarsInformation.resx">
+      <DependentUpon>SewadarsInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\Sewadars.resx">
+      <DependentUpon>Sewadars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarsDetails.resx">
+      <DependentUpon>SewadarsDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\DepartmentTransfers.resx">
+      <DependentUpon>DepartmentTransfers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarsParticulars.resx">
+      <DependentUpon>SewadarsParticulars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewadarTeamTransfers.resx">
+      <DependentUpon>SewadarTeamTransfers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\SewaTeams.resx">
+      <DependentUpon>SewaTeams.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ACT\Speakers.resx">
+      <DependentUpon>Speakers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATT\ArbitraryDailyPresences.resx">
+      <DependentUpon>ArbitraryDailyPresences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATT\ArbitrarySummarisedExemptions.resx">
+      <DependentUpon>ArbitrarySummarisedExemptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATT\ArbitraryShiftPresences.resx">
+      <DependentUpon>ArbitraryShiftPresences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATT\SewadarWiseSewaSummaries.resx">
+      <DependentUpon>SewadarWiseSewaSummaries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATT\SewaTeamAttendence.resx">
+      <DependentUpon>SewaTeamAttendence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ATT\TeamDailyAttendence.resx">
+      <DependentUpon>TeamDailyAttendence.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\BadgeTemplates.resx">
+      <DependentUpon>BadgeTemplates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Colours.resx">
+      <DependentUpon>Colours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\MedicalDisabilities.resx">
+      <DependentUpon>MedicalDisabilities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\CopyCreditSpecifications.resx">
+      <DependentUpon>CopyCreditSpecifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Departments.resx">
+      <DependentUpon>Departments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\CreditSpecifications.resx">
+      <DependentUpon>CreditSpecifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\WeeklySewaLocations.resx">
+      <DependentUpon>WeeklySewaLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\PostOfficesOrCities.resx">
+      <DependentUpon>PostOfficesOrCities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\SewaExemptions.resx">
+      <DependentUpon>SewaExemptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\QualificationSubjects.resx">
+      <DependentUpon>QualificationSubjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Qualifications.resx">
+      <DependentUpon>Qualifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\DistrictOrCities.resx">
+      <DependentUpon>DistrictOrCities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\InitiationPlaces.resx">
+      <DependentUpon>InitiationPlaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Relations.resx">
+      <DependentUpon>Relations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Occupations.resx">
+      <DependentUpon>Occupations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Countries.resx">
+      <DependentUpon>Countries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\SatsangCentresDetails.resx">
+      <DependentUpon>SatsangCentresDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\Skills.resx">
+      <DependentUpon>Skills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ENT\States.resx">
+      <DependentUpon>States.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSC\CreateTeamUsingSewadarListAndSewa.resx">
+      <DependentUpon>CreateTeamUsingSewadarListAndSewa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSC\MergeSewaTeamsForASewa.resx">
+      <DependentUpon>MergeSewaTeamsForASewa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSC\SewaSummary.resx">
+      <DependentUpon>SewaSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSC\SewadarHistory.resx">
+      <DependentUpon>SewadarHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSC\History.resx">
+      <DependentUpon>History.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PHT\PhotoClicking.resx">
+      <DependentUpon>PhotoClicking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\BadgePrinting.resx">
+      <DependentUpon>BadgePrinting.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="RPT\GenericReportPortrait.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GenericReportPortrait.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalSpecialFront.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HorizontalSpecialFront.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalSewadarFront.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HorizontalSewadarFront.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\ConstructionSewaBadge.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ConstructionSewaBadge.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\GenericSummaryPortrait.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GenericSummaryPortrait.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\HorizontalSewadarBack.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HorizontalSewadarBack.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\GenericSynopsisPortrait.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>GenericSynopsisPortrait.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="RPT\ConstructionSewaBadge.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\GenerateDailyAttendanceReports.resx">
+      <DependentUpon>GenerateDailyAttendanceReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\ShowLogs.resx">
+      <DependentUpon>ShowLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\MigrateSewadars.resx">
+      <DependentUpon>MigrateSewadars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\TraineeSewadarsBadge.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\GenericReportPortrait.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\GenericSummaryPortrait.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\GenericSynopsisPortrait.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\HorizontalSewadarBack.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\HorizontalSewadarFront.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\HorizontalSpecialFront.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\ImportExistingSewadarsPhotos.resx">
+      <DependentUpon>ImportExistingSewadarsPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\ImportNewSewadarsPhotos.resx">
+      <DependentUpon>ImportNewSewadarsPhotos.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="RPT\MobilePhoneReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MobilePhoneReport.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\PrintSewadarPersonalDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrintSewadarPersonalDetails.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="RPT\ImportPhotoErrorWindow.resx">
+      <DependentUpon>ImportPhotoErrorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\MobilePhoneReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\PrintSewadarPersonalDetails.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\RosterPrinting.resx">
+      <DependentUpon>RosterPrinting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\PostBadgePrintingDialog.resx">
+      <DependentUpon>PostBadgePrintingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="RPT\TriangularSewadarBack.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TriangularSewadarBack.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\TriangularSewadarFront.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TriangularSewadarFront.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\VerticalSewadarBack.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VerticalSewadarBack.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\VerticalSewadarFront.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VerticalSewadarFront.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RPT\SewadarRoster.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SewadarRoster.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="RPT\SewadarRoster.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\TriangularSewadarBack.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\TriangularSewadarFront.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\VerticalSewadarBack.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\VerticalSewadarFront.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\GenericAttributes.resx">
+      <DependentUpon>GenericAttributes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\PhotoSettings.resx">
+      <DependentUpon>PhotoSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\ScanningJobsValidations.resx">
+      <DependentUpon>ScanningJobsValidations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\ScanningJobs.resx">
+      <DependentUpon>ScanningJobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\Sewas.resx">
+      <DependentUpon>Sewas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RPT\GenericReports.resx">
+      <DependentUpon>GenericReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\SystemInformationCodes.resx">
+      <DependentUpon>SystemInformationCodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SETUP\Users.resx">
+      <DependentUpon>Users.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

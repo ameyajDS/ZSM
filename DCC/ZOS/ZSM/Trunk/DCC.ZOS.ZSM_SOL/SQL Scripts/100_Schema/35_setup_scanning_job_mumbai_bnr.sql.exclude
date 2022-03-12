@@ -1,0 +1,81 @@
+/* ==================================================================================
+	Source File		:	35_setup_scanning_job_mumbai_bnr.sql
+	Author(s)		:	Jitendra Loyal
+	Started On		:	Thu 10 Jan 10:57:00 IST 2013
+	Version			:	1.00
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	10-Jan-2013
+	Reviewed By		:	
+	Reviewed On		:	
+	==================================================================================
+																	  Revision History
+	----------------------------------------------------------------------------------
+     AJ : 10-Jan-2013
+		*   Initial versions
+	==================================================================================*/
+
+
+----------------------------------For Scanning Jobs------------------------------------------
+DECLARE
+	@scanning_job_id		scanning_job_id,
+	@scanning_sub_job_id	scanning_job_id,
+	@scanning_job_nm		gnc_nm,
+	@sewadar_list_id		sewadar_list_id,
+	@satsang_centre_id		satsang_centre_id
+BEGIN
+	SET	@scanning_job_nm	=	'Badges not returned 2013 Jan'
+
+	SELECT @satsang_centre_id = satsang_centre_id
+	FROM	satsang_centres_details 
+	WHERE	centre_nm		= 'Mumbai'
+	AND		is_main_centre	= 'Yes';
+
+	IF (@@ROWCOUNT = 0)
+	BEGIN
+		RAISERROR ('Satsang Centre ID for Mumbai not found', 16, 1);
+		RETURN;
+	END
+
+	SELECT @sewadar_list_id = sewadar_list_id
+	FROM	generic_sewadar_lists 
+	WHERE	sewadar_list_nm = 'Badges not returned 2013 January';
+
+	IF (@@ROWCOUNT = 0)
+	BEGIN
+		RAISERROR ('Badges not returned 2013 January Sewadar List not found', 16, 1);
+		RETURN;
+	END
+
+	INSERT INTO scanning_jobs
+			(	satsang_centre_id, scanning_job_nm, scanning_job_type_cd, remarks, effective_from, effective_till,
+				sewadar_list_id, sewa_id, is_deleting_allowed, status_system_info_cd
+			)
+		VALUES
+			(	@satsang_centre_id, @scanning_job_nm, 'Reducing List', 'Badges not returned of Regular Sewadars after January 2013, Programme', '10-Jan-2013', '31-Jan-2013',
+				@sewadar_list_id, NULL, 'No', 'SttsBdgTrk'
+			);
+	SET @scanning_job_id = SCOPE_IDENTITY();
+	
+	INSERT	scanning_jobs_periods
+			(	scanning_job_id, effective_from, effective_till	)
+		VALUES
+			(	@scanning_job_id, '10-Jan-2013', '31-Jan-2013'	)
+	
+	SELECT	@scanning_sub_job_id = scanning_sub_job_id
+	FROM	scanning_sub_jobs
+	WHERE	scanning_sub_job_nm	= @scanning_job_nm
+	
+	IF (@@ROWCOUNT = 0)
+	BEGIN
+		RAISERROR ('Scanning Sub Job for Badges not returned 2013 January not found', 16, 1);
+		RETURN;
+	END
+
+	INSERT	scanning_sub_jobs_validations
+			(	recorded_sub_job_id, recording_sub_job_id, validating_action )
+		VALUES
+			(	@scanning_sub_job_id, @scanning_sub_job_id, 'No Action')
+	
+END
+

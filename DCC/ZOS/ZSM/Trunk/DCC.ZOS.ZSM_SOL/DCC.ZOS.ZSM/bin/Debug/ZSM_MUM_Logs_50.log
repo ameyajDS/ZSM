@@ -1,0 +1,171 @@
+12-Mar-2022 10:51:29 AM : Logging initialized for this session
+
+--10:51:29>M: Starting Common Development Framework
+
+--10:51:30>M: Command Line arguments received : ZSM_MUM|Zonal Sewadar Management|ZSM|Zonal Sewadar Management|1|20-09-2005|ZSM|.\SQLEXPRESS||DCC|1|DCC|ZSM_ADM|****|50|No|Error|1||||||6015|Mumbai|1|10||
+
+--10:51:30>M: Loading application menus..
+
+--10:51:30>M: Application menus loaded
+
+--10:51:30>M: MDI Main Created Successfully!
+
+--10:51:30>M: 
+SELECT * FROM sysadmin..standard_messages
+
+--10:51:30>M: Sql Executed Successfully
+
+--10:51:34>M: Request to open screen of type DCC.ZOS.ZSM.SETUP.Sewas
+
+--10:51:34>M: This type of screen is not opened in any chain. Starting a new chain or link in existing chain.
+
+--10:51:34>M: 
+select attendance_unit from attendance_units WHERE (GETDATE() BETWEEN effective_from AND effective_till)
+
+--10:51:34>M: Sql Executed Successfully
+
+--10:51:34>M: 
+select sewa_frequency from sewa_frequencies WHERE (GETDATE() BETWEEN effective_from AND effective_till)
+
+--10:51:34>M: Sql Executed Successfully
+
+--10:51:34>M: 
+select sewa_shift from sewa_shifts where GETDATE() between effective_from AND effective_till
+
+--10:51:34>M: Sql Executed Successfully
+
+--10:51:34>M: Screen of type DCC.ZOS.ZSM.SETUP.Sewas created successfully!
+
+--10:51:34>M: Setting UIMode of the application environment to Query mode
+
+--10:51:34>M: UIMode of the application environment set to Query mode
+
+--10:51:34>M: Screen is visible now
+
+--10:51:35>M: Setting UIMode of the application environment to Retrieve mode
+
+--10:51:35>M: UIMode of the application environment set to Retrieve mode
+
+--10:51:35>M: 
+SELECT  * FROM dbo.ViewSewas WHERE satsang_centre_id = '6015'
+  ORDER BY  sewa_id DESC
+
+--10:51:35>M: Setting UIMode of the application environment to Browse mode
+
+--10:51:35>M: UIMode of the application environment set to Browse mode
+
+--10:51:39>M: 
+EXEC QuerySewasSewaShift
+@sewa_id = '153';
+
+EXEC QuerySewasSewaShiftCombinations
+@sewa_id = '153';
+
+EXEC QuerySewasSatsangCentre
+@sewa_id = '153';
+
+EXEC QuerySewasPeriod
+@sewa_id = '153';
+
+
+
+--10:51:39>M: Sql Executed Successfully
+
+--10:51:43>M: 
+EXEC QuerySewasSewaShift
+@sewa_id = '152';
+
+EXEC QuerySewasSewaShiftCombinations
+@sewa_id = '152';
+
+EXEC QuerySewasSatsangCentre
+@sewa_id = '152';
+
+EXEC QuerySewasPeriod
+@sewa_id = '152';
+
+
+
+--10:51:43>M: Sql Executed Successfully
+
+--10:51:43>M: 
+EXEC QuerySewasSewaShift
+@sewa_id = '151';
+
+EXEC QuerySewasSewaShiftCombinations
+@sewa_id = '151';
+
+EXEC QuerySewasSatsangCentre
+@sewa_id = '151';
+
+EXEC QuerySewasPeriod
+@sewa_id = '151';
+
+
+
+--10:51:43>M: Sql Executed Successfully
+
+--10:51:44>M: 
+EXEC QuerySewasSewaShift
+@sewa_id = '150';
+
+EXEC QuerySewasSewaShiftCombinations
+@sewa_id = '150';
+
+EXEC QuerySewasSatsangCentre
+@sewa_id = '150';
+
+EXEC QuerySewasPeriod
+@sewa_id = '150';
+
+
+
+--10:51:44>M: Sql Executed Successfully
+
+--10:51:44>M: 
+EXEC QuerySewasSewaShift
+@sewa_id = '149';
+
+EXEC QuerySewasSewaShiftCombinations
+@sewa_id = '149';
+
+EXEC QuerySewasSatsangCentre
+@sewa_id = '149';
+
+EXEC QuerySewasPeriod
+@sewa_id = '149';
+
+
+
+--10:51:45>M: Sql Executed Successfully
+
+--10:51:45>M: 
+EXEC QuerySewasSewaShift
+@sewa_id = '148';
+
+EXEC QuerySewasSewaShiftCombinations
+@sewa_id = '148';
+
+EXEC QuerySewasSatsangCentre
+@sewa_id = '148';
+
+EXEC QuerySewasPeriod
+@sewa_id = '148';
+
+
+
+--10:51:45>M: Sql Executed Successfully
+
+--10:52:08>M: 
+CloseSession @p_user_no=1, @p_application_id=ZSM_MUM, @p_session_id=50
+
+--10:52:08>E: Session (50) of User (1) for closing does not exist in the Database 
+
+--10:52:08>M: Closing screen Sewas
+
+--10:52:08>M: Screen Sewas closed and removed from chain
+
+--10:52:08>M: Common Development Framework will now close the application and exit.
+
+--10:52:08>M: Good Bye....
+

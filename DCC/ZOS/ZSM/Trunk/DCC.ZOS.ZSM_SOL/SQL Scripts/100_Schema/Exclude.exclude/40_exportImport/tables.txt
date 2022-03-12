@@ -1,0 +1,175 @@
+Following operations are done on a table:
+	I : Insert
+	D : Delete 
+	U : Update
+
+Assumptions......
+1. No operation at Centre till the time backup is taken, imported into Zonal System, Exported from Zonal System and restored at the Centre.
+2. While exporting, the database is created afresh, and the data is INSERTed from the Zonal System.
+3. For some entities that will be managed by the Centre (like Sewas) will have IDs partitioned for each of the centres (indicated by * below).
+
+																												Report Anomalies
+																												~~~~~~~~~~~~~~~~
+																										Data Exists IN		Data different IN
+									Zonal to Centre				Centre to Zonal		Who Manages		Zone		Centre		Zone		Centre
+									===============				===============		~~~~~~~~~~~		~~~~		~~~~~~		~~~~		~~~~~~
+--	11_schema.sql
+address_proofs								I						no					Zone
+address_types								I						no					Zone
+attendance_units							I						no					Zone
+badge_part_types							I						no					Zone
+centre_functionaries						I						no					Zone
+sewadar_status								I						no					Zone
+sewadar_status_valid_transitions			I						no					Zone
+generic_attributes							I						no					Zone
+generic_attributes_list_values				I						no					Zone
+generic_attributes_status					I						no					Zone
+occupations									I						no					Zone
+sewadar_types								I						no					Zone
+remarks_types								I						no					Zone
+responsibilities							I						no					Zone
+scanning_validating_actions					I						no					Zone
+sewa_frequencies							I						no					Zone
+sewa_shifts									I						no					Zone
+sewadar_list_uses							I						no					Zone
+system_information_codes					I						no					Zone
+system_information_values					I						no					Zone
+
+--	12_schema_entities.sql
+colours										I						no					Zone
+badge_templates								I						no					Zone
+badge_templates_sewadar_status				I						no					Zone
+satsang_centres_details						I						no					Zone
+satsang_centre_functionaries				I						no					Zone
+
+sewas										I	(sewas_s_centres)	Yes	U/I	  			Centre *
+sewas_periods								I						Yes	D/U/I 			Centre (No check)
+sewas_sewa_shifts							I						Yes	D/U/I			Centre (No check)
+sewas_satsang_centres						I	sc					Yes	D/I				Centre (No check)
+
+credit_specifications						I	sc					no	I/D/U/I			Centre *
+credit_specifications_sewas					I						no					Centre 
+departments									I						no					Zone
+departments_satsang_centres					I	c					no					Zone
+sub_departments								I						no					Zone
+sub_departments_satsang_centres				I	c					no					Zone
+
+		..... CDB database is sent to the Centre and is completely managed at the Zonal Office
+cdb..countries								I						no					Zone
+cdb..states									I						no					Zone
+cdb..districts								I						no					Zone
+cdb..initiation_places						I						no					Zone
+cdb..skills									I						no					Zone
+cdb..relations								I						no					Zone
+cdb..qualification_types					I						no					Zone
+cdb..qualifications							I						no					Zone
+cdb..patrons								I						no					Zone
+
+																												Report Anomalies
+																												~~~~~~~~~~~~~~~~
+																										Data Exists IN		Data different IN	....actually, we cannot
+									Zonal to Centre				Centre to Zonal		Who Manages		Zone		Centre		Zone		Centre	....figure this out as
+									===============				===============		~~~~~~~~~~~		~~~~		~~~~~~		~~~~		~~~~~~	....to who did it.
+--	12_schema_entities.sql
+post_offices_or_cities						I						no					Centre	*	No			Yes			No			Yes
+															(LATER. As of now throw an error if there is a data in centre and not in zone)
+sequence_controlling_information			I						no	U/I				Centre 
+								(Import only centre's data. Flag error of data outside centre. Where sewa_id is NULL (in centre), it is an error. For existing sat_cent, seq_id sewa_id is not same in zone and centre is error. O/W update the last_no. Insert non-existing records). (Export all entries of the cetre where sewa_id is not null).
+
+sewa_exemptions								I						no					Zone
+sewa_exemptions_applicable_sewas		no	I	(sewas)					yes I/					Centre (insert non-existing)#
+weekly_sewa_locations					no	I						yes	U/I				Centre	*
+generic_attributes_satsang_centres		may be	I					no	I/				Centre (insert non-existing. flag error for non-centre data)#
+--*$*-- End--12_schema_entities
+
+--*$*-- Start--13_schema
+sewadars								centre-specific only I		no					Zone		No			Yes			No			Yes
+--*$*-- End--13_schema
+
+--*$*-- Start--18_schema_photos
+ZSM_Photos..sewadars_photos				centre-specific only		no					Zone
+--*$*-- End--18_schema_photos
+
+--*$*-- Start--13_schema
+sewadars_details						centre-specific only I		yes (updates only)	Centre (update only)
+sewadars_addresses						centre-specific only I		yes (updates only)	Centre (update only) -2--D/I
+sewadars_qualifications					centre-specific only I		yes	(updates only)	Centre (update only) -2--D/I
+sewadars_skills         				centre-specific only I		yes (updates only)	Centre (update only) -2--D/I
+sewadars_remarks						csonly(A,T,M)	     I      yes	(A,TDN,M only)  Centre (A,TDN,M); Zone (Others. No need to export this to Centre) -2--D/I
+sewadars_registrations					centre-specific only I		yes					Zone		No			Yes			No			Yes
+sewadars_satsang_centre_transfers		centre-specific only		yes					# Drop table because we will not build screen for this.
+sewadars_transfers						centre-specific only I		yes					Zone		No			Yes			NA			NA
+sewadars_status_changes					centre-specific only I		yes					Zone		No			Yes			NA			NA
+sewadars_responsibility_changes			centre-specific only I		yes					Zone		No			Yes			NA			NA
+sewadars_particulars					centre-specific only I		yes	D/I				Centre
+sewadars_attributes						centre-specific only I	    yes	D/I				Centre
+sewa_teams								centre-specific only I		yes	U/I/			Centre * (operate only on sewas above)
+sewa_team_wise_sewadars					centre-specific only I		yes	D/I				Centre (operate on sewa_teams above) (delete team_wise_daily_attendance, sewa_team_wise_sewadars; then insert in opp order)
+sewadars_txn_ts							centre-specific only I		yes	D/I				#???? --Import : Pending as discusses on 07.01.2012 : 
+sewa_teams_txn_ts						centre-specific only I		yes	D/I				#????
+team_wise_daily_attendance				centre-specific only I		yes	D/I				Centre		Yes			Yes			Yes			Yes	for previously imported Sewas excluding Archiving
+				(operate on above sewa_teams; delete and insert). check that sewadar belongs to that @centre before deleting from zone. similarly do the check in the imported centre.
+arbitrary_daily_presences				centre-specific only I		yes	D/I				Centre		Yes			Yes			Yes			Yes	for previously imported Sewas excluding Archiving
+				(operate on above sewas; delete and insert). check that sewadar belongs to that @centre before deleting from zone. similarly do the check in the imported centre.
+arbitrary_shift_presences				centre-specific only I		yes	D/I				Centre		Yes			Yes			Yes			Yes	for previously imported Sewas excluding Archiving
+				(operate on above sewas; delete and insert). check that sewadar belongs to that @centre before deleting from zone.  similarly do the check in the imported centre.
+arbitrary_summarised_exemptions			centre-specific only I		yes	D/I				Centre		Yes			Yes			Yes			Yes	for previously imported Sewas excluding Archiving
+				(operate on above sewas; delete and insert). check that sewadar belongs to that @centre before deleting from zone.  similarly do the check in the imported centre.
+sewadar_wise_sewa_summaries				centre-specific only I		yes	D/I				Centre		Yes			Yes			Yes			Yes	for previously imported Sewas excluding Archiving and newly enrolled sewadars
+				(operate on above sewas; delete and insert). check that sewadar belongs to that @centre before deleting from zone.  similarly do the check in the imported centre.
+credit_specifications_sewadars			I						  --Yes D/I				Centre
+				(operate on credit_specifications like above).
+--*$*-- End--13_schema
+
+--*$*-- Start--15_schema_centres
+generic_sewadar_lists																	Maintain Centres' data and do not import
+generic_sewadar_lists_sewadars															Maintain Centres' data and do not import
+--*$*-- End--15_schema_centres
+
+--*$*-- Start--13_schema
+sewadars_badges							centre-specific only I		yes	I				Both *
+sewadars_badge_issues_and_returns		centre-specific only		yes					Centre (LATER. As of now, Flag an error if you get data in zone or centre (both in import and export).)
+sewadars_merged							centre-specific only		yes					Zone		No			Yes			NA			NA
+--*$*-- End--13_schema
+
+--*$*-- Start--11_schema									
+generic_reports							yes I						no					Zone
+--*$*-- End--11_schema									
+
+--*$*-- Start--14_schema_rpts
+generic_report_headers					no							no					Maintain Centres' data and do not import
+generic_report_details					no							no					Maintain Centres' data and do not import
+generic_report_summaries				no							no					Maintain Centres' data and do not import
+generic_report_synopsis					no							no					Maintain Centres' data and do not import
+--*$*-- End--14_schema_rpts
+
+--*$*-- Start--11_schema									
+scanning_job_types						no	I						no					Zone
+--*$*-- End--11_schema									
+
+--*$*-- Start--15_schema_centres
+scanning_jobs							no							no					Maintain Centres' data and do not import
+scanning_jobs_periods					no							no					Maintain Centres' data and do not import
+scanning_sub_jobs						no							no					Maintain Centres' data and do not import
+scanning_sub_jobs_validations			no							no					Maintain Centres' data and do not import
+scanning_sub_jobs_valid_combinations	no							no					Maintain Centres' data and do not import
+scanning_jobs_controlling_dates			no							no					Maintain Centres' data and do not import
+scanned_badges							no							no					Maintain Centres' data and do not import
+--*$*-- End--15_schema_centres
+
+--*$*-- Start--12_schema_entities
+satsang_centres_seeds					no							no					Zone. No export / import. Metadata information
+--*$*-- End--12_schema_entities
+
+--*$*-- Start--13_schema
+additionally_exported_sewadars			no	I						no					Zone. No export / import. Metadata information
+--*$*-- End--13_schema
+
+Notes..... When centre-specific data is backed-up, it should NOT be updated at the centre till the centre receives their centre-specific backup from the Zonal Centre.
+
+*$*-- 19/01/2013 --$
+Table not found while export zone to centre : Table Name : Manually_Exported_Sewadars  : Used in 13_schema
+														    generic_list_report_headers     : 14_schema_rpts
+															generic_list_report_details     : 14_schema_rpts
+															_ZSM_tables                     : No Schema
+*$*-- 19/01/2013 --$

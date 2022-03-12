@@ -1,0 +1,2 @@
+DBCC CHECKIDENT ('sewadar_applications', RESEED, 120000001) WITH NO_INFOMSGs
+

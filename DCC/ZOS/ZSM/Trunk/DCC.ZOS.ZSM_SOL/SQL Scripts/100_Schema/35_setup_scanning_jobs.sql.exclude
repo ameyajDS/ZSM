@@ -1,0 +1,183 @@
+/* ==================================================================================
+	Source File		:	35_setup_scanning_jobs.sql
+	Author(s)		:	Ameya Jadhav
+	Started On		:	Fri 10 Dec 18:21:00 IST 2010
+	Version			:	1.00
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	10-Nov-2010
+	Reviewed By		:	
+	Reviewed On		:	
+	==================================================================================
+																	  Revision History
+	----------------------------------------------------------------------------------
+     AJ : 10-Dec-2010
+		*   Initial versions
+	==================================================================================*/
+
+
+----------------------------------For Scanning Jobs------------------------------------------
+DECLARE
+	@scanning_job_id		scanning_job_id,
+	@sewadar_list_id		sewadar_list_id,
+	@satsang_centre_id		satsang_centre_id,
+	@shift_I_sub_job_id		scanning_job_id,
+	@shift_II_sub_job_id	scanning_job_id,
+	@shift_III_sub_job_id	scanning_job_id,
+	@sewa_id				sewa_id
+BEGIN
+
+	DELETE scanning_jobs_controlling_dates
+	DELETE scanning_sub_jobs_validations	
+	DELETE scanning_sub_jobs
+	DELETE scanning_jobs
+	DELETE scanning_job_types
+	DELETE generic_sewadar_lists_sewadars
+	DELETE generic_sewadar_lists
+	
+		
+	SELECT @satsang_centre_id = satsang_centre_id
+	FROM	satsang_centres_details 
+	WHERE	centre_nm		= 'Mumbai'
+	AND		is_main_centre	= 'Yes';
+
+
+	INSERT INTO generic_sewadar_lists
+		(sewadar_list_nm, satsang_centre_id)
+	VALUES	('Sewadar_List_1', @satsang_centre_id)
+	
+	SELECT @sewadar_list_id = sewadar_list_id
+	FROM	generic_sewadar_lists 
+	WHERE	sewadar_list_nm = 'Sewadar_List_1';
+
+	INSERT INTO generic_sewadar_lists_sewadars
+		(sewadar_list_id, satsang_centre_id, sewadar_grno)
+	VALUES (@sewadar_list_id, @satsang_centre_id, 'G07579');
+	
+	INSERT INTO generic_sewadar_lists_sewadars
+		(sewadar_list_id, satsang_centre_id, sewadar_grno)
+	VALUES (@sewadar_list_id, @satsang_centre_id, 'G07580');
+	
+	INSERT INTO generic_sewadar_lists_sewadars
+		(sewadar_list_id, satsang_centre_id, sewadar_grno)
+	VALUES (@sewadar_list_id, @satsang_centre_id, 'G07581');
+	
+	INSERT INTO scanning_job_types
+	(
+		scanning_job_type_cd, remarks, is_date_wise, has_sub_jobs, status_system_info_cd, procedure_nm, effective_from, effective_till
+	)
+	VALUES
+	(
+		'CnstrctnSewa', 'For Scanning of construction sewa', 'Yes', 'Yes', 'SttsGenUse', 'UpdateSewadarBadge', '17-Jan-2010', '30-Dec-2020'
+	)
+	
+	SELECT @sewa_id = sewa_id
+	FROM sewas
+	WHERE sewa_cd = '2008 MTHA';
+	
+	INSERT INTO scanning_jobs
+	(satsang_centre_id, scanning_job_nm, scanning_job_type_cd, remarks, effective_from, effective_till, sewadar_list_id, sewa_id,
+		is_deleting_allowed, status_system_info_cd)
+	VALUES
+	(@satsang_centre_id, 'Construction Sewa 2008', 'CnstrctnSewa', 'For Scanning of construction sewa for year 2008', '17-Jan-2008', '20-Dec-2008', @sewadar_list_id, @sewa_id, 
+	'Yes', 'SttsGenUse')
+		
+	
+	SELECT @scanning_job_id = scanning_job_id 
+	FROM	scanning_jobs 
+	WHERE	scanning_job_nm = 'Construction Sewa 2009'
+	
+	SELECT @sewa_id = sewa_id
+	FROM sewas
+	WHERE sewa_cd = '2009 MTHA';
+	
+	INSERT INTO scanning_jobs
+	(satsang_centre_id, scanning_job_nm, scanning_job_type_cd, remarks, effective_from, effective_till, sewadar_list_id, sewa_id,
+		is_deleting_allowed, status_system_info_cd)
+	VALUES
+	(@satsang_centre_id, 'Construction Sewa 2009', 'CnstrctnSewa', 'For Scanning of construction sewa for year 2009', '17-Jan-2009', '20-Dec-2009', @sewadar_list_id, @sewa_id, 
+	'No', 'SttsGenUse')
+		
+	
+	SELECT @scanning_job_id = scanning_job_id 
+	FROM	scanning_jobs 
+	WHERE	scanning_job_nm = 'Construction Sewa 2009'
+	
+	--------For Scanning Sub Jobs----------------------------------
+	INSERT INTO scanning_sub_jobs	(scanning_job_id, scanning_sub_job_nm, scanning_sub_job_sq, credit_cnt, unit_cnt)
+	VALUES						(@scanning_job_id, 'Shift I (9am - 1pm)', 1, 1, 2)
+
+	INSERT INTO scanning_sub_jobs	(scanning_job_id, scanning_sub_job_nm, scanning_sub_job_sq, credit_cnt, unit_cnt)
+	VALUES						(@scanning_job_id, 'Shift II (9am - 7pm)', 2, 1, 1)
+
+	INSERT INTO scanning_sub_jobs	(scanning_job_id, scanning_sub_job_nm, scanning_sub_job_sq, credit_cnt, unit_cnt)
+	VALUES						(@scanning_job_id, 'Shift III (3pm - 7pm)', 3, 1, 2)
+
+
+-----------------FOR SCANNING SUB JOBS VALIDATIONS------------------
+	SELECT @shift_I_sub_job_id = scanning_sub_job_id
+	FROM	scanning_sub_jobs
+	WHERE	scanning_sub_job_nm	= 'Shift I (9am - 1pm)'
+	
+	SELECT @shift_II_sub_job_id = scanning_sub_job_id
+	FROM	scanning_sub_jobs
+	WHERE	scanning_sub_job_nm	= 'Shift II (9am - 7pm)'
+	
+	SELECT @shift_III_sub_job_id = scanning_sub_job_id
+	FROM	scanning_sub_jobs
+	WHERE	scanning_sub_job_nm	= 'Shift III (3pm - 7pm)'
+		
+	---For Shift I
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_I_sub_job_id, @shift_I_sub_job_id, 'No Action')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_I_sub_job_id, @shift_II_sub_job_id, 'Move')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_I_sub_job_id, @shift_III_sub_job_id, 'Add')
+	
+	---For Shift II
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_II_sub_job_id, @shift_I_sub_job_id, 'Move')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_II_sub_job_id, @shift_II_sub_job_id, 'No Action')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_II_sub_job_id, @shift_III_sub_job_id, 'Move')
+
+	---For Shift III
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_III_sub_job_id, @shift_I_sub_job_id, 'Error')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_III_sub_job_id, @shift_II_sub_job_id, 'Error')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_III_sub_job_id, @shift_III_sub_job_id, 'No Action')
+END
+
+SELECT * FROM generic_sewadar_lists
+GO
+SELECT * FROM scanning_job_types
+GO
+SELECT * FROM scanning_jobs 
+GO
+SELECT * FROM scanning_sub_jobs 
+GO
+SELECT * FROM scanning_sub_jobs_validations
+GO
+SELECT * FROM generic_sewadar_lists 
+GO
+SELECT * FROM generic_sewadar_lists_sewadars
+GO

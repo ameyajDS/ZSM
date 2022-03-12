@@ -1,0 +1,21 @@
+--Pre-requisites
+--Execute ..\10_procs_on_zsm_tables.sql
+--Execute procs_setup_for_centre.sql
+--Change the parameter values for the desired centre in _SetupForCentre call below.
+
+BEGIN TRAN
+EXEC _SetupForCentre 6056, 'ZSM_NGP', 'Ahmedabad', 'AHM', 'A', 5040, 'ZSM_AHM', 'Zonal Sewadar Manager (Ahmedabad)'
+ROLLBACK
+--COMMIT TRAN
+EXEC _DropProcedures
+--==============================================================================
+
+--JUST FOR REFERENCE for other Centres. DO NOT EXECUTE
+--EXEC _SetupForCentre 6015, 'ZSM_MUM', 'Raipur', 'RPR', 'R', 9720, 'ZSM_RPR', 'Zonal Sewadar Manager (Raipur)'
+--EXEC _SetupForCentre 6015, 'ZSM_MUM', 'Ahmedabad', 'AHM', 'A', 5040, 'ZSM_AHM', 'Zonal Sewadar Manager (Ahmedabad)'
+--EXEC _SetupForCentre 6015, 'ZSM_MUM', 'Nagpur', 'NGP', 'N', 6056, 'ZSM_NGP', 'Zonal Sewadar Manager (Nagpur)'
+--EXEC _SetupForCentre 6015, 'ZSM_MUM', 'Kolkata', 'KOL', 'K', 7210, 'ZSM_KOL', 'Zonal Sewadar Manager (Kolkata)'
+--EXEC _SetupForCentre 6015, 'ZSM_MUM', 'Indore', 'IND', 'I', 5820, 'ZSM_IND', 'Zonal Sewadar Manager (Indore)'
+--EXEC _SetupForCentre 5820, 'ZSM_IND', 'Biaora', 'BIR', 'B', 5756, 'ZSM_BIR', 'Zonal Sewadar Manager (Biaora)'
+--EXEC _SetupForCentre 7210, 'ZSM_KOL', 'Jamshedpur', 'JMD', 'J', 9948, 'ZSM_JMD', 'Zonal Sewadar Manager (Jamshedpur)'
+

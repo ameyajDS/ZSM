@@ -1,0 +1,53 @@
+/* ==================================================================================
+    Source File		:	drop_schema_rpts.sql
+    Author(s)		:	Jitendra Loyal
+    Started On		:	Sat Nov 27 05:28 IST 2010
+    Version			:	1.00
+    Last updated	:	Nov 27, 2010
+    Module ID		:	ZSM (Zonal Sewadars Manager)
+    Language		:	TRANSACT-SQL
+    Reviewed By		:
+    Reviewed On		:
+    ==================================================================================
+									   Usage Notes
+    ----------------------------------------------------------------------------------
+		Common suffixes used:
+				id	Identifier
+				cd	Code
+				nm	Name
+				dt	Date
+				dtm	Date and Time
+		Recommendations:
+		*   Any piece of information (as far as possible, and unless stated otherwise)
+			should be stored in mixed case and NOT in upper case. This stems from the
+			fact that graphical outputs occupy lesser width for lower-case alphabets
+			thereby permitting to print more amount of information in same width.
+    ==================================================================================
+								      Revision History
+    ----------------------------------------------------------------------------------
+     JL : 07-26-Nov-2010
+		*   Initial versions
+   ==================================================================================*/
+
+SET QUOTED_IDENTIFIER OFF
+GO
+
+SET ANSI_NULLS ON
+GO
+
+DROP	TABLE	generic_reports
+GO
+
+DROP	TABLE	generic_report_synopsis
+GO
+
+DROP	TABLE	generic_report_summaries
+GO
+
+DROP	TABLE	generic_report_details
+GO
+
+DROP	TABLE	generic_report_headers
+GO
+
+-- vim:sw=4 ht=4 ai ts=4

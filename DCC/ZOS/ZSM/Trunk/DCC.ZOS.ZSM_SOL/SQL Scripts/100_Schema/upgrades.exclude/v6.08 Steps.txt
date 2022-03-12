@@ -1,0 +1,10 @@
+Steps for carrying out v6.08 release
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+IMPORTANT.	If the release for a Centre is being done, after Import at Zone, you need to execute 
+				..ONLY that part of v6.08a.sql that is AFTER "Use ZSM".
+			This is because at the Zone, centre's database is not ZSM, but ZSM_XXX.
+
+1. Execute v6.08a.sql for ALL Centres (including Mumbai/zone)
+2. Execute the appropriate Satang Centre-specific v6.08b.sql
+

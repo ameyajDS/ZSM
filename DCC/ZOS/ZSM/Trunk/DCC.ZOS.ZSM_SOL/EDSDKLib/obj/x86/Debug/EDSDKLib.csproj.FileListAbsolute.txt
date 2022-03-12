@@ -1,0 +1,6 @@
+D:\RSSB\DCC\ZOS\ZSM\Trunk\DCC.ZOS.ZSM_SOL\EDSDKLib\bin\Debug\EDSDKLib.dll
+D:\RSSB\DCC\ZOS\ZSM\Trunk\DCC.ZOS.ZSM_SOL\EDSDKLib\bin\Debug\EDSDKLib.pdb
+D:\RSSB\DCC\ZOS\ZSM\Trunk\DCC.ZOS.ZSM_SOL\EDSDKLib\obj\x86\Debug\EDSDKLib.csproj.CoreCompileInputs.cache
+D:\RSSB\DCC\ZOS\ZSM\Trunk\DCC.ZOS.ZSM_SOL\EDSDKLib\obj\x86\Debug\EDSDKLib.dll
+D:\RSSB\DCC\ZOS\ZSM\Trunk\DCC.ZOS.ZSM_SOL\EDSDKLib\obj\x86\Debug\EDSDKLib.pdb
+D:\RSSB\DCC\ZOS\ZSM\Trunk\DCC.ZOS.ZSM_SOL\EDSDKLib\obj\x86\Debug\EDSDKLib.csprojAssemblyReference.cache

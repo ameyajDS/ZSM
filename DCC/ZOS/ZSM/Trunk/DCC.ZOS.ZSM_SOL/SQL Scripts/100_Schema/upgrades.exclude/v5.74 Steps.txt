@@ -1,0 +1,2 @@
+1. Create database ZSM_TMP
+2. Execute upgrades.exclude\v5.74.sql

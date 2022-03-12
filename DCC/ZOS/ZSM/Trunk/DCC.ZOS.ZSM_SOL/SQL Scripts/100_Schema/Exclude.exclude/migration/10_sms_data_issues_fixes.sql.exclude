@@ -1,0 +1,1007 @@
+/* ==================================================================================
+	Source File		:	10_sms_data_issues_fixes.sql.exclude
+	Author(s)		:	Manish Saluja, Jiten Loyal
+	Started On		:	Mon Dec 22, 2010
+	Version			:	0.07
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	06-Jan-2011
+	Reviewed By		:
+	Reviewed On		:
+	==================================================================================
+																		   Usage Notes
+	----------------------------------------------------------------------------------
+		This script fixes data issues in sms database to enable migration
+
+	==================================================================================
+																	  Revision History
+	----------------------------------------------------------------------------------
+	v0.07 MS	* 06-Jan-2011
+				* For fixing length of data in
+					- credit_specifications 
+	v0.06 MS	* 05-Jan-2011
+				* Moved specialisation_areas fixes to 07_sms_data_issues_fixes.sql
+	v0.05 MS	* 01-Jan-2011
+				* For fixing length of data in
+					- specialisation_areas
+	v0.04 MS	* 31-Dec-2010
+				* For fixing incorrect data in
+					- districts
+	v0.03 MS	* 28-Dec-2010
+				* For fixing incorrect data in
+					- countries
+					- states
+	v0.02 MS	* 26-Dec-2010
+				* For fixing incorrect data in
+					- scanned_daily_shift_presences
+	v0.01 MS	* 22-Dec-2010
+				* Initial version for fixing incorrect data in
+					- sewadars
+					- satsang_centre_functionaries
+	==================================================================================*/
+
+DECLARE 
+	@cnt1			INT;
+
+-- ====================================================================================================
+--	Sewadars
+-- ====================================================================================================
+SELECT @cnt1 = COUNT(*) FROM sewadars WHERE outside_sewadar_area_secretary IN ('Area Secretary', 'Select for outside sewadar', '', 'A');
+IF (@cnt1 > 0)
+	UPDATE sewadars SET outside_sewadar_area_secretary = NULL WHERE outside_sewadar_area_secretary IN ('Area Secretary', 'Select for outside sewadar', '', 'A');
+
+SELECT @cnt1 = COUNT(*) FROM sewadars WHERE outside_sewadar_secretary IN ('Area Secretary', 'Select for outside sewadar', '', 'Secretary1', 'A');
+IF (@cnt1 > 0)
+	UPDATE sewadars SET outside_sewadar_secretary = NULL WHERE outside_sewadar_secretary IN ('Area Secretary', 'Select for outside sewadar', '', 'Secretary1', 'A');
+
+SELECT @cnt1 = COUNT(*) FROM sewadars WHERE appointment_dt > department_dt;
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE sewadars SET appointment_dt = department_dt WHERE appointment_dt > department_dt;
+	END;
+
+-- ====================================================================================================
+--	Satsang Centre Functionaries
+-- ====================================================================================================
+
+SELECT @cnt1 = COUNT(*) FROM satsang_centre_functionaries WHERE effective_from > effective_till;
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE satsang_centre_functionaries SET effective_from = effective_till, effective_till = effective_from WHERE effective_from > effective_till;
+	END;
+
+SELECT @cnt1 = COUNT(*)
+			FROM sewadars s
+LEFT OUTER 	JOIN satsang_centre_functionaries scf ON s.outside_sewadar_secretary = scf.functionary_nm AND scf.functionary = 'Secretary'
+WHERE s.outside_sewadar_secretary IS NOT NULL AND scf.functionary_nm IS NULL;
+IF (@cnt1 > 0)
+	BEGIN
+-- Dummy Entries to enable migration
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('THN       ','Secretary', 'BHAGI GYANCHAND MALK', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('SGB       ','Secretary', 'Archana Suresh Katar', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('VLD       ','Secretary', 'JAYPRAKASHSINGH MURL', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('VAR       ','Secretary', 'MARUTI NAGA PATIL', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+	END;
+
+SELECT @cnt1 = COUNT(*)
+			FROM sewadars s
+LEFT OUTER 	JOIN satsang_centre_functionaries scf ON s.outside_sewadar_area_secretary = scf.functionary_nm  AND scf.functionary = 'Area Secretary'
+WHERE s.outside_sewadar_area_secretary IS NOT NULL AND scf.functionary_nm IS NULL;
+IF (@cnt1 > 0)
+	BEGIN
+-- Dummy Entries to enable migration
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('THN       ','Area Secretary', 'BHAGI GYANCHAND MALK', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('SGB       ','Area Secretary', 'Archana Suresh Katar', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('VLD       ','Area Secretary', 'JAYPRAKASHSINGH MURL', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+		INSERT INTO satsang_centre_functionaries (satsang_centre_id, functionary, functionary_nm, is_current, effective_from, effective_till)
+		values ('VAR       ','Area Secretary', 'MARUTI NAGA PATIL', 'No', '2000-01-01 00:00:00.000', '2005-10-12 00:00:00.000')
+	END;
+	
+-- ====================================================================================================
+--	Satsang Centres
+-- ====================================================================================================
+
+SELECT @cnt1 = COUNT(*) FROM satsang_centres WHERE satsang_centre_nm = 'Chanera Sarsodi';
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE sewadars SET weekly_satsang_centre_id = 'SAR       ' WHERE weekly_satsang_centre_id = 'CHA       ';
+		UPDATE sewadar_system_record SET satsang_centre_id = 'SAR       ' WHERE satsang_centre_id = 'CHA       ';
+		DELETE FROM satsang_centre_functionaries WHERE satsang_centre_id = 'CHA       ';
+		DELETE satsang_centres WHERE satsang_centre_nm = 'Chanera Sarsodi';
+	END;
+
+-- ====================================================================================================
+--	Scanned Daily Shift Presences
+-- ====================================================================================================
+SELECT @cnt1 = COUNT(*) FROM scanned_daily_shift_presences
+WHERE shift_id NOT IN (SELECT DISTINCT shift_id FROM sewa_shifts);
+
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE scanned_daily_shift_presences
+		SET shift_id = '9am - 1pm (1)'
+		WHERE shift_id = 'S9am - 1pm (1)';
+	END;
+	
+-- ====================================================================================================
+--	Countries
+-- ====================================================================================================
+
+SELECT @cnt1 = COUNT(*) FROM countries WHERE country_nm IN ('Oman');
+IF (@cnt1 = 0)
+	INSERT INTO countries (country_id, country_nm, has_districts) VALUES ('OM', 'Oman', 'Yes');
+
+SELECT @cnt1 = COUNT(*) FROM countries WHERE country_nm IN ('United States Of America');
+IF (@cnt1 > 0)
+	UPDATE countries SET country_nm = 'United States' WHERE country_nm = 'United States Of America';
+SELECT @cnt1 = COUNT(*) FROM countries WHERE country_nm IN ('SULTANATE OF OMAN')
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE states SET state_nm = 'Salalah' WHERE country_id = 'SO ' AND state_nm = 'Salabh';
+		UPDATE districts SET district_nm = 'Salalah' WHERE country_id = 'SO ' AND state_id = 'SAL' AND district_nm = 'Salabh';
+		UPDATE pos_or_cities SET po_or_city_nm = 'Salalah' WHERE country_id = 'SO ' AND state_id = 'SAL' AND district_id = 'SAL' AND po_or_city_nm = 'Salabh';
+		
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('OM ', 'OM ', 'Oman');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			SELECT 'OM ', 'OM ', district_id, district_nm, is_active FROM districts 
+			WHERE country_id = 'SO ' AND state_id = 'SAL' AND district_nm = 'Salalah';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT 'OM ', 'OM ', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'SO ' AND state_id = 'SAL' AND district_id = 'SAL' AND po_or_city_nm = 'Salalah';
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'OM ', district_id, district_nm, is_active FROM districts 
+			WHERE country_id = 'OM ' AND state_id = 'MUS' AND district_nm = 'MUSCAT';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'OM ', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'OM ' AND state_id = 'MUS' AND district_id = 'MUS' AND po_or_city_nm = 'MUSCAT';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT 'OM ', 'OM ', 'MUS', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'OM ' AND state_id = 'MUS' AND district_id = 'JIB' AND po_or_city_nm = 'Jibroo';
+		
+		UPDATE sewadars SET residence_country_id = 'OM ', residence_state_id = 'OM ' WHERE residence_country_id = 'SO ' AND residence_state_id = 'SAL';
+		
+		UPDATE sewadars SET residence_country_id = 'OM ', residence_state_id = 'OM ', residence_district_id = 'MUS', residence_po_or_city_id = 'MUS  '
+			WHERE residence_country_id = 'SO ' AND residence_state_id = 'M  ' AND residence_district_id = 'M  ' AND residence_po_or_city_id = 'M    ';
+		
+		UPDATE sewadars SET residence_state_id = 'OM ', residence_district_id = 'MUS'
+			WHERE residence_country_id = 'OM ' AND residence_state_id = 'MUS' AND residence_district_id = 'JIB';
+		UPDATE sewadars SET residence_state_id = 'OM ' WHERE residence_country_id = 'OM ' AND residence_state_id = 'MUS';
+		
+
+		DELETE FROM pos_or_cities WHERE country_id = 'SO ' AND state_id = 'SAL' AND district_id = 'SAL' AND po_or_city_nm = 'Salalah';
+		DELETE FROM districts WHERE country_id = 'SO ' AND state_id = 'SAL' AND district_nm = 'Salalah';
+		DELETE FROM states WHERE country_id = 'SO ' AND state_nm = 'Salalah';
+		
+		DELETE FROM pos_or_cities WHERE country_id = 'SO ' AND state_id = 'M  ' AND district_id = 'M  ' AND po_or_city_nm = 'Muscat';
+		DELETE FROM districts WHERE country_id = 'SO ' AND state_id = 'M  ' AND district_nm = 'Muscat';
+		DELETE FROM states WHERE country_id = 'SO ' AND state_nm = 'Muscat';
+		
+		DELETE FROM pos_or_cities WHERE country_id = 'OM ' AND state_id = 'MUS' AND district_id = 'MUS' AND po_or_city_nm = 'Muscat';
+		DELETE FROM districts WHERE country_id = 'OM ' AND state_id = 'MUS' AND district_nm = 'Muscat';
+
+		DELETE FROM pos_or_cities WHERE country_id = 'OM ' AND state_id = 'MUS' AND district_id = 'JIB';
+		DELETE FROM districts WHERE country_id = 'OM ' AND state_id = 'MUS ' AND district_nm = 'Jibroo';		
+		
+		DELETE FROM states WHERE country_id = 'OM ' AND state_nm = 'Muscat';
+
+		DELETE FROM countries WHERE country_nm = 'SULTANATE OF OMAN';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM countries WHERE country_nm IN ('T');
+IF (@cnt1 > 0)
+	DELETE FROM countries WHERE country_id = 'TNZ' AND country_nm = 'T';
+
+SELECT @cnt1 = COUNT(*) FROM (	SELECT c.country_nm FROM countries c LEFT OUTER JOIN cdb..countries cc ON cc.country_nm = c.country_nm AND cc.effective_till > GETDATE()
+								WHERE c.country_nm IS NOT NULL AND cc.country_nm IS NULL) t;
+IF (@cnt1 > 0)
+	BEGIN
+		RAISERROR ('There are some countries in SMS that are not in CDB', 16, 0);
+		SELECT c.country_nm FROM countries c LEFT OUTER JOIN cdb..countries cc ON cc.country_nm = c.country_nm AND cc.effective_till > GETDATE()
+		WHERE c.country_nm IS NOT NULL AND cc.country_nm IS NULL;
+	END;
+-- ====================================================================================================
+--	STATES
+-- ====================================================================================================
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'IND' AND state_nm = '.  ';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = '.  ' AND district_id = '.  ' AND po_or_city_id = '56A  ' AND po_or_city_nm = 'C/O 56 A. P. O.';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = '.  ' AND district_nm = '.';
+		DELETE FROM states WHERE country_id = 'IND' AND state_nm = '.  ';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'IND' AND state_id = 'CTG'; --Another state 'CG' exists for Chhattisgarh
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE sewadars SET residence_state_id = 'CG ' WHERE residence_country_id = 'IND' AND residence_state_id = 'CTG';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'CTG' AND district_id = 'RP ' AND po_or_city_nm = 'Raipur';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'CTG' AND district_nm = 'Raipur';
+		DELETE FROM states WHERE country_id = 'IND' AND state_id = 'CTG';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'IND' AND state_nm = 'Jammu and Kashmir';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'JAMMU & KASHMIR' WHERE country_id = 'IND' AND state_nm = 'Jammu and Kashmir';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'IND' AND state_nm = 'Uttaranchal';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'UTTARAKHAND' WHERE country_id = 'IND' AND state_nm = 'Uttaranchal';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'IND' AND state_nm = 'Chhatisgarh';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'CHHATTISGARH' WHERE country_id = 'IND' AND state_nm = 'Chhatisgarh';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'IND' AND state_nm = 'Andaman Nicobar';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'ANDAMAN & NICOBAR' WHERE country_id = 'IND' AND state_nm = 'Andaman Nicobar';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'ISR' AND state_nm = 'JERUSALEM';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'Jeruselem' WHERE country_id = 'ISR' AND state_nm = 'JERUSALEM';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'SP ' AND state_nm = 'Illes Balears';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'Islas Baleares' WHERE country_id = 'SP ' AND state_nm = 'Illes Balears';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'UAE' AND state_nm = 'Ras Al Khaimab';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'Ras-Al-Khaimah' WHERE country_id = 'UAE' AND state_nm = 'Ras Al Khaimab';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'A  ' AND state_nm = 'Perth';
+IF (@cnt1 > 0)
+	UPDATE states SET state_nm = 'Western Australia' WHERE country_id = 'A  ' AND state_nm = 'Perth';
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'FR ' AND state_nm = 'Paris';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('FR ', 'FR ', 'France');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'FR ', district_id, district_nm, is_active FROM districts 
+			WHERE country_id = 'FR ' AND state_id = 'PA ' AND district_nm = 'Paris';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'FR ', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'FR ' AND state_id = 'PA ' AND district_id = 'PA ' AND po_or_city_nm = 'Paris';
+		UPDATE sewadars SET residence_state_id = 'FR ' WHERE residence_country_id = 'FR ' AND residence_state_id = 'PA ';
+		DELETE FROM pos_or_cities WHERE country_id = 'FR ' AND state_id = 'PA ' AND district_id = 'PA ' AND po_or_city_nm = 'Paris';
+		DELETE FROM districts WHERE country_id = 'FR ' AND state_id = 'PA ' AND district_nm = 'Paris';
+		DELETE FROM states WHERE country_id = 'FR ' AND state_nm = 'Paris';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'NZ ' AND state_nm = 'Wellington';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('NZ ', 'NZ ', 'New Zealand');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'NZ ', district_id, district_nm, is_active FROM districts 
+			WHERE country_id = 'NZ ' AND state_id = 'WLG' AND district_nm = 'Wellington';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'NZ ', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'NZ ' AND state_id = 'WLG' AND district_id = 'WLG' AND po_or_city_nm = 'Wellington';
+		UPDATE sewadars SET residence_state_id = 'NZ ' WHERE residence_country_id = 'NZ ' AND residence_state_id = 'WLG';
+		DELETE FROM pos_or_cities WHERE country_id = 'NZ ' AND state_id = 'WLG' AND district_id = 'WLG' AND po_or_city_nm = 'Wellington';
+		DELETE FROM districts WHERE country_id = 'NZ ' AND state_id = 'WLG' AND district_nm = 'Wellington';
+		DELETE FROM states WHERE country_id = 'NZ ' AND state_nm = 'Wellington';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'SW ' AND state_nm = 'Stockholm';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('SW ', 'SW ', 'Sweden');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'SW ', district_id, district_nm, is_active FROM districts 
+			WHERE country_id = 'SW ' AND state_id = 'ST ' AND district_nm = 'Stockholm';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'SW ', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'SW ' AND state_id = 'ST ' AND district_id = 'ST ' AND po_or_city_nm = 'Stockholm';
+		UPDATE sewadars SET residence_state_id = 'SW ' WHERE residence_country_id = 'SW ' AND residence_state_id = 'ST ';
+		DELETE FROM pos_or_cities WHERE country_id = 'SW ' AND state_id = 'ST ' AND district_id = 'ST ' AND po_or_city_nm = 'Stockholm';
+		DELETE FROM districts WHERE country_id = 'SW ' AND state_id = 'ST ' AND district_nm = 'Stockholm';
+		DELETE FROM states WHERE country_id = 'SW ' AND state_nm = 'Stockholm';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'UK ' AND state_nm = 'London';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('UK ', 'UK ', 'United Kingdom');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('UK ', 'UK ', 'MDX', 'Middlesex', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			VALUES ('UK ', 'UK ', 'MDX', 'MDX', 'Middlesex', 'Yes');
+		UPDATE sewadars SET residence_state_id = 'UK ', residence_district_id = 'MDX', residence_po_or_city_id = 'MDX' 
+			WHERE residence_country_id = 'UK ' AND residence_state_id = 'LA ' AND residence_district_id = 'HA ' AND residence_po_or_city_id = 'MID';
+		DELETE FROM pos_or_cities WHERE country_id = 'UK ' AND state_id = 'LA ' AND district_id = 'HA ' AND po_or_city_nm = 'Middle Sex';
+		DELETE FROM districts WHERE country_id = 'UK ' AND state_id = 'LA ' AND district_nm = 'Haiity';
+		DELETE FROM states WHERE country_id = 'UK ' AND state_nm = 'London';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'UAE' AND state_nm = 'Doha';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('UAE', 'QT ', 'Qatar');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('UAE', 'QT ', 'DA ', 'Doha', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT 'UAE', 'QT ', 'DA ', po_or_city_id, po_or_city_nm, is_active  FROM pos_or_cities
+			WHERE country_id = 'UAE' AND state_id = 'DA ' AND district_id = 'QT ' AND po_or_city_id = 'RL   '
+		UPDATE sewadars SET residence_state_id = 'QT ', residence_district_id = 'DA '
+		WHERE residence_country_id = 'UAE' AND residence_state_id = 'DA ' AND residence_district_id = 'QT ' AND residence_po_or_city_id = 'RL   ';
+		DELETE FROM pos_or_cities WHERE country_id = 'UAE' AND state_id = 'DA ' AND district_id = 'QT ' AND po_or_city_nm = 'Ras Laffan';
+		DELETE FROM districts WHERE country_id = 'UAE' AND state_id = 'DA ' AND district_nm = 'Qatar';
+		DELETE FROM states WHERE country_id = 'UAE' AND state_nm = 'Doha';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'UAE' AND state_nm = 'BUR';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('UAE', 'UAE', 'United Arab Emirates');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('UAE', 'UAE', 'BD', 'Bur Dubai', 'Yes')
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			VALUES ('UAE', 'UAE', 'BD', 'BD', 'Bur Dubai', 'Yes')
+		UPDATE sewadars SET residence_state_id = 'UAE', residence_district_id = 'BD', residence_po_or_city_id = 'BD'
+			WHERE residence_country_id = 'UAE' AND residence_state_id = 'BR ' AND residence_district_id = 'BR ' AND residence_po_or_city_id = 'BR ';
+		DELETE FROM pos_or_cities WHERE country_id = 'UAE' AND state_id = 'BR' AND district_id = 'BR' AND po_or_city_nm = 'BUR';
+		DELETE FROM districts WHERE country_id = 'UAE' AND state_id = 'BR' AND district_nm = 'BUR';
+		DELETE FROM states WHERE country_id = 'UAE' AND state_nm = 'BUR';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'UAE' AND state_nm = 'DEIRA';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'UAE' AND state_id = 'DI ' AND district_id = 'DI ' AND po_or_city_nm = 'DEIRA';
+		DELETE FROM districts WHERE country_id = 'UAE' AND state_id = 'DI' AND district_nm = 'DEIRA';
+		DELETE FROM states WHERE country_id = 'UAE' AND state_nm = 'DEIRA';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM states WHERE country_id = 'NE '
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'NE ';
+		DELETE FROM districts WHERE country_id = 'NE ';
+		DELETE FROM states WHERE country_id = 'NE ';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM (
+	SELECT s.state_nm FROM states s JOIN countries c ON c.country_id = s.country_id
+	LEFT OUTER JOIN CDB..countries cc ON cc.country_nm = c.country_nm AND cc.effective_till > GETDATE()
+	LEFT OUTER JOIN CDB..states cs ON cs.country_id = cc.country_id AND cs.state_nm = s.state_nm AND cs.effective_till > GETDATE()
+	WHERE s.state_nm IS NOT NULL AND cs.state_nm IS NULL) t;
+IF (@cnt1 > 0)
+	BEGIN
+		RAISERROR ('There are some states in SMS that are not in CDB', 16, 0);
+		SELECT c.country_id, c.country_nm, s.state_id, s.state_nm FROM states s JOIN countries c ON c.country_id = s.country_id
+		LEFT OUTER JOIN CDB..countries cc ON cc.country_nm = c.country_nm AND cc.effective_till > GETDATE()
+		LEFT OUTER JOIN CDB..states cs ON cs.country_id = cc.country_id AND cs.state_nm = s.state_nm AND cs.effective_till > GETDATE()
+		WHERE s.state_nm IS NOT NULL AND cs.state_nm IS NULL		
+	END;
+-- ====================================================================================================
+--	Districts
+-- ====================================================================================================
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE   country_id = 'IND' AND STATE_ID = 'GUJ' AND  district_nm  = 'Ahemdabad';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'AHMEDABAD' WHERE   country_id = 'IND' AND STATE_ID = 'GUJ' AND  district_nm  = 'Ahemdabad';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'JOR' AND state_id = 'JOR' AND district_nm = 'Al - Dulyal';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'Ad-Dulayl' WHERE country_id = 'JOR' AND state_id = 'JOR' AND district_nm = 'Al - Dulyal';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'HP' AND district_nm = 'Billaspur';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm =  'BILASPUR' WHERE country_id = 'IND' AND state_id = 'HP' AND district_nm = 'Billaspur';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'TN' AND state_id = 'TN' AND district_nm = 'Daresalam';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'Dar es Salaam' WHERE country_id = 'TN' AND state_id = 'TN' AND district_nm = 'Daresalam';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'FARUKHABAD';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'FARRUKHABAD' WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'FARUKHABAD';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Gajipur';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm =  'GHAZIPUR' WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Gajipur';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'AP' AND district_nm = 'Karim Nagar';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'KARIMNAGAR' WHERE country_id = 'IND' AND state_id = 'AP' AND district_nm = 'Karim Nagar';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'WB' AND district_nm = 'KOLKUTTA';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'KOLKATA' WHERE country_id = 'IND' AND state_id = 'WB' AND district_nm = 'KOLKUTTA';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Maharaj Ganj';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'MAHARAJGANJ' WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Maharaj Ganj';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Mehsana';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'MAHESANA' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Mehsana';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'WB' AND district_nm = 'Midnapur';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'MIDNAPORE' WHERE country_id = 'IND' AND state_id = 'WB' AND district_nm = 'Midnapur';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Rai Bareilly';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'RAE BARELI' WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Rai Bareilly';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'UAE' AND state_id = 'RAK' AND district_nm = 'Ras Al Khaimab';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'Ras-al-khaimah' WHERE country_id = 'UAE' AND state_id = 'RAK' AND district_nm = 'Ras Al Khaimab';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'TN' AND district_nm = 'Thiruchirapalli';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'THIRUCHIRAPPALLI' WHERE country_id = 'IND' AND state_id = 'TN' AND district_nm = 'Thiruchirapalli';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'KRL' AND district_nm = 'Trivandum';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'TRIVANDRUM' WHERE country_id = 'IND' AND state_id = 'KRL' AND district_nm = 'Trivandum';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'VASCO DE GAMA';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'VASCO-DA-GAMA' WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'VASCO DE GAMA';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'AP' AND district_nm = 'Vishakhapatnam';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'VISAKHAPATNAM' WHERE country_id = 'IND' AND state_id = 'AP' AND district_nm = 'Vishakhapatnam';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Yavatmal';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'YEOTMAL' WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Yavatmal';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'AN' AND district_nm = 'Portblair';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'PORT BLAIR' WHERE country_id = 'IND' AND state_id = 'AN' AND district_nm = 'Portblair';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Badhoi';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'SANT RAVI DASS NAGAR BHADOHI' WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Badhoi';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Baroda';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'Vadodara' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Baroda';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Chanderpur';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'CHANDRAPUR' WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Chanderpur';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'DNH' AND district_nm = 'Dadra';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'DADRA & NAGAR HAVELI' WHERE country_id = 'IND' AND state_id = 'DNH' AND district_nm = 'Dadra';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UTR' AND district_nm = 'DEHRRA DUN';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'DEHRADUN' WHERE country_id = 'IND' AND state_id = 'UTR' AND district_nm = 'DEHRRA DUN';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Kutch';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'KACHCHH' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Kutch';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MP' AND district_nm = 'Shahjahan Pur';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'SHAHJAHANPUR' WHERE country_id = 'IND' AND state_id = 'MP' AND district_nm = 'Shahjahan Pur';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Siddharth Nagar';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'SIDDHARTHNAGAR' WHERE country_id = 'IND' AND state_id = 'UP' AND district_nm = 'Siddharth Nagar';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'KNT' AND district_nm = 'South Kanada';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'DAKSHINA KANNADA' WHERE country_id = 'IND' AND state_id = 'KNT' AND district_nm = 'South Kanada';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'USA' AND state_id = 'CO' AND district_nm = 'Colorado';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'Colorado Springs' WHERE country_id = 'USA' AND state_id = 'CO' AND district_nm = 'Colorado';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'NP' AND state_id = 'NP' AND district_nm = 'KAILALISHETI';
+IF (@cnt1 > 0)
+	UPDATE districts set district_nm = 'KAILALI' WHERE country_id = 'NP' AND state_id = 'NP' AND district_nm = 'KAILALISHETI';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'PNB' AND district_nm = 'Ambala';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'HRY', district_id, district_nm, is_active FROM districts
+			WHERE country_id = 'IND' AND state_id = 'PNB' AND district_nm = 'Ambala';
+		UPDATE pos_or_cities SET state_id = 'HRY' WHERE country_id = 'IND' AND state_id = 'PNB' AND district_id = 'AMB';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'PNB' AND district_nm = 'Ambala';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MP' AND district_nm = 'SHAHJAHANPUR';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'UP', 'SJP', district_nm, is_active FROM districts
+			WHERE country_id = 'IND' AND state_id = 'MP' AND district_nm = 'SHAHJAHANPUR';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'UP', 'SJP', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'MP' AND district_id = 'SP';
+		UPDATE sewadars SET residence_state_id = 'UP', residence_district_id = 'SJP'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MP' AND residence_district_id = 'SP'
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'MP' AND district_id = 'SP';		
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'MP' AND district_nm = 'SHAHJAHANPUR';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'SP' AND state_id = 'CI' AND district_nm = 'Canary Islands';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('SP', 'SP', 'Spain')
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'SP', district_id, district_nm, is_active FROM districts
+			WHERE country_id = 'SP' AND state_id = 'CI' AND district_nm = 'Canary Islands';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'SP', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'SP' AND state_id = 'CI' AND district_id = 'CI';
+		UPDATE sewadars SET residence_state_id = 'SP'
+			WHERE residence_country_id = 'SP' AND residence_state_id = 'CI' AND residence_district_id = 'CI';
+		DELETE FROM pos_or_cities WHERE country_id = 'SP' AND state_id = 'CI' AND district_id = 'CI';
+		DELETE FROM districts WHERE country_id = 'SP' AND state_id = 'CI' AND district_nm = 'Canary Islands';
+	END;
+		
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'UK' AND state_id = 'ESX' AND district_nm = 'ESSEX';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'UK', district_id, district_nm, is_active FROM districts
+			WHERE country_id = 'UK' AND state_id = 'ESX' AND district_nm = 'ESSEX';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'UK', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'UK' AND state_id = 'ESX' AND district_id = 'ESX';
+		UPDATE sewadars SET residence_state_id = 'UK'
+			WHERE residence_country_id = 'UK' AND residence_state_id = 'ESX' AND residence_district_id = 'ESX';
+		DELETE FROM pos_or_cities WHERE country_id = 'UK' AND state_id = 'ESX' AND district_id = 'ESX';
+		DELETE FROM districts WHERE country_id = 'UK' AND state_id = 'ESX' AND district_nm = 'ESSEX';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'KNT' AND district_nm = 'KARVAR';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('IND', 'KNT', 'UK', 'Uttara Kannada', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'UK', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'KNT' AND district_id = 'KAR';
+		UPDATE sewadars SET residence_district_id = 'UK'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'KNT' AND residence_district_id = 'KAR';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'KNT' AND district_id = 'KAR';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'KNT' AND district_nm = 'KARVAR';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'KARVAR';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'KA';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'KARVAR';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'WB' AND district_nm = 'Khadakpur';
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE pos_or_cities SET district_id = 'M' WHERE country_id = 'IND' AND state_id = 'WB' AND district_id = 'KH';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'WB' AND district_nm = 'Khadakpur';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'KRL' AND district_nm = 'Kochi';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('IND', 'KRL', 'E', 'ERNAKULAM', 'Yes')
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'E', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'KRL' AND district_id = 'KO';
+		UPDATE sewadars SET residence_district_id = 'E'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'KRL' AND residence_district_id = 'KO';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'KRL' AND district_id = 'KO';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'KRL' AND district_nm = 'Kochi';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'Majorda';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('IND', 'GOA', 'SG', 'South Goa', 'Yes')
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'SG', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'GOA' AND district_id = 'MAJ';
+		UPDATE sewadars SET residence_district_id = 'SG'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'GOA' AND residence_district_id = 'MAJ';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GOA' AND district_id = 'MAJ';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'Majorda';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'KNT' AND district_nm = 'Mangalore';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'SK', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'KNT' AND district_id = 'MNG';
+		UPDATE sewadars SET residence_district_id = 'SK'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'KNT' AND residence_district_id = 'MNG';
+		UPDATE satsang_centres SET district_id = 'SK'
+			WHERE country_id = 'IND' AND state_id = 'KNT' AND district_id = 'MNG';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'KNT' AND district_id = 'MNG';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'KNT' AND district_nm = 'Mangalore';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'Panjim';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('IND', 'GOA', 'NG', 'North Goa', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'NG', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'GOA' AND district_id = 'PN';
+		UPDATE sewadars SET residence_district_id = 'NG'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'GOA' AND residence_district_id = 'PN';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GOA' AND district_id = 'PN';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'Panjim';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'KRL' AND district_nm = 'Rameshwaram';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('IND', 'TN', 'RP', 'RAMANATHAPURAM', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'TN', 'RP', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'KRL' AND district_id = 'RAM';
+		UPDATE sewadars SET residence_state_id = 'TN', residence_district_id = 'RP'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'KRL' AND residence_district_id = 'RAM';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'KRL' AND district_id = 'RAM';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'KRL' AND district_nm = 'Rameshwaram';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'Tonca';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GOA' AND district_id = 'TO';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GOA' AND district_nm = 'Tonca';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'DNH' AND district_nm = 'Silvasa';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'DAD', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'DNH' AND district_id = 'SIL';
+		UPDATE satsang_centres SET district_id = 'DAD' WHERE country_id = 'IND' AND state_id = 'DNH' AND district_id = 'SIL';
+		UPDATE sewadars SET residence_district_id = 'DAD'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'DNH' AND residence_district_id = 'SIL';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'DNH' AND district_id = 'SIL';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'DNH' AND district_nm = 'Silvasa';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'CN' AND state_id = 'CN' AND district_nm = 'Montreal';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('CN', 'Q', 'Quebec');
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'Q', district_id, district_nm, is_active FROM districts
+			WHERE country_id = 'CN' AND state_id = 'CN' AND district_nm = 'Montreal'
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'Q', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'CN' AND state_id = 'CN' AND district_id = 'MO';
+		UPDATE sewadars SET residence_state_id = 'Q'
+			WHERE residence_country_id = 'CN' AND residence_state_id = 'CN' AND residence_district_id = 'MO';
+		DELETE FROM pos_or_cities WHERE country_id = 'CN' AND state_id = 'CN' AND district_id = 'MO';
+		DELETE FROM districts WHERE country_id = 'CN' AND state_id = 'CN' AND district_nm = 'Montreal';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'NP' AND state_id = 'NP' AND district_nm = 'Siddharth Nagar';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('NP', 'NP', 'RUP', 'RUPANDEHI', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'RUP', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'NP' AND state_id = 'NP' AND district_id = 'SN';
+		UPDATE sewadars SET residence_district_id = 'RUP'
+			WHERE residence_country_id = 'NP' AND residence_state_id = 'NP' AND residence_district_id = 'SN';
+		DELETE FROM pos_or_cities WHERE country_id = 'NP' AND state_id = 'NP' AND district_id = 'SN';
+		DELETE FROM districts WHERE country_id = 'NP' AND state_id = 'NP' AND district_nm = 'Siddharth Nagar';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'UAE' AND state_id = 'DB' AND district_nm = 'DEIRA';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'DB', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'UAE' AND state_id = 'DB' AND district_id = 'DI';
+		UPDATE sewadars SET residence_district_id = 'DB'
+			WHERE residence_country_id = 'UAE' AND residence_state_id = 'DB' AND residence_district_id = 'DI';
+		DELETE FROM pos_or_cities WHERE country_id = 'UAE' AND state_id = 'DB' AND district_id = 'DI';
+		DELETE FROM districts WHERE country_id = 'UAE' AND state_id = 'DB' AND district_nm = 'DEIRA';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UT' AND district_nm = 'Dadra & Nagar Haveli';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'DNH', 'DAD', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'UT' AND district_id = 'DNH' AND po_or_city_nm = 'Kard';
+		UPDATE pos_or_cities SET po_or_city_id = 'DADRA' 
+			WHERE country_id = 'IND' AND state_id = 'DNH' AND district_id = 'DAD' AND po_or_city_nm = 'Dadra';
+		UPDATE sewadars SET residence_state_id = 'DNH', residence_district_id = 'DAD'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'UT' AND residence_district_id = 'DNH';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'UT' AND district_id = 'DNH';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'UT' AND district_nm = 'Dadra & Nagar Haveli';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Bulsar';
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE sewadars SET residence_po_or_city_id = 'PD', residence_district_id = 'VLD' WHERE residence_country_id = 'IND' AND 
+			residence_state_id = 'GUJ' AND residence_district_id = 'BL' AND residence_po_or_city_id = 'PR';
+		UPDATE sewadars SET residence_po_or_city_id = 'VLD', residence_district_id = 'VLD' WHERE residence_country_id = 'IND' AND 
+			residence_state_id = 'GUJ' AND residence_district_id = 'BL' AND residence_po_or_city_id = 'BLR';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'BL';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'Bulsar';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'DNH' AND district_nm = 'Masat';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'DAD', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'DNH' AND district_id = 'MAS' AND po_or_city_nm = 'Masat';
+		UPDATE sewadars SET residence_district_id = 'DAD' WHERE residence_country_id = 'IND' AND 
+			residence_state_id = 'DNH' AND residence_district_id = 'MAS';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'DNH' AND district_id = 'MAS';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'DNH' AND district_nm = 'Masat';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'USA' AND state_id = 'GE' AND district_nm = 'Georgia';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'USA' AND state_id = 'GE' AND district_id = 'GEO';
+		DELETE FROM districts WHERE country_id = 'USA' AND state_id = 'GE' AND district_nm = 'Georgia';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Sangali';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'SAN';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Sangali';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'ORS' AND district_nm = 'Yavatmaal';
+IF (@cnt1 > 0)
+	BEGIN
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'ORS' AND district_id = 'YTL';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'ORS' AND district_nm = 'Yavatmaal';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Darbhanga';
+IF (@cnt1 > 0)
+	DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Darbhanga';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Usmanbad';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'OS', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'US' AND po_or_city_nm IN ('Amba jawarne', 'Warda');
+		UPDATE sewadars SET residence_district_id = 'OS'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'US';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'US';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Usmanbad';
+END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'AP' AND district_nm = 'OSMANABAD';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'MAH', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'AP' AND district_id = 'OS';
+		UPDATE sewadars SET residence_state_id = 'MAH'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'AP' AND residence_district_id = 'OS';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'AP' AND district_id = 'OS';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'AP' AND district_nm = 'OSMANABAD';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Navi Mumbai';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'THN', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'NMB' AND po_or_city_nm IN 
+			('Airoli', 'Ghansoli', 'Jui Nagar', 'Kharghar', 'Kopar Khairane', 'Nerul', 'Nerul(E)', 'Nerul(W)', 'Sanpada', 'Turbhe');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'THN', 'VA', po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'NMB' AND po_or_city_nm = 'Vashi';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'RAI', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'NMB' AND po_or_city_nm IN 
+			('Kamothe', 'New Panvel');
+		UPDATE satsang_centres SET district_id = 'THN'
+			WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'NMB' AND po_or_city_id = 'S';
+		UPDATE sewadars SET residence_district_id = 'THN', residence_po_or_city_id = 'VA'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'NMB' AND residence_po_or_city_id = 'V';
+		UPDATE sewadars SET residence_district_id = 'THN', residence_po_or_city_id = 'BELA'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'NMB' AND residence_po_or_city_id IN ('B', 'C');
+		UPDATE sewadars SET residence_district_id = 'RAI', residence_po_or_city_id = 'KALAM'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'NMB' AND residence_po_or_city_id = 'KALA';
+		UPDATE sewadars SET residence_district_id = 'RAI', residence_po_or_city_id = 'P'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'NMB' AND residence_po_or_city_id = 'PV';
+		UPDATE sewadars SET residence_district_id = 'THN'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'NMB' AND 
+			residence_po_or_city_id IN ('AIR', 'GH', 'JN', 'KG', 'KK', 'N', 'NE', 'NW', 'S', 'TBE');
+		UPDATE sewadars SET residence_district_id = 'RAI'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'MAH' AND residence_district_id = 'NMB' AND 
+			residence_po_or_city_id IN ('KAM', 'NEWPN')
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'MAH' AND district_id = 'NMB';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'MAH' AND district_nm = 'Navi Mumbai';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'SP' AND state_id = 'IB' AND district_nm = 'Illes Balears';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO districts (country_id, state_id, district_id, district_nm, is_active)
+			VALUES ('SP', 'IB', 'PM', 'Palma De Mallorca', 'Yes');
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'PM', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'SP' AND state_id = 'IB' AND district_id = 'IB' AND po_or_city_nm = 'Palma De Mallorca';	
+		UPDATE sewadars SET residence_district_id = 'PM'
+			WHERE residence_country_id = 'SP' AND residence_state_id = 'IB' AND residence_district_id = 'IB';
+		DELETE FROM pos_or_cities WHERE country_id = 'SP' AND state_id = 'IB' AND district_id = 'IB';
+		DELETE FROM districts WHERE country_id = 'SP' AND state_id = 'IB' AND district_nm = 'Illes Balears';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'UT' AND district_nm = 'Goa';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'GOA', 'SG', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'UT' AND district_id = 'G' AND po_or_city_nm = 'Dabolin';	
+		UPDATE sewadars SET residence_state_id = 'GOA', residence_district_id = 'SG'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'UT' AND residence_district_id = 'G' AND residence_po_or_city_id = 'DAB';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'UT' AND district_id = 'G';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'UT' AND district_nm = 'Goa';
+		DELETE FROM states WHERE country_id = 'IND' AND state_nm = 'Union Territory'
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'PANCHMAHAL';
+IF (@cnt1 > 0)
+	UPDATE districts SET district_nm = 'PANCHMAHALS' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'PANCHMAHAL';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'SABARKATHA';
+IF (@cnt1 > 0)
+	UPDATE districts SET district_nm = 'SABARKANTHA' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'SABARKATHA';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'KUTCHH';
+IF (@cnt1 > 0)
+	UPDATE districts SET district_nm = 'KACHCHH' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'KUTCHH';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'GANDHINAGAR';
+IF (@cnt1 > 0)
+	UPDATE districts SET district_nm = 'GANDHI NAGAR' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'GANDHINAGAR';
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'BHUJ';
+IF (@cnt1 > 0)
+	BEGIN
+		UPDATE satsang_centres SET district_id = 'KUT' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'BH';
+		UPDATE sewadars SET residence_district_id = 'KUT'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'GUJ' AND residence_district_id = 'BH';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'BH';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'BHUJ';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'KHAMBHAT';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'AN', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'KH' AND po_or_city_nm = 'KHAMBHAT';	
+		UPDATE sewadars SET residence_district_id = 'AN'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'GUJ' AND residence_district_id = 'KH';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'KH';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'KHAMBHAT';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'NADIAD';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, state_id, 'KHE', po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'ND';
+		UPDATE sewadars SET residence_district_id = 'KHE'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'GUJ' AND residence_district_id = 'ND';
+		UPDATE sewadars SET office_district_id = 'KHE'
+			WHERE office_country_id = 'IND' AND office_state_id = 'GUJ' AND office_district_id = 'ND';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'ND';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'NADIAD';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'DAMAN';
+IF (@cnt1 > 0)
+	BEGIN
+		INSERT INTO states (country_id, state_id, state_nm) VALUES ('IND', 'DND', 'Daman & Diu');
+		INSERT INTO districts	(country_id, state_id, district_id, district_nm, is_active)
+			SELECT country_id, 'DND', district_id, district_nm, is_active FROM districts 
+			WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'DAMAN';
+		INSERT INTO pos_or_cities (country_id, state_id, district_id, po_or_city_id, po_or_city_nm, is_active)
+			SELECT country_id, 'DND', district_id, po_or_city_id, po_or_city_nm, is_active FROM pos_or_cities
+			WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'DM';
+		UPDATE sewadars SET residence_state_id = 'DND'
+			WHERE residence_country_id = 'IND' AND residence_state_id = 'GUJ' AND residence_district_id = 'DM';
+		UPDATE sewadars SET office_state_id = 'DND'
+			WHERE office_country_id = 'IND' AND office_state_id = 'GUJ' AND office_district_id = 'DM';
+		UPDATE satsang_centres SET state_id = 'DND' WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'DM';
+		DELETE FROM pos_or_cities WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_id = 'DM';
+		DELETE FROM districts WHERE country_id = 'IND' AND state_id = 'GUJ' AND district_nm = 'DAMAN';
+	END;
+
+SELECT @cnt1 = COUNT(*) FROM (
+	SELECT d.district_nm 
+	FROM districts d JOIN states s ON s.state_id = d.state_id AND s.country_id = d.country_id
+	JOIN countries c ON c.country_id = d.country_id
+	LEFT OUTER JOIN CDB..countries cc ON cc.country_nm = c.country_nm AND cc.effective_till > GETDATE()
+	LEFT OUTER JOIN CDB..states cs ON cs.country_id = cc.country_id AND cs.state_nm = s.state_nm AND cs.effective_till > GETDATE()
+	LEFT OUTER JOIN CDB..districts_or_cities cd ON cd.state_id = cs.state_id AND cd.district_nm = d.district_nm AND cd.effective_till > GETDATE()
+	WHERE d.district_nm IS NOT NULL AND cd.district_nm IS NULL ) t;
+	
+IF (@cnt1 > 0)
+	BEGIN
+		RAISERROR ('There are some districts in SMS that are not in CDB', 16, 0);
+		SELECT c.country_nm, s.state_nm, d.district_nm 
+		FROM districts d JOIN states s ON s.state_id = d.state_id AND s.country_id = d.country_id
+		JOIN countries c ON c.country_id = d.country_id
+		LEFT OUTER JOIN CDB..countries cc ON cc.country_nm = c.country_nm AND cc.effective_till > GETDATE()
+		LEFT OUTER JOIN CDB..states cs ON cs.country_id = cc.country_id AND cs.state_nm = s.state_nm AND cs.effective_till > GETDATE()
+		LEFT OUTER JOIN CDB..districts_or_cities cd ON cd.state_id = cs.state_id AND cd.district_nm = d.district_nm AND cd.effective_till > GETDATE()
+		WHERE d.district_nm IS NOT NULL AND cd.district_nm IS NULL
+		ORDER BY 3;
+	END;
+
+-- ====================================================================================================
+--	Credit Specifications
+-- ====================================================================================================
+
+-- Commented as already implemented in SMS
+--UPDATE credit_specifications SET credit_specification_nm = '2000 Annual Satsang - All days' where credit_specification_id = 16 ---- 32
+--UPDATE credit_specifications SET credit_specification_nm = '2000 Annual Satsang - 6 days' where credit_specification_id = 10 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2000 Annual Satsang - 7 days' where credit_specification_id = 12 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2000 Annual Satsang - 8 days' where credit_specification_id = 14 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2000 Annual Satsang - 9 days' where credit_specification_id = 15 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2000 Annual Satsang - 5 Days' where credit_specification_id = 6 ---- 34
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 7 Days' where credit_specification_id = 28 ---- 34
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - Days 7' where credit_specification_id = 30 ---- 42
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 9 Days' where credit_specification_id = 27 ---- 34
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 1 Day' where credit_specification_id = 18 ---- 34
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 2 Days' where credit_specification_id = 19 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 3 Days' where credit_specification_id = 20 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 4 Days' where credit_specification_id = 21 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 5 Days' where credit_specification_id = 22 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 6 Days' where credit_specification_id = 24 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang : 7 Days' where credit_specification_id = 25 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = '2001 Annual Satsang - 8 Days' where credit_specification_id = 26 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2005 - Local' where credit_specification_id = 62 ---- 37
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2005 - Outstation' where credit_specification_id = 63 ---- 42
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2004 (10 + TWT) dfnct' where credit_specification_id = 47 ---- 32
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2004 (6.5 + 3) dfnct' where credit_specification_id = 55 ---- 31
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2004 (6.5-8 + 3)dfnct' where credit_specification_id = 56 ---- 33
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2004 (8 + TWT) dfnct' where credit_specification_id = 49 ---- 31
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2005 : Outstation' where credit_specification_id = 59 ---- 32
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2006 - Outstation ' where credit_specification_id = 66 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Local (4+4)' where credit_specification_id = 77 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Local (5+4)' where credit_specification_id = 76 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Local (6+4)' where credit_specification_id = 75 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Local (7+1)' where credit_specification_id = 74 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Local (7+2) ' where credit_specification_id = 73 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Local (7+3)' where credit_specification_id = 72 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2007 - Outstation' where credit_specification_id = 78 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad 2008 - Outstation' where credit_specification_id = 80 ---- 35
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad March 2007 - Local' where credit_specification_id = 67 ---- 36
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad March 2007 - Local(R)' where credit_specification_id = 69 ---- 46
+--UPDATE credit_specifications SET credit_specification_nm = 'Prashad March 2007 - Outstn' where credit_specification_id = 68 ---- 41
+
+-- ====================================================================================================
+

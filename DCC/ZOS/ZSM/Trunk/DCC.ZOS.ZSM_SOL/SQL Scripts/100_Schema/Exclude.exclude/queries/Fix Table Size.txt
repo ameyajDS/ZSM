@@ -1,0 +1,174 @@
+/*.... Broad steps are as below ...........
+  ----- 1. For each table  (sewadars_txn_ts, sewadar_wise_sewa_summaries, team_wise_daily_attendance)
+  			Copy data..... INSERT into tmp_<table>
+			DROP original table
+			CREATE table
+			Copy data back.. .INSERT INTO <table> SELECT ... FROM tmp_<table> ORDER BY <primary key columns>
+			DROP tmp_<table>
+		2. Re-create triggers ..... 20_triggers*.sql through 29_triggers*.sql in 300_AppObjects/10_Core
+
+---- ====================================================================================================
+---- TABLE	sewadars_txn_ts
+---- ====================================================================================================
+
+SELECT		satsang_centre_id, sewadar_grno, sewa_id, screen_id			
+	INTO	tmp_sewadars_txn_ts
+FROM	sewadars_txn_ts;
+
+
+DROP	TABLE	sewadars_txn_ts
+GO
+
+CREATE	TABLE	sewadars_txn_ts
+(
+	satsang_centre_id 	satsang_centre_id	NOT NULL,
+	sewadar_grno		sewadar_grno		NOT NULL,
+	sewa_id				sewa_id				NOT NULL,
+	screen_id			CHAR (6)			NOT NULL,				
+
+	txn_ts				TIMESTAMP			NOT NULL,
+
+		CONSTRAINT	SewadarsTxnTs_PK_SatsangCentreID_SewadarGRNo_SewaID_ScreenID
+			PRIMARY KEY	CLUSTERED	(	satsang_centre_id, sewadar_grno, sewa_id, screen_id	)
+)
+GO
+
+INSERT INTO sewadars_txn_ts
+	(	satsang_centre_id, sewadar_grno, sewa_id, screen_id		)
+SELECT	satsang_centre_id, sewadar_grno, sewa_id, screen_id
+FROM	tmp_sewadars_txn_ts
+ORDER BY 1, 2, 3, 4;
+
+DROP TABLE	tmp_sewadars_txn_ts;
+
+---- ====================================================================================================
+---- TABLE	sewadars_txn_ts
+---- ====================================================================================================
+
+SELECT		sewa_id, satsang_centre_id, sewadar_grno, present_cnt, exempt_cnt, leave_cnt, absent_cnt, is_system_recorded
+	INTO	tmp_sewadar_wise_sewa_summaries
+FROM	sewadar_wise_sewa_summaries;
+
+
+DROP	TABLE	sewadar_wise_sewa_summaries
+GO
+
+	
+
+CREATE	TABLE	sewadar_wise_sewa_summaries
+(
+		--- LATER: Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+	sewa_id				sewa_id				NOT NULL	CONSTRAINT	SewadarWiseSewaSummaries_FK_SewaID
+															REFERENCES	sewas,
+		--- LATER:	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno only when is_system_recorded is No.
+		---			when the Attendance Marking is Summary (this is to allow Summarisation for other Sewas by the System).
+		--- Front-end screen code ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+		--- LATER: Front-end screen ensures that current_satsang_centre_id is same as that passed as parameter to application.
+	satsang_centre_id 	satsang_centre_id	NOT NULL,
+	sewadar_grno		sewadar_grno		NOT NULL,
+
+	present_cnt			CreditCntF0			NOT NULL,
+
+		---- LATER: Trigger ensures that exempt_cnt > 0 only when sewas.is_exemption_allowed is Yes
+	exempt_cnt			CreditCntF0			NOT	NULL,
+
+		---- LATER: Trigger ensures that leave_cnt > 0 only when sewas.is_leave_allowed is Yes
+	leave_cnt			CreditCntF0			NOT	NULL,
+
+		---- LATER: Trigger ensures that absent_cnt > 0 only when sewas.attendance_marking is one of Team-wise or Computed
+	absent_cnt			CreditCntF0			NOT NULL,
+
+		---- LATER: Trigger ensures that (a) overwriting system generated values is not permitted (in other words, updates are not allowed)
+		---- 							 (b) is_system_recorded can be No only for sewas where attendance_marking = "Summary"
+		---- For system generated summaries, is_system_recorded is specified as Yes.
+	is_system_recorded	Boolean				NOT NULL	CONSTRAINT	SewadarWiseSewaSummaries_DF_IsSystemRecorded
+															DEFAULT		'Yes',
+
+		CONSTRAINT	SewadarWiseSewaSummaries_PK_SewaID_SatsangCentreID_SewadarGRNo
+			PRIMARY KEY	CLUSTERED	(	sewa_id, satsang_centre_id, sewadar_grno 	),
+
+		CONSTRAINT	SewadarWiseSewaSummaries_FK_SatsangCentreID_SewadarGRNo
+			FOREIGN KEY	(	satsang_centre_id, sewadar_grno	)
+				REFERENCES	sewadars_registrations,
+
+		CONSTRAINT	SewadarWiseSewaSummaries_CK_PresentCnt_ExemptCnt_LeaveCnt_AbsentCnt
+			CHECK	(	(	present_cnt + exempt_cnt + leave_cnt + absent_cnt ) > 0	)
+)
+GO
+
+EXEC 	sp_addextendedproperty
+		'SewadarWiseSewaSummaries_CK_PresentCnt_ExemptCnt_LeaveCnt_AbsentCnt', 'At least one of Present, Exempt, Leave or Absent Count should be more than zero',
+		'USER',	'dbo', 'TABLE',	'sewadar_wise_sewa_summaries'
+GO
+
+
+INSERT INTO sewadar_wise_sewa_summaries
+	(	sewa_id, satsang_centre_id, sewadar_grno, present_cnt, exempt_cnt, leave_cnt, absent_cnt, is_system_recorded		)
+SELECT	sewa_id, satsang_centre_id, sewadar_grno, present_cnt, exempt_cnt, leave_cnt, absent_cnt, is_system_recorded
+FROM	tmp_sewadar_wise_sewa_summaries
+ORDER BY 1, 2, 3;
+
+CREATE	NONCLUSTERED INDEX	SewadarWiseSewaSummariesIX_SatsangCentreID_SewadarGRNo	ON	sewadar_wise_sewa_summaries	(	satsang_centre_id, sewadar_grno 	)
+GO
+
+DROP TABLE	tmp_sewadar_wise_sewa_summaries;
+
+---- ====================================================================================================
+---- TABLE	team_wise_daily_attendance
+---- ====================================================================================================
+
+SELECT		sewa_team_id, serial_id, attendance_dt, attendance, sewa_exemption_id, is_scanned
+	INTO	tmp_team_wise_daily_attendance
+FROM	team_wise_daily_attendance;
+
+
+DROP	TABLE	team_wise_daily_attendance
+GO
+
+CREATE	TABLE	team_wise_daily_attendance
+(
+		--- LATER: Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+	sewa_team_id		sewa_team_id		NOT NULL,
+	serial_id			sewa_team_serial_id	NOT NULL,
+
+	attendance_dt		SMALLDATETIME		NOT NULL,
+		--- LATER: Trigger ensures that
+		---			(a) sewas.is_leave_allowed to record attendance as Leave
+		---			(b) sewas.is_exemption_allowed to record attendance as Exemption
+	attendance			CHAR (1)			NOT NULL	CONSTRAINT	TeamWiseDailyAttendance_CK_Attendance
+															CHECK	(	attendance		IN	(	'P',		---- Present
+																								'E',		---- Exempt
+																								'L',		---- Leave
+																								'A'			---- Absent
+																							)
+																		),
+	
+		--- LATER: Trigger ensures that when sewa_exemptions.sewa_applicability = Yes, the exemption exists in sewa_exemptions_applicable_sewas
+	sewa_exemption_id	sewa_exemption_id		NULL	CONSTRAINT	TeamWiseDailyAttendance_FK_SewaExemptionID
+															REFERENCES	sewa_exemptions,
+		--- LATER: Trigger ensures that is_scanned can be set to Yes only if sewas.is_scanner_used is set to Yes
+	is_scanned			Boolean				NOT NULL,
+
+		CONSTRAINT	TeamWiseDailyAttendance_PK_SewaTeamID_SerialID_AttendanceDt
+			PRIMARY KEY	CLUSTERED	(	sewa_team_id, serial_id, attendance_dt	),
+
+		CONSTRAINT	TeamWiseDailyAttendance_FK_SewaTeamID_SerialID
+			FOREIGN KEY		(	sewa_team_id, serial_id	)
+				REFERENCES	sewa_team_wise_sewadars,
+
+		CONSTRAINT	TeamWiseDailyAttendance_CK_ExemptionID_Attendance
+			CHECK	(	(	attendance	=	'E'	AND	sewa_exemption_id IS NOT NULL	)
+					OR	(	attendance	!=	'E'	AND	sewa_exemption_id IS NULL		)
+					)
+)
+GO
+
+
+INSERT INTO team_wise_daily_attendance
+	(	sewa_team_id, serial_id, attendance_dt, attendance, sewa_exemption_id, is_scanned		)
+SELECT	sewa_team_id, serial_id, attendance_dt, attendance, sewa_exemption_id, is_scanned
+FROM	tmp_team_wise_daily_attendance
+ORDER BY 1, 2, 3;
+
+DROP TABLE	tmp_team_wise_daily_attendance;
+

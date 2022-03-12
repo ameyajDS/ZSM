@@ -1,0 +1,83 @@
+/* ==================================================================================
+    Source File		:	drop_audit_tables.sql
+    Author(s)		:	Jitendra Loyal
+    Started On		:	Aug 05 19:35 IST 2012
+    Version			:	1.00
+    Last updated	:	Aug 05, 2012
+    Module ID		:	ZSM (Zonal Sewadars Manager)
+    Language		:	TRANSACT-SQL
+    Reviewed By		:	
+    Reviewed On		:	
+    ==================================================================================
+																		   Usage Notes
+    ----------------------------------------------------------------------------------
+		Drops the audit tables of ZSM
+    ==================================================================================
+								   									  Revision History
+    ----------------------------------------------------------------------------------
+     JL : 05-Aug-2011
+		* Two tables adt_scanning_jobs_periods and adt_scanning_sub_jobs_valid_combinations were not part of 16_drop_audit_tables.sql.exclude script.
+     JL : 02-Aug-2011
+		*   Initial version
+   ==================================================================================*/
+
+
+DROP	TABLE	adt_badge_templates
+DROP	TABLE	adt_badge_templates_sewadar_status
+DROP	TABLE	adt_colours
+DROP	TABLE	adt_credit_specifications
+DROP	TABLE	adt_credit_specifications_sewas
+DROP	TABLE	adt_departments
+DROP	TABLE	adt_departments_satsang_centres
+DROP	TABLE	adt_sub_departments
+DROP	TABLE	adt_sub_departments_satsang_centres
+DROP	TABLE	adt_generic_attributes
+DROP	TABLE	adt_generic_attributes_list_values
+DROP	TABLE	adt_generic_attributes_status
+DROP	TABLE	adt_generic_attributes_satsang_centres
+DROP	TABLE	adt_post_offices_or_cities
+DROP	TABLE	adt_satsang_centres_details
+DROP	TABLE	adt_satsang_centre_functionaries
+DROP	TABLE	adt_sewas
+DROP	TABLE 	adt_sewas_periods
+DROP	TABLE 	adt_sewas_sewa_shifts
+DROP	TABLE	adt_sewas_satsang_centres
+DROP	TABLE	adt_sewa_exemptions
+DROP	TABLE	adt_sewa_exemption_applicable_sewas
+DROP	TABLE	adt_system_information_codes
+DROP	TABLE	adt_system_information_values
+DROP	TABLE	adt_weekly_sewa_locations
+DROP	TABLE	adt_sewadars
+DROP	TABLE	adt_sewadars_details
+DROP	TABLE	adt_sewadars_addresses
+DROP	TABLE	adt_sewadars_qualifications
+DROP	TABLE	adt_sewadars_skills
+DROP	TABLE	adt_sewadars_remarks
+DROP	TABLE	adt_sewadars_registrations
+DROP	TABLE	adt_sewadars_transfers
+DROP	TABLE	adt_sewadars_status_changes
+DROP	TABLE	adt_sewadars_responsibility_changes
+DROP	TABLE	adt_sewadars_particulars
+DROP	TABLE	adt_sewadars_attributes
+DROP	TABLE	adt_sewa_teams
+DROP	TABLE	adt_sewa_team_wise_sewadars
+DROP	TABLE	adt_arbitrary_daily_presences
+DROP	TABLE	adt_arbitrary_shift_presences
+DROP	TABLE	adt_arbitrary_summarised_exemptions
+DROP	TABLE	adt_sewadar_wise_sewa_summaries
+DROP	TABLE	adt_credit_specifications_sewadars
+DROP	TABLE	adt_generic_sewadar_lists
+DROP	TABLE	adt_generic_sewadar_lists_sewadars
+DROP	TABLE	adt_scanning_jobs
+DROP	TABLE 	adt_scanning_jobs_periods
+DROP	TABLE 	adt_scanning_sub_jobs
+DROP	TABLE 	adt_scanning_sub_jobs_validations
+DROP	TABLE 	adt_scanning_sub_jobs_valid_combinations
+DROP	TABLE	adt_scanning_jobs_controlling_dates
+DROP	TABLE	adt_scanned_badges
+
+DROP	TABLE	audit_logs
+
+
+-- =============================================================================
+-- vim:ts=4 ht=8 sw=4

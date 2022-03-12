@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="txtListName.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT l.*, d.satsang_centre_id AS list_satsang_centre_id, d.centre_nm AS list_centre_nm FROM generic_sewadar_lists l&amp;#xD;&amp;#xA;JOIN satsang_centres_details d ON (d.satsang_centre_id = l.satsang_centre_id)&amp;#xD;&amp;#xA;WHERE   ?  AND (2=2)"&gt;
+  &lt;LookupColumn caption="Sewadar List Id" sqlName="sewadar_list_id" aliasName="sewadar_list_id" percentageWidth="25" toolTipText="Sewadar List Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar List Name" sqlName="sewadar_list_nm" aliasName="sewadar_list_nm" percentageWidth="75" toolTipText="Sewadar List Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Satsang Centre Id" sqlName="satsang_centre_id" aliasName="list_satsang_centre_id" percentageWidth="25" toolTipText="Satsang Centre Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar List Use" sqlName="sewadar_list_use" aliasName="sewadar_list_use" percentageWidth="25" toolTipText="Sewadar List Use" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar List Other Use" sqlName="sewadar_list_other_use" aliasName="sewadar_list_other_use" percentageWidth="25" toolTipText="Sewadar List Other Use" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Other Satsang Centre Sewadars" sqlName="other_satsang_centre_sewadars" aliasName="other_satsang_centre_sewadars" percentageWidth="25" toolTipText="Other Satsang Centre Sewadars" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Is Other Satsang Centre" sqlName="is_other_satsang_centre" aliasName="is_other_satsang_centre" percentageWidth="25" toolTipText="Is Other Satsang Centre" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Is Editing Allowed" sqlName="is_editing_allowed" aliasName="is_editing_allowed" percentageWidth="25" toolTipText="Is Editing Allowed" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Remarks" sqlName="remarks" aliasName="remarks" percentageWidth="25" toolTipText="Remarks" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Generated Date" sqlName="generated_dtm" aliasName="generated_dtm" percentageWidth="25" toolTipText="Generated Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Report Name" sqlName="report_nm" aliasName="report_nm" percentageWidth="25" toolTipText="Report Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Session Id" sqlName="session_id" aliasName="session_id" percentageWidth="25" toolTipText="Session Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Centre Name" sqlName="centre_nm" aliasName="list_centre_nm" percentageWidth="20" toolTipText="List Satsang Centre Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+  <data name="lkpListSatsangCentre.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT DISTINCT l.satsang_centre_id, d.centre_cd, d.centre_nm FROM generic_sewadar_lists l&amp;#xD;&amp;#xA;JOIN satsang_centres_details d ON d.satsang_centre_id = l.satsang_centre_id&amp;#xD;&amp;#xA;WHERE ((l.is_other_satsang_centre = 'Yes') OR (l.satsang_centre_id = 0))"&gt;
+  &lt;LookupColumn caption="Satsang Centre Id" sqlName="satsang_centre_id" aliasName="satsang_centre_id" percentageWidth="20" toolTipText="Satsang Centre Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Centre Code" sqlName="centre_cd" aliasName="centre_cd" percentageWidth="30" toolTipText="Centre Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="True" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Centre Name" sqlName="centre_nm" aliasName="centre_nm" percentageWidth="50" toolTipText="Centre Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+  <metadata name="satsang_centre_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="centre_nm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="current_sewadar_grno.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="full_nm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="sewadar_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="age.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="gender.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="current_sewadar_status_nm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="current_sewadar_status_dtm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="department_nm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="sub_department_nm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="sewadar_list_use.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="sewadar_list_other_use.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="other_satsang_centre_sewadars.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="is_other_satsang_centre.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="is_editing_allowed.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="remarks.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="session_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="swd_sewadar_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="grdList_full_nm.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="swd_satsang_centre_id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="swd_sewadar_gr_no.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

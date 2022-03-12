@@ -1,0 +1,31 @@
+/* ==================================================================================
+	Source File		:	05_zsm_photo_update.sql.exclude
+	Author(s)		:	Manish Saluja
+	Started On		:	Thu Dec 29, 2010
+	Version			:	1.00
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	29-Dec-2010
+	Reviewed By		:
+	Reviewed On		:
+	==================================================================================
+																		   Usage Notes
+	----------------------------------------------------------------------------------
+		This script migrates the photos from Tmp_ZSM_Photos database to ZSM_Photos database
+*/
+
+-- For dummy photo entries
+--INSERT INTO ZSM_Photos..sewadars_photos (sewadar_id, sewadar_photo, photo_dt)--15701
+--	SELECT s.sewadar_id, p.sewadar_photo, p.photo_dt
+--	FROM sewadars s 
+--	JOIN Tmp_ZSM_Photos..sewadars_photos p ON (p.sewadar_id = ((s.sewadar_id%26)+1))
+	
+-- For actual photo entries
+INSERT INTO ZSM_Photos..sewadars_photos (sewadar_id, sewadar_photo, photo_dt)
+	SELECT p.sewadar_id, p.sewadar_photo, s.photo_dt
+	FROM Tmp_ZSM_Photos..sewadars_actual_photos	p
+		JOIN	ZSM..tmp_mgr_sms_sewadar_system_record	r
+			ON	(	r.system_id	=	p.sewadar_id	)
+		JOIN	SMS..sewadars	s
+			ON	(	s.sewadar_id	=	r.sewadar_id	);
+

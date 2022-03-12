@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{24853CC2-B0BF-4656-BAE2-4716B9A0764D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.SSM.ZMS.Controls</RootNamespace>
+    <AssemblyName>DCC.SSM.ZMS.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Combos\AttendanceMarkingCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\AttendanceMarkingCombo.Designer.cs">
+      <DependentUpon>AttendanceMarkingCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\BadgeTemplateCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\BadgeTemplateCombo.designer.cs">
+      <DependentUpon>BadgeTemplateCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\ColourControlCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\ColourControlCombo.designer.cs">
+      <DependentUpon>ColourControlCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\BadgePartTypesCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\BadgePartTypesCombo.designer.cs">
+      <DependentUpon>BadgePartTypesCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\BadgeShapeCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\BadgeShapeCombo.designer.cs">
+      <DependentUpon>BadgeShapeCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\ColourCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\ColourCombo.designer.cs">
+      <DependentUpon>ColourCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\AttributeTypeCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\AttributeTypeCombo.Designer.cs">
+      <DependentUpon>AttributeTypeCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\ApplicationStatusCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\ApplicationStatusCombo.designer.cs">
+      <DependentUpon>ApplicationStatusCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\SpeakerTypeCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\SpeakerTypeCombo.designer.cs">
+      <DependentUpon>SpeakerTypeCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\SpeakerStatusCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\SpeakerStatusCombo.designer.cs">
+      <DependentUpon>SpeakerStatusCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\ScanningJobTypesCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\ScanningJobTypesCombo.designer.cs">
+      <DependentUpon>ScanningJobTypesCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\InformationTypeCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\InformationTypeCombo.designer.cs">
+      <DependentUpon>InformationTypeCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\SeparatorCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\SeparatorCombo.designer.cs">
+      <DependentUpon>SeparatorCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\SewaExemptionTypeCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\SewaExemptionTypeCombo.Designer.cs">
+      <DependentUpon>SewaExemptionTypeCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\OutstationSewadarCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\OutstationSewadarCombo.Designer.cs">
+      <DependentUpon>OutstationSewadarCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\ResponsibilityCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\ResponsibilityCombo.designer.cs">
+      <DependentUpon>ResponsibilityCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\ZSMGenderCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\ZSMGenderCombo.Designer.cs">
+      <DependentUpon>ZSMGenderCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos\SewadarStatusCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Combos\SewadarStatusCombo.designer.cs">
+      <DependentUpon>SewadarStatusCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbFacade\CDB_APPDbFacade.cs" />
+    <Compile Include="DbFacade\ZSM_APPDbFacade.cs" />
+    <Compile Include="Configuration\ZSMConstants.cs" />
+    <Compile Include="Lists\ImageExtensionsListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\ImageExtensionsListBox.designer.cs">
+      <DependentUpon>ImageExtensionsListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\SubDepartmentListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\SubDepartmentListBox.designer.cs">
+      <DependentUpon>SubDepartmentListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\PostOfficeOrCityListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\PostOfficeOrCityListBox.Designer.cs">
+      <DependentUpon>PostOfficeOrCityListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\DepartmentListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\DepartmentListBox.designer.cs">
+      <DependentUpon>DepartmentListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\StatusListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\StatusListBox.designer.cs">
+      <DependentUpon>StatusListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\CentreFunctionariesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\AttributesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ColoursLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ColoursLookup.designer.cs">
+      <DependentUpon>ColoursLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\ApplicationIdLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ApplicationIdLookup.designer.cs">
+      <DependentUpon>ApplicationIdLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\OtherAddressProofLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ScanningJobLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SystemInfoCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SystemInfoCode.designer.cs">
+      <DependentUpon>SystemInfoCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\JobNameControllingDateLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ZSMSatsangCentresLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\JobNameLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SewaShitsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\RegisteredSewadarIDLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\RegisteredSewadarIDLookup.designer.cs">
+      <DependentUpon>RegisteredSewadarIDLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\RegisteredSewadarLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\RegisteredSewadarLookup.designer.cs">
+      <DependentUpon>RegisteredSewadarLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\SewadarIDLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SewadarIDLookup.designer.cs">
+      <DependentUpon>SewadarIDLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\SewadarListLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SewadarLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SewadarLookup.designer.cs">
+      <DependentUpon>SewadarLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\SewaExemptionsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SkillsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\CreditSpecificationsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SewaTeamsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SubJobNameLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ZMSDepartmentsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\RelationsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\PostOfficeOrCityLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\GRNoLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\GRNoLookup.designer.cs">
+      <DependentUpon>GRNoLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookup\QualificationTypesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\ZSMMainSatsangCentresLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\SewaLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookup\WeeklySewaLocationLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Misc\AddressBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Misc\AddressBox.designer.cs">
+      <DependentUpon>AddressBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\AttributeRecorder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Misc\AttributeRecorder.Designer.cs">
+      <DependentUpon>AttributeRecorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\HistoryHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Misc\HistoryHeader.designer.cs">
+      <DependentUpon>HistoryHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\DepartmentChooser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Misc\DepartmentChooser.designer.cs">
+      <DependentUpon>DepartmentChooser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Misc\SewadarHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Misc\SewadarHeader.designer.cs">
+      <DependentUpon>SewadarHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\ZSMUtility.cs" />
+    <Compile Include="Utils\Screens.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Combos\AttendanceMarkingCombo.resx">
+      <DependentUpon>AttendanceMarkingCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\BadgeTemplateCombo.resx">
+      <DependentUpon>BadgeTemplateCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\ColourControlCombo.resx">
+      <DependentUpon>ColourControlCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\BadgePartTypesCombo.resx">
+      <DependentUpon>BadgePartTypesCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\BadgeShapeCombo.resx">
+      <DependentUpon>BadgeShapeCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\ColourCombo.resx">
+      <DependentUpon>ColourCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\AttributeTypeCombo.resx">
+      <DependentUpon>AttributeTypeCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\ApplicationStatusCombo.resx">
+      <DependentUpon>ApplicationStatusCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\SpeakerTypeCombo.resx">
+      <DependentUpon>SpeakerTypeCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\SpeakerStatusCombo.resx">
+      <DependentUpon>SpeakerStatusCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\ScanningJobTypesCombo.resx">
+      <DependentUpon>ScanningJobTypesCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\InformationTypeCombo.resx">
+      <DependentUpon>InformationTypeCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\SeparatorCombo.resx">
+      <DependentUpon>SeparatorCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\SewaExemptionTypeCombo.resx">
+      <DependentUpon>SewaExemptionTypeCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\OutstationSewadarCombo.resx">
+      <DependentUpon>OutstationSewadarCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\ResponsibilityCombo.resx">
+      <DependentUpon>ResponsibilityCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\ZSMGenderCombo.resx">
+      <DependentUpon>ZSMGenderCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combos\SewadarStatusCombo.resx">
+      <DependentUpon>SewadarStatusCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\ImageExtensionsListBox.resx">
+      <DependentUpon>ImageExtensionsListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\SubDepartmentListBox.resx">
+      <DependentUpon>SubDepartmentListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\PostOfficeOrCityListBox.resx">
+      <DependentUpon>PostOfficeOrCityListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\DepartmentListBox.resx">
+      <DependentUpon>DepartmentListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\StatusListBox.resx">
+      <DependentUpon>StatusListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\CentreFunctionariesLookup.resx">
+      <DependentUpon>CentreFunctionariesLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\AttributesLookup.resx">
+      <DependentUpon>AttributesLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\ColoursLookup.resx">
+      <DependentUpon>ColoursLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\ApplicationIdLookup.resx">
+      <DependentUpon>ApplicationIdLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\OtherAddressProofLookup.resx">
+      <DependentUpon>OtherAddressProofLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\ScanningJobLookup.resx">
+      <DependentUpon>ScanningJobLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SystemInfoCode.resx">
+      <DependentUpon>SystemInfoCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\JobNameControllingDateLookup.resx">
+      <DependentUpon>JobNameControllingDateLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\ZSMSatsangCentresLookup.resx">
+      <DependentUpon>ZSMSatsangCentresLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\JobNameLookup.resx">
+      <DependentUpon>JobNameLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewaShitsLookup.resx">
+      <DependentUpon>SewaShitsLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\RegisteredSewadarIDLookup.resx">
+      <DependentUpon>RegisteredSewadarIDLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\RegisteredSewadarLookup.resx">
+      <DependentUpon>RegisteredSewadarLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewadarIDLookup.resx">
+      <DependentUpon>SewadarIDLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewadarListLookup.resx">
+      <DependentUpon>SewadarListLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewadarLookup.resx">
+      <DependentUpon>SewadarLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewaExemptionsLookup.resx">
+      <DependentUpon>SewaExemptionsLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SkillsLookup.resx">
+      <DependentUpon>SkillsLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\CreditSpecificationsLookup.resx">
+      <DependentUpon>CreditSpecificationsLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewaTeamsLookup.resx">
+      <DependentUpon>SewaTeamsLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SubJobNameLookup.resx">
+      <DependentUpon>SubJobNameLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\ZMSDepartmentsLookup.resx">
+      <DependentUpon>ZMSDepartmentsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\RelationsLookup.resx">
+      <DependentUpon>RelationsLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\PostOfficeOrCityLookup.resx">
+      <DependentUpon>PostOfficeOrCityLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\GRNoLookup.resx">
+      <DependentUpon>GRNoLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\QualificationTypesLookup.resx">
+      <DependentUpon>QualificationTypesLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\ZSMMainSatsangCentresLookup.resx">
+      <DependentUpon>ZSMMainSatsangCentresLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\SewaLookup.resx">
+      <DependentUpon>SewaLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookup\WeeklySewaLocationLookup.resx">
+      <DependentUpon>WeeklySewaLocationLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\AddressBox.resx">
+      <DependentUpon>AddressBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\AttributeRecorder.resx">
+      <DependentUpon>AttributeRecorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\HistoryHeader.resx">
+      <DependentUpon>HistoryHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\DepartmentChooser.resx">
+      <DependentUpon>DepartmentChooser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\SewadarHeader.resx">
+      <DependentUpon>SewadarHeader.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\umb\CDB\DCC.UMB.CDBControls\DCC.UMB.CDBControls.csproj">
+      <Project>{71442424-d2c6-46fc-ad3b-3c39da76fae5}</Project>
+      <Name>DCC.UMB.CDBControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\..\UMB\CDF\DCC.UMB.CDF_SOL\DCC.UMB.CDF\DCC.UMB.CDF.csproj">
+      <Project>{b630abdd-90d9-4d4d-9b7b-02df342efcf0}</Project>
+      <Name>DCC.UMB.CDF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

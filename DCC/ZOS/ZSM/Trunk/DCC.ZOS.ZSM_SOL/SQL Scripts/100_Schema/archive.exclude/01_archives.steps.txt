@@ -1,0 +1,33 @@
+
+ONLY First Time.........
+~~~~~~~~~~~~~~~
+
+1. Create ZSM_Archive Database as below:
+	+ CREATE DATABASE ZSM_Archive
+	+ USE ZSM_Archive
+	+ Execute SQL Script 01_primitives.sql
+	+ Execute SQL Script archive.exclude/91_archive_audit_logs_tbl.sql
+	+ Execute SQL Script 16_2_schema_adt_tables.sql
+
+2. Execute the Steps for each Time
+
+3.  Re-create ZSM's Audit tables (because the indexes are CLUSTERED now) as below:
+	+ USE ZSM
+	+ Execute SQL Script 16_drop_audit_tables.sql.exclude
+	+ Execute SQL Script 16_1_audit_logs_tbl.sql
+	+ Execute SQL Script 16_2_schema_adt_tables.sql
+	+ Execute SQL Script archive.exclude/92_set_audit_tbl_identity_seed.sql
+	+ EXEC SysAdmin..GrantObjectPermissions 'ZSM', 'ZSM_RDR, ZSM_ATM, ZSM_USR, ZSM_SUP, ZSM_ADM, ZSM_CU, ZSM_PC', 'Yes'
+
+
+Subsequently.... each time..............
+~~~~~~~~~~~~     ~~~~~~~~~
+	+ USE ZSM_Archive
+	+ Execute SQL Script archive.exclude/11_procs_archive.sql
+	+ Execute SQL Script archive.exclude/12_archive_data.sql
+	+ EXEC _CleanUpArchive
+
+
+Pending to do...........
+~~~~~~~~~~~~~~~~~~~~~~~~
+* Keep the counts so that the same can be compared

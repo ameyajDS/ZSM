@@ -1,0 +1,285 @@
+Note: Need to replace XXX by <centre_cd> (like NGP) in all the places before executing that step. User may choose to Find and Replace all the occurances of this in the current file before executing the steps. He should however not save / commit this changes.
+~~~~
+Important: 
+			1. Ensure that ZSM binaries and databases at centre are as per current ZSM version being used in the Zone. If not so then update the same at centre.
+			2. Backup ZSM database at centre and keep it in a new sub-folder (ellobrated later) in \\ZSM_Preserved_Backups folder for example 126 Import Nagpur 27 September 2018
+
+Very Important: If any of the Procedures is aborted in middle due to errors, following steps must be carried out for restoration at Zone:
+~~~~~~~~~
+						1. Restore the ZSM database from its backup that has been taken before the operation.
+						2. Get latest ALL_ZSM_Procs_only	---- Caveat: If the latest version has not been released, there may be problem(s) here.
+						3. Execute ALL_ZSM_Procs_only
+Import
+~~~~~~
+-- sp_unbindrule 'Boolean'
+
+	* Set the Current database to ZSM
+	* Run Data Integrity checks. If any data rows are shown, STOP and report.
+	* Ensure that the ZSM_PRVEXP_<CentreCode> database is up to date with the CURRENT VERSION of ZSM. If not, execute the UPGRADE scripts (Be EXTREMELY CAREFUL that ONLY the statements AFTER "USE ZSM" statement MUST BE selected and executed).
+	* Rename previously exported Database of the Centre ZSM_PRVEXP_<CentreCode> as ZSM_PRVEXP. sp_renamedb 'ZSM_PRVEXP_XXX', 'ZSM_PRVEXP'.
+	* Restore Database of the Centre as ZSM_<CentreCode>
+	* Ensure that Current Database is ZSM_<CentreCode>
+									  ~~~~~~~~~~~~~~~~
+	* Execute data_fix.sql, if it exists and doubly ensure that it needs to be executed.
+	* Run Data Integrity checks. If any data rows are shown, STOP and report.
+	* Execute the following scripts
+		+ procs_expimp.sql
+		+ ImportFromCentreToZone.sql
+		+ ExportFromZoneToCentre.sql
+		+ ..\10_procs_on_zsm_tables.sql
+	* EXEC _Create_ZSM_tables_table
+	  NOTE: Need to replace XXX by 3-character <centre_cd> (like NGP) in all the places before executing that step. User may choose to Find and Replace all the occurances of this in the current file before executing the steps. He should however not save / commit this changes.
+	* EXEC _CountRecordsBefore 'Import', 'XXX', <remarks if any> OR NULL
+	* EXEC _ReportAnomalies 'XXX'
+	* EXEC ImportFromCentreToZone 'XXX', 'Yes'
+	* If any of the previous two steps returns data in any of the SQL Statements, the data should be copied into Excel file and corrected manually. Also, whether to proceed further should be decided after analyzing this data.
+	* If need be (because of errors / resolving discrepancies/anomalies), database of centre should be restored and above steps executed till this point.
+
+	* No one should be using the System........
+		+ This can be ensured by EXECUTING following SQL Statement:
+			SELECT * FROM LOG..sessions WHERE finish_dtm IS NULL AND clear_dtm IS NULL
+		+ If any records are returned, sewadars are using the system. Tell the sewadars to log off, and re-run the above SQL Statement.
+		+ To ensure that no one logs into the system, execute:
+			sp_renamedb 'Log', 'Log_Lock'
+	* Take Backup of ZSM databases (namely ZSM, ZSM_Photos, CDB) of Zone
+		+ The ZSM database backup file should be kept as ZSM_Zone.bak to signify the backup being ZSM of Zone.
+		+ Backups are to be taken in a folder that is preserved (say "ZSM Preserved Backups").
+		+ Below this should be a folder, that should be created as <nnn>_Import_<Centre>
+			- where		<nnn> is a 3-digit running serial number (to maintain the ordering) starting with 001
+			- 			<Centre> is the name of the Centre whose data is being imported.
+		+ The backups should be taken in the folder <nnn>_Import_<Centre>
+
+	* Set the Current database to ZSM
+	* EXEC	SysAdmin..DropAllTriggers	'ZSM'
+								  		 ~~~
+
+	* Set and ensure that Current Database is ZSM_<CentreCode>
+									          ~~~~~~~~~~~~~~~~
+	* EXEC Delete100DayOldGenericReportsData
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_UpdateSatsangCentresSeeds',	'Yes', '%',		'No',	'P'			--- 5 seconds	..timings for Indore
+	* EXEC _DeleteZoneRecords 'XXX'																	--- 58 seconds
+	* EXEC ImportFromCentreToZone 'XXX', 'No'														--- 14 seconds
+	* EXEC _InsertCentreRecordsInZone 'XXX'															--- 37 seconds (earlier aborted after 2 hours)
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_MoveDataToImpTable',			'Yes', 'Yes',	'No',	'%'				---
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_MoveDataToImpTable',			'Yes', '%',		'%',	'%', 'Yes'			---
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_UpdateSatsangCentresSeeds',	'Yes', '%',		'No',	'P'			---
+	* EXEC _CountRecordsAfter 'Import', 'XXX', <date_of_starting_import>, <operation_id> OR NULL		--- <operation_id> will be needed when multiple imports are attempted for a centre on same day to identify it distinctly.
+	* EXEC _DropProcedures
+	* Switch current database to ZSM
+-- sp_bindrule 'Boolean', 'Boolean'
+	* Create all triggers in ZSM database using scripts in SQL Scripts/300_AppObjects/10_Core
+		+ 21_triggers_setup
+		+ 22_triggers_entities
+		+ 23_triggers
+		+ 25_triggers_scanning
+		+ 29_triggers_DML
+	* Run the following query:
+			SELECT COUNT(*) FROM sysobjects WHERE xtype = 'TR'
+		IF the value shown is not around 140, report, and do NOT release system
+	* Take Backup of ZSM database of Zone as well as Centre
+		+ The ZSM database backup file should be kept as ZSM_Zone_after_import.bak
+		+ Centre backup should be kept as ZSM_<XXX>_after_import.bak
+	* ZSM System can be used now in the Zone
+
+Export (after Import)
+~~~~~~
+
+	* No one should be using the System
+	* Set the Current database to ZSM
+								  ~~~
+	* Run Data Integrity checks. If any data rows are shown, STOP and report.
+	* Take Backup of ZSM databases (namely ZSM, ZSM_Photos, CDB) of Zone
+		+ The ZSM database backup file should be kept as ZSM_Zone.bak to signify the backup being of ZSM of Zone.
+		+ Backups are to be taken in a folder that is preserved (say "ZSM Preserved Backups").
+		+ Below this should be a folder, that should be created as <nnn>_Export_<Centre> (after Import)
+			- where		<nnn> is a 3-digit running serial number (to maintain the ordering) starting with 001
+			- 			<Centre> is the name of the Centre whose data is being exported.
+		+ The backups should be taken in the folder <nnn>_Export_<Centre>
+	* Set Current Database to ZSM_<CentreCode> and ensure it exists (TRIPLE CHECK)
+							  ~~~~~~~~~~~~~~~~
+	* Execute the following scripts
+		+ procs_expimp.sql
+		+ ExportFromZoneToCentre.sql
+		+ ImportFromCentreToZone.sql
+		+ ..\10_procs_on_zsm_tables.sql
+	* ALTER TABLE sewadars DROP CONSTRAINT Sewadars_FK_CurrentSatsangCentreID_CurrentSewadarGRNo
+	* DROP TABLE	centres_tables_id_changes  -- if exists
+	* DROP TABLE	satsang_centres_seeds  -- if exists
+	* DROP TABLE	additionally_exported_sewadars  -- if exists
+	* DROP TABLE	manually_exported_sewadars  -- if exists
+--	* DROP TABLE	tmp_bulk_registrations  -- if exists
+	* DROP TABLE	_data_operations_tables  -- if exists
+	* DROP TABLE	_data_operations	-- if exists
+	* ALTER TABLE	system_information_values	DROP COLUMN	system_info_value
+	* DROP	FUNCTION	GetSystemInfoValue
+	  NOTE: Need to replace XXX by 3-character <centre_cd> (like NGP) in all the places before executing that step. User may choose to Find and Replace all the occurances of this in the current file before executing the steps. He should however not save / commit this changes.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_DropZSMTable', 'No', '%', 'No', '%'
+	* Execute Scripts:
+		+ 11_schema_setup.sql
+		+ 12_schema_entities.sql
+		+ 13_schema.sql
+		+ 14_schema_rpts.sql
+		+ 15_schema_centres.sql
+		+ 16_1_audit_logs_tbl.sql
+		+ 16_2_schema_adt_tables.sql
+
+-- sp_unbindrule 'Boolean'
+-- sp_unbindrule 'Separator'
+	* EXEC _CountRecordsBefore 'Export', 'XXX', <remarks if any> OR NULL
+	* EXEC ExportFromZoneToCentre 'XXX', 'Yes'														-- If any data rows found, STOP and report.
+	* EXEC ExportFromZoneToCentre 'XXX', 'No'														-- If any error found, STOP and report.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_MoveDataFromImpTable',		'Yes', 'Yes',	'No',	'%'			-- If any error found, STOP and report.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_MoveDataFromImpTable',		'Yes', '%',		'%',	'%', 'Yes'		-- If any error found, STOP and report.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_InitSeedOfCentreTable',		'Yes', '%',		'No',	'P'				-- If any error found, STOP and report.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_UpdateSatsangCentresSeeds',	'Yes', '%',		'No',	'P'			-- If any error found, STOP and report.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_DropImpTable',				'Yes', 'Yes',	'No',	'%'
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_DropImpTable',				'Yes', '%',		'%',	'%', 'Yes'
+	* EXEC _CountRecordsAfter 'Export', 'XXX', <date_of_starting_export>, <operation_id> OR NULL		--- <operation_id> will be needed when multiple exports are attempted for a centre on same day to identify it distinctly.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_DropZSMTable',				'No',	'No',	'Yes',	'%'	
+	* Execute 38_centre_migration_schema.sql...... this is to be dropped at a later stage... this is kept till "Migrate Sewadars" screen is kept. Only table definition is kept.
+	* EXEC _DropProcedures
+-- sp_bindrule 'Boolean', 'Boolean'
+-- sp_bindrule 'Separator', 'Separator'
+	* Export Photos
+		+ CREATE DATABASE ZSM_<CentreCode>_Photos (if already exists, drop it and recreate)
+		+ Set Current Database to ZSM_<CentreCode>_Photos
+		+ Execute the following scripts:
+			+ 18_schema_photos
+			+ ..\10_procs_on_zsm_tables.sql
+			+ procs_photos_exp.sql
+		+ EXEC _MovePhotosForCentre 'XXX'
+		+ EXEC _DropProcedures
+		+ Set Current Database back to ZSM_<CentreCode>
+	* Run Data Integrity checks. If any data rows are shown, STOP and report.
+	* ZSM System can be used now in the Zone
+	* Take the backup of ZSM_<CentreCode>
+	* Take the backup of ZSM_<CentreCode>_Photos
+	* DROP database ZSM_PRVEXP.
+	* Restore database ZSM_PRVEXP_XXX from ZSM_XXX.
+	* DROP database ZSM_<CentreCode>_Photos
+	* Compress the backups of ZSM_<CentreCode> ,ZSM_<CentreCode>_Photos and CDB, and transfer these three files to the <CENTRE>.
+	* DROP database ZSM_<CentreCode>_Photos & ZSM_<CentreCode> (normally done after restoring exported databases at Centre).
+	* Make an entry on the wiki page for Mumbai Liver Server Releases (https://www.dccapps.org/pm/projects/zsm/wiki/Mumbai_Live_Server_Releases)
+	* Ensure that this point onwards, work is on the Centre's Machine
+	* Restore backup of ZSM_<CentreCode> on Centre's machine as ZSM
+	* Restore backup of ZSM_<CentreCode>_Photos on Centre's machine as ZSM_Photos
+	* Restore backup of CDB on Centre's machine
+	* Set Current Database to ZSM
+							  ~~~~~~~~~~~~~~~~
+	* Execute the script reset_roles.sql .... issues exist (see comments in the script)
+	* Get latest ALL_ZSM_Procs_only on the Centre's machine
+	* Execute ALL_ZSM_Procs_only on the Centre's machine		(this ensures that the triggers are created)
+
+
+Export (first-time)
+~~~~~~
+	* No one should be using the System
+	* Set the Current database to ZSM
+								  ~~~
+	* Run Data Integrity checks. If any data rows are shown, STOP and report.
+	* Take Backup of ZSM databases (namely ZSM, ZSM_Photos, CDB) of Zone
+		+ Backups are to be taken in a folder that is preserved (say "ZSM Preserved Backups").
+		+ Below this should be a folder, that should be created as <nnn>_Export_<Centre> (first time)
+			- where		<nnn> is a 3-digit running serial number (to maintain the ordering) starting with 001
+			- 			<Centre> is the name of the Centre whose data is being exported.
+		+ The ZSM database backup file should be kept as ZSM_Zone.bak to signify the backup being of ZSM of Zone.
+	* Create Database ZSM_<CentreCode>
+	* Ensure that the current database is ZSM_<CentreCode>
+										  ~~~~~~~~~~~~~~~~
+	* Execute the following scripts
+		+ 01_primitives.sql
+		+ 11_schema_setup.sql
+		+ 12_schema_entities.sql
+		+ 13_schema.sql
+		+ 14_schema_rpts.sql
+		+ 15_schema_centres.sql
+		+ 16_1_audit_logs_tbl.sql
+		+ 16_2_schema_adt_tables.sql
+	* Execute the following scripts
+		+ procs_expimp.sql
+		+ ExportFromZoneToCentre.sql
+		+ ..\10_procs_on_zsm_tables.sql
+-- sp_unbindrule 'Boolean'
+-- sp_unbindrule 'Separator'
+	  NOTE: Need to replace XXX by 3-character <centre_cd> (like NGP) in all the places before executing that step. User may choose to Find and Replace all the occurances of this in the current file before executing the steps. He should however not save / commit this changes.
+	* EXEC _Create_ZSM_tables_table
+	* EXEC _CountRecordsBefore 'Export-1st', 'XXX', <remarks if any> OR NULL
+BEGIN TRAN
+	* EXEC ExportFromZoneToCentre 'XXX', 'No'
+COMMIT or ROLLBACK
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_InitSeedOfCentreTable',		'Yes', '%', 'No',	'P'			-- If any error found, STOP and report.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_UpdateSatsangCentresSeeds',	'Yes', '%', 'No',	'P'		-- If any error found, STOP and report.
+	* EXEC _CountRecordsAfter 'Export-1st', 'XXX', <date_of_starting_export>, <operation_id> OR NULL		--- <operation_id> will be needed when multiple exports are attempted for a centre on same day to identify it distinctly.
+	* EXEC _ExecProcOn_ZSMTables 'XXX', '_DropZSMTable',				'No', 'No', 'Yes',	'%'
+	* Execute 38_centre_migration_schema.sql...... this is to be dropped at a later stage... this is kept till "Migrate Sewadars" screen is kept. Only table definition is kept.
+	* EXEC _DropProcedures
+	* Run Data Integrity checks. If any data rows are shown, STOP and report.
+-- sp_bindrule 'Boolean', 'Boolean'
+-- sp_bindrule 'Separator', 'Separator'
+	* Export Photos
+		+ CREATE DATABASE ZSM_<CentreCode>_Photos (if already exists, drop it and recreate)
+		+ Set Current Database to ZSM_<CentreCode>_Photos
+		+ Execute the following scripts:
+			+ 18_schema_photos
+			+ ..\10_procs_on_zsm_tables.sql
+			+ procs_photos_exp.sql
+		+ EXEC _MovePhotosForCentre 'XXX'
+		+ EXEC _DropProcedures
+	* ZSM System can be used now in the Zone
+	* Take the backup of ZSM_<CentreCode>
+	* Take the backup of ZSM_<CentreCode>_Photos
+	* Take the backups of CDB, RMS
+	* Rename database ZSM_XXX to ZSM_PRVEXP_XXX.
+	* Compress the backups which are to taken to the centre
+	* Make an entry on the wiki page for Mumbai Liver Server Releases (https://www.dccapps.org/pm/projects/zsm/wiki/Mumbai_Live_Server_Releases)
+	* Ensure that this point onwards, work is on the Machine of the Centre
+	* SysAdmin, CDB, RMS, Log databases and setup
+	* Restore backup of ZSM_<CentreCode> on Centre's machine as ZSM
+	* Restore backup of ZSM_<CentreCode>_Photos on Centre's machine as ZSM_Photos
+	* Restore the backups of CDB, RMS
+	* There are two ways the SysAdmin and Log Databases can be created; both steps are enumerated; only one method is to be adopted.
+		* Method 1: Create Databases
+			+ Create SysAdmin and Log databases
+			+ Create database objects in the SysAdmin and Log databases by executing SQL Scripts in DCC.UMB.SAM.DB\100_Schema and DCC.UMB.SAM.DB\300_AppObjects\10_Core folders.
+			+ Execute the Scripts in DCC.ZOS.ZSM_SOL\SQL Scripts\200_AppSetup as below:
+				+ Edit 10_Setup_Package_And_Applications.sql appropriately and execute the script.... this needs to be cleaned up
+				+ If any users are existing for the user-roles ZSM_*, drop them; expected to be existing in CDB database
+		* Method 2: Restore backup of Databases
+			+ Restore Log and SysAdmin file from any existing Centre(Not Zone) say NGP
+			+ If any users are existing in databases CDB, ZSM, ZSM_Photos, Log, SysAdmin, RMS etc for the user-roles ZSM_*, drop them
+			+ Set the Current database to Log
+			+ DELETE FROM	message_logs
+			+ DELETE FROM	sessions
+			+ Set the Current database to SysAdmin
+			+ DELETE FROM user_privileges
+			+ DELETE FROM application_users
+			+ DELETE FROM all_users
+			+ INSERT / UPDATE records using following command (the example is for Raipur - needs to be changed for other centres, with Nagpur as base)
+				+	EXEC insApplication		@application_id = 'ZSM_RPR', 
+											@application_nm = 'Zonal Sewadar Manager (Raipur)', 
+											@package_id = 'ZSM', @database_nm = 'ZSM', 
+											@implementation_dt = '23-Feb-2012', 
+											@error_log_level = 'Error', 
+											@log_file_size_in_mb = '10',
+											@report_title = NULL,
+											@report_footer = NULL,
+											@path_1 = NULL,
+											@path_2 = NULL,
+											@path_3 = NULL,
+											@argument_1 = 9720,
+											@argument_2 = 'Raipur',
+											@argument_3 = 'No',
+											@argument_4 = NULL, 
+											@argument_5 = NULL
+				+ UPDATE	application_screen_audits	SET application_id = 'ZSM_RPR'	WHERE	application_id = 'ZSM_NGP'
+				+ DELETE FROM	applications	WHERE	application_id = 'ZSM_NGP'
+				+ UPDATE	packages	SET	server_distribution_root = '\\Raipur\e\zsm\bin\' + package_id
+				+ UPDATE	package_databases	SET	server_nm = '\\Raipur'
+			+ Execute script for live to test
+	* Execute 20_SetupPackageRoles.sql in DCC.ZOS.ZSM_SOL\SQL Scripts\200_AppSetup
+	* Execute script for New Server Setup after restoring databases
+	* Get latest ALL_ZSM_Procs_only on the machine of Centre
+	* Execute ALL_ZSM_Procs_only		(this ensures that the triggers are created)
+
+Note. All import and export objects (procedures and tables) are always created in ZSM_<CentreCode> database (and NEVER in ZSM database).
+	  This should safeguard against any inadvertent operation.

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="$this.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT  vs.* FROM  ViewSewadarHeader vs&amp;#xD;&amp;#xA;WHERE     ?   AND (2=2)"&gt;
+  &lt;LookupColumn caption="Sewadar Id" sqlName="sewadar_id" aliasName="sewadar_id" percentageWidth="25" toolTipText="Sewadar Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="vs" /&gt;
+  &lt;LookupColumn caption="Full Name" sqlName="full_nm" aliasName="full_nm" percentageWidth="70" toolTipText="Full Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Gender" sqlName="gender" aliasName="gender" percentageWidth="5" toolTipText="Gender" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="First Name" sqlName="first_nm" aliasName="first_nm" percentageWidth="25" toolTipText="First Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Middle Name" sqlName="middle_nm" aliasName="middle_nm" percentageWidth="25" toolTipText="Middle Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Last Name" sqlName="last_nm" aliasName="last_nm" percentageWidth="25" toolTipText="Last Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Birth Date" sqlName="birth_dtm" aliasName="birth_dtm" percentageWidth="25" toolTipText="Birth Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Age" sqlName="age" aliasName="age" percentageWidth="25" toolTipText="Age" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Is Married" sqlName="is_married" aliasName="is_married" percentageWidth="25" toolTipText="Is Married" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Initiation Date" sqlName="initiation_dt" aliasName="initiation_dt" percentageWidth="25" toolTipText="Initiation Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Initiation Place Id" sqlName="initiation_place_id" aliasName="initiation_place_id" percentageWidth="25" toolTipText="Initiation Place Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Place Name" sqlName="place_nm" aliasName="place_nm" percentageWidth="25" toolTipText="Place Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Initiation By" sqlName="initiation_by" aliasName="initiation_by" percentageWidth="25" toolTipText="Initiation By" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Satsang Centre Id" sqlName="satsang_centre_id" aliasName="satsang_centre_id" percentageWidth="25" toolTipText="Satsang Centre Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Global Sewadar Status Code" sqlName="global_sewadar_status_cd" aliasName="global_sewadar_status_cd" percentageWidth="25" toolTipText="Global Sewadar Status Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Global Sewadar Status Date" sqlName="global_sewadar_status_dt" aliasName="global_sewadar_status_dt" percentageWidth="25" toolTipText="Global Sewadar Status Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar GR No." sqlName="sewadar_grno" aliasName="sewadar_grno" percentageWidth="25" toolTipText="Sewadar GR No." isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Global Sewadar Status Name" sqlName="global_sewadar_status_nm" aliasName="global_sewadar_status_nm" percentageWidth="25" toolTipText="Global Sewadar Status Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar Status Code" sqlName="sewadar_status_cd" aliasName="sewadar_status_cd" percentageWidth="25" toolTipText="Sewadar Status Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Satsang Centre Name" sqlName="centre_nm" aliasName="centre_nm" percentageWidth="25" toolTipText="Satsang Centre Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar Status Date" sqlName="sewadar_status_dt" aliasName="sewadar_status_dt" percentageWidth="25" toolTipText="Sewadar Status Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sewadar Status Name" sqlName="sewadar_status_nm" aliasName="sewadar_status_nm" percentageWidth="25" toolTipText="Sewadar Status Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Department Date" sqlName="department_dt" aliasName="department_dt" percentageWidth="25" toolTipText="Department Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Appointment Date" sqlName="appointment_dt" aliasName="appointment_dt" percentageWidth="25" toolTipText="Appointment Date" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Department Name" sqlName="department_nm" aliasName="department_nm" percentageWidth="25" toolTipText="Department Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Sub Department Name" sqlName="sub_department_nm" aliasName="sub_department_nm" percentageWidth="25" toolTipText="Sub Department Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Full Department Name" sqlName="full_department_nm" aliasName="full_department_nm" percentageWidth="25" toolTipText="Full Department Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Weekly Satsang Centre Id" sqlName="weekly_satsang_centre_id" aliasName="weekly_satsang_centre_id" percentageWidth="25" toolTipText="Weekly Satsang Centre Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Weekly Satsang Centre Name" sqlName="weekly_satsang_centre_nm" aliasName="weekly_satsang_centre_nm" percentageWidth="25" toolTipText="Weekly Satsang Centre Name" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Txn Ts" sqlName="txn_ts" aliasName="txn_ts" percentageWidth="25" toolTipText="Txn Ts" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+</root>

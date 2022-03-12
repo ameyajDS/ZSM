@@ -1,0 +1,169 @@
+/* ==================================================================================
+	Source File		:	70_sms_upgrade_for_ahmedabad.sql.exclude
+	Author(s)		:	Manish Saluja
+	Started On		:	Thu Dec 01
+	Version			:	v0.05
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	03-Jan-2011
+	Reviewed By		:	Jiten Loyal
+	Reviewed On		:
+	==================================================================================
+																		   Usage Notes
+	----------------------------------------------------------------------------------
+	This script upgrades the sms schema in Ahmedabad to latest
+	==================================================================================*/
+IF EXISTS (SELECT * FROM systypes WHERE name = 'shift_id')
+	EXEC	sp_droptype	'shift_id'
+GO
+
+EXEC	sp_addtype	'shift_id',					'VARCHAR (15)',	'NOT NULL'
+GO
+
+CREATE TABLE 	sewa_shifts (
+	sewa_id		sewa_id			NOT NULL	REFERENCES sewas,    
+	shift_id	shift_id		NOT NULL,
+	shift_no	TINYINT			NOT NULL,
+	credit_days	NUMERIC(4,2) 	NOT	NULL,
+
+		CONSTRAINT	PK_SewaShifts
+			PRIMARY KEY		CLUSTERED	(sewa_id,  shift_id),
+
+		CONSTRAINT	UK_SewaShifts_SewaID_ShiftNo
+			UNIQUE		NONCLUSTERED	(sewa_id,  shift_no)
+)
+GO
+
+
+CREATE	TABLE	scanned_daily_shift_presences	(
+	sewa_id				sewa_id				NOT NULL	REFERENCES	sewas,
+	presence_dt			SMALLDATETIME		NOT NULL,
+	shift_id			shift_id			NOT NULL,
+	sewadar_id			gr_no				NOT NULL	REFERENCES	sewadars,
+	is_scanned			Boolean				NOT NULL,	--ADDED BY AJ: ON 27-DEC-09 FOR ATTENDENCE RECORDED THROUGH SCANNER
+
+		CONSTRAINT	PK_ArbitraryDailyShiftPresences
+					PRIMARY KEY		(sewa_id, presence_dt, shift_id, sewadar_id)
+)
+GO
+
+CREATE TABLE centre_functionary (
+	functionary			varchar(20)		PRIMARY KEY	NOT NULL,
+	effective_from		DATETIME		NOT NULL	DEFAULT	GetDate(),
+	effective_till		DATETIME		NOT NULL	DEFAULT	'31-Dec-9999'
+)
+GO
+
+INSERT INTO centre_functionary values ('Secretary', Getdate(), '31-Dec-9999')
+INSERT INTO centre_functionary values ('Area Secretary', Getdate(), '31-Dec-9999')
+GO
+
+CREATE TABLE satsang_centre_functionaries (
+	satsang_centre_id 	satsang_centre_id		NOT NULL	REFERENCES	satsang_centres, 
+	functionary 		varchar(20)			NOT NULL	REFERENCES	centre_functionary, 
+	functionary_nm		gnc_nm				NOT NULL, 
+	effective_from		DATETIME			NOT NULL,
+	effective_till		DATETIME			NOT NULL	DEFAULT	'31-Dec-9999',
+	is_current		boolean				NOT NULL	DEFAULT	'No',	
+	
+	CONSTRAINT	PK_SatsangCentreFunctionary
+			PRIMARY KEY (satsang_centre_id, functionary, effective_from)
+
+)
+GO
+
+CREATE	TABLE	sewadar_system_record	(
+
+	system_id			INT				IDENTITY(20001,1),
+	sewadar_id			gr_no				NOT NULL	CONSTRAINT	SewadarSystemRecord_FK_SewadarId
+															REFERENCES	sewadars,
+	
+	satsang_centre_id 	satsang_centre_id	NULL		CONSTRAINT	SewadarSystemRecord_FK_SatsangCentreId
+															REFERENCES	satsang_centres,
+
+	effective_dt		SMALLDATETIME		NOT NULL,	--FOREIGN KEY		(sewadar_id, effective_dt, status)
+														--	REFERENCES	sewadar_status,
+
+	status				CHAR (20)			NOT NULL,	--FOREIGN KEY		(sewadar_id, effective_dt, status)
+														--	REFERENCES	sewadar_status
+
+		CONSTRAINT	PK_SewadarSystemRecord
+					PRIMARY KEY		(system_id, sewadar_id)	--,	satsang_centre_id)	
+	
+)
+GO
+
+INSERT INTO		sewadar_system_record	(sewadar_id,	effective_dt, 	status, satsang_centre_id)
+--YET TO SELECT CORRECT SATSANG_CENTRE_ID FOR FOUND SEWADAR
+SELECT sewadar_id, status_dt, status, 'AHD'
+FROM sewadars
+ORDER BY department_id, sub_department_id, sewadar_id
+
+UPDATE satsang_centres SET is_main_centre = 'Yes' WHERE satsang_centre_id = 'AHD       '
+
+CREATE TABLE address_proofs	(
+		address_proof_id 	varchar(20)		NOT NULL	PRIMARY KEY,
+		effective_from		DATETIME		NOT NULL	Default	GetDate(),
+		effective_till		DATETIME		NULL
+)
+GO
+
+INSERT INTO address_proofs VALUES (	'Ration Card', '', '' )
+GO
+
+INSERT INTO address_proofs VALUES (	'Voter''s Card', '', '' )
+GO
+
+INSERT INTO address_proofs VALUES (	'Passport', '', '' )
+GO
+
+ALTER TABLE sewadars ADD	outside_sewadar_secretary		gnc_nm			NULL;
+ALTER TABLE sewadars ADD	outside_sewadar_area_secretary	gnc_nm			NULL;
+ALTER TABLE sewadars ADD	is_attend_weekly_satsang	boolean				NULL;
+ALTER TABLE sewadars ADD	weekly_satsang_centre_id	satsang_centre_id	NULL	REFERENCES	satsang_centres;
+GO
+ALTER TABLE sewadars ADD 		CONSTRAINT CK_AttendWeeklySatsang	
+						CHECK	((is_attend_weekly_satsang IS NOT NULL AND is_attend_weekly_satsang = 'Yes' AND weekly_satsang_centre_id IS NOT NULL)
+										OR
+								 (weekly_satsang_centre_id IS NULL)
+								);
+ALTER TABLE sewadars ADD	reference_1_sewadar_id		gr_no				NULL	REFERENCES	sewadars;
+ALTER TABLE sewadars ADD	reference_1_department		varchar (20)		NULL;
+ALTER TABLE sewadars ADD	reference_1_centre_id		satsang_centre_id	NULL	REFERENCES	satsang_centres;
+ALTER TABLE sewadars ADD	has_hypertension			boolean				NULL;
+ALTER TABLE sewadars ADD	is_diabetic					boolean				NULL;
+ALTER TABLE sewadars ADD	has_skin_problem			boolean				NULL;
+ALTER TABLE sewadars ADD	has_epillepsy				boolean				NULL;
+ALTER TABLE sewadars ADD	any_disability				varchar (30)		NULL;
+ALTER TABLE sewadars ADD	reference_2_sewadar_id		gr_no				NULL	REFERENCES	sewadars;
+ALTER TABLE sewadars ADD	reference_2_department		varchar (20)		NULL;
+ALTER TABLE sewadars ADD	reference_2_centre_id		satsang_centre_id	NULL	REFERENCES	satsang_centres;
+ALTER TABLE sewadars ADD	address_proof_id			varchar (20)		NULL	REFERENCES	address_proofs;
+ALTER TABLE sewadars ADD	other_address_proof 		varchar (20)		NULL;
+
+
+ALTER TABLE sewas ADD	gents_DOB					DATETIME	NULL;	--- Gents start DOB;
+ALTER TABLE sewas ADD	ladies_DOB					DATETIME	NULL;	--- Gents start DOB;
+ALTER TABLE sewas ADD	is_scanned					boolean		NOT NULL	DEFAULT 'No';
+
+GO
+
+UPDATE sewadars SET status_dt = '2007-12-28 20:40:00' WHERE sewadar_id = 'M00816';
+
+UPDATE sewadars SET appointment_dt = status_dt WHERE appointment_dt > status_dt;
+
+-- Different sewadars with same name and dob
+UPDATE sewadars set birth_dt = '1961-01-01 00:01:00' where sewadar_id = 'F01443'
+
+UPDATE sewadars set birth_dt = '1964-06-01 00:01:00' where sewadar_id = 'L00716'
+
+UPDATE sewadars set birth_dt = '1962-01-01 00:01:00' where sewadar_id = 'F01377'
+
+UPDATE sewadars set birth_dt = '1974-01-01 00:01:00' where sewadar_id = 'L00492'
+
+UPDATE sewadars set birth_dt = '1951-06-01 00:01:00' where sewadar_id = 'F01837'
+
+UPDATE sewadars set birth_dt = '1964-06-01 00:01:00' where sewadar_id = 'G00197'
+
+UPDATE sewadars set birth_dt = '1964-06-01 00:01:00' where sewadar_id = 'M01802'
+

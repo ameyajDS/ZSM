@@ -1,0 +1,752 @@
+namespace DCC.ZOS.ZSM.ENT
+{
+    partial class QualificationSubjects
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QualificationSubjects));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.scListOrBrowse = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtName = new DCC.UMB.CDF.UIControls.TextControls.DCCTextField();
+            this.intID = new DCC.UMB.CDF.UIControls.TextControls.DCCLongIntegerField();
+            this.txtCode = new DCC.UMB.CDF.UIControls.TextControls.DCCTextField();
+            this.dtmEffectiveRange = new DCC.UMB.CDF.UIControls.TextControls.DateRangePair();
+            this.txtDescription = new DCC.UMB.CDF.UIControls.TextControls.DCCTextField();
+            this.grdList = new DCC.UMB.CDF.UIControls.Grid.DCCGrid();
+            this.qlfctn_subject_id = new DCC.UMB.CDF.UIControls.Grid.Column.DCCLongIntegerGridColumn();
+            this.qlfctn_subject_nm = new DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn();
+            this.qlfctn_subject_cd = new DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn();
+            this.Effective_From = new DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn();
+            this.Effective_Till = new DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn();
+            this.description = new DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.dccTextField1 = new DCC.UMB.CDF.UIControls.TextControls.DCCTextField();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dccGrid1 = new DCC.UMB.CDF.UIControls.Grid.DCCGrid();
+            this.dccTextFieldGridColumn1 = new DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn();
+            this.dccTextFieldGridColumn2 = new DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn();
+            this.dccDateGridColumn1 = new DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn();
+            this.dccDateGridColumn2 = new DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn();
+            this.dccDateGridColumn3 = new DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn();
+            this.dccDateGridColumn4 = new DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn();
+            this.scListOrBrowse.Panel1.SuspendLayout();
+            this.scListOrBrowse.Panel2.SuspendLayout();
+            this.scListOrBrowse.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdList)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dccGrid1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // scListOrBrowse
+            // 
+            this.scListOrBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scListOrBrowse.Location = new System.Drawing.Point(0, 0);
+            this.scListOrBrowse.Name = "scListOrBrowse";
+            // 
+            // scListOrBrowse.Panel1
+            // 
+            this.scListOrBrowse.Panel1.Controls.Add(this.tableLayoutPanel1);
+            // 
+            // scListOrBrowse.Panel2
+            // 
+            this.scListOrBrowse.Panel2.Controls.Add(this.grdList);
+            this.scListOrBrowse.Panel2Collapsed = true;
+            this.scListOrBrowse.Size = new System.Drawing.Size(956, 512);
+            this.scListOrBrowse.SplitterDistance = 798;
+            this.scListOrBrowse.TabIndex = 0;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.841F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.38912F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.7113F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.577406F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.89958F));
+            this.tableLayoutPanel1.Controls.Add(this.txtName, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.intID, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtCode, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dtmEffectiveRange, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtDescription, 1, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.16406F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.375F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.960938F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.5F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(956, 512);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // txtName
+            // 
+            this.txtName.AllowsNew = false;
+            this.txtName.AllowsReference = false;
+            this.txtName.AllowsUpdate = false;
+            this.txtName.ApplicationIdForDbConnection = null;
+            this.txtName.BackColor = System.Drawing.Color.Transparent;
+            this.txtName.CalledScreenApplicationId = null;
+            this.txtName.CalledScreenTypeName = null;
+            this.txtName.CallingScreenType = null;
+            this.txtName.DisplayText = "";
+            this.txtName.DisplayTextBindingKey = "qlfctn_subject_nm";
+            this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtName.EditingControlDataGridView = null;
+            this.txtName.EditingControlFormattedValue = "";
+            this.txtName.EditingControlRowIndex = 0;
+            this.txtName.EditingControlValueChanged = false;
+            this.txtName.EnableToolTip = false;
+            this.txtName.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.IdText = null;
+            this.txtName.IdTextBindingKey = null;
+            this.txtName.Location = new System.Drawing.Point(291, 95);
+            this.txtName.Lookup = false;
+            this.txtName.LookupColumns = null;
+            this.txtName.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.txtName.LookupResult = null;
+            this.txtName.Mandatory = true;
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtName.MaxCharacterLength = 20;
+            this.txtName.MaximumSize = new System.Drawing.Size(1300, 44);
+            this.txtName.MinimumSize = new System.Drawing.Size(10, 22);
+            this.txtName.Name = "txtName";
+            this.txtName.Padding = new System.Windows.Forms.Padding(0, 17, 0, 0);
+            this.txtName.PascalCase = false;
+            this.txtName.RangeInQueryMode = false;
+            this.txtName.ReadOnly = false;
+            this.txtName.RegularExpressionValidator = "^[0-9a-zA-Z .]+$";
+            this.txtName.Size = new System.Drawing.Size(427, 42);
+            this.txtName.TabIndex = 1;
+            this.txtName.Title = "Name";
+            this.txtName.ToolTipLookupField = "information";
+            this.txtName.ValueText = null;
+            // 
+            // intID
+            // 
+            this.intID.AllowsNew = false;
+            this.intID.AllowsReference = false;
+            this.intID.AllowsUpdate = false;
+            this.intID.ApplicationIdForDbConnection = null;
+            this.intID.BackColor = System.Drawing.Color.Transparent;
+            this.intID.CalledScreenApplicationId = null;
+            this.intID.CalledScreenTypeName = null;
+            this.intID.CallingScreenType = null;
+            this.intID.DisplayText = "";
+            this.intID.DisplayTextBindingKey = "qlfctn_subject_id";
+            this.intID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.intID.EditingControlDataGridView = null;
+            this.intID.EditingControlFormattedValue = "";
+            this.intID.EditingControlRowIndex = 0;
+            this.intID.EditingControlValueChanged = false;
+            this.intID.EnableToolTip = false;
+            this.intID.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.intID.IdText = null;
+            this.intID.IdTextBindingKey = "qlfctn_subject_id";
+            this.intID.Location = new System.Drawing.Point(726, 95);
+            this.intID.Lookup = false;
+            this.intID.LookupColumns = null;
+            this.intID.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.intID.LookupResult = null;
+            this.intID.Mandatory = false;
+            this.intID.Margin = new System.Windows.Forms.Padding(4, 3, 3, 3);
+            this.intID.MaxCharacterLength = 32767;
+            this.intID.MaximumSize = new System.Drawing.Size(1300, 45);
+            this.intID.MaxValue = ((long)(9223372036854775807));
+            this.intID.MinimumSize = new System.Drawing.Size(10, 22);
+            this.intID.MinValue = ((long)(-9223372036854775808));
+            this.intID.Name = "intID";
+            this.intID.Padding = new System.Windows.Forms.Padding(0, 17, 0, 0);
+            this.intID.PascalCase = false;
+            this.intID.RangeInQueryMode = false;
+            this.intID.ReadOnly = true;
+            this.intID.RegularExpressionValidator = null;
+            this.intID.Size = new System.Drawing.Size(74, 42);
+            this.intID.TabIndex = 2;
+            this.intID.TabStop = false;
+            this.intID.Title = "ID";
+            this.intID.ToolTipLookupField = null;
+            this.intID.ValueText = null;
+            // 
+            // txtCode
+            // 
+            this.txtCode.AllowsNew = false;
+            this.txtCode.AllowsReference = false;
+            this.txtCode.AllowsUpdate = false;
+            this.txtCode.ApplicationIdForDbConnection = null;
+            this.txtCode.BackColor = System.Drawing.Color.Transparent;
+            this.txtCode.CalledScreenApplicationId = null;
+            this.txtCode.CalledScreenTypeName = null;
+            this.txtCode.CallingScreenType = null;
+            this.txtCode.DisplayText = "";
+            this.txtCode.DisplayTextBindingKey = "qlfctn_subject_cd";
+            this.txtCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtCode.EditingControlDataGridView = null;
+            this.txtCode.EditingControlFormattedValue = "";
+            this.txtCode.EditingControlRowIndex = 0;
+            this.txtCode.EditingControlValueChanged = false;
+            this.txtCode.EnableToolTip = false;
+            this.txtCode.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCode.IdText = null;
+            this.txtCode.IdTextBindingKey = "";
+            this.txtCode.Location = new System.Drawing.Point(164, 95);
+            this.txtCode.Lookup = false;
+            this.txtCode.LookupColumns = null;
+            this.txtCode.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.txtCode.LookupResult = null;
+            this.txtCode.Mandatory = true;
+            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtCode.MaxCharacterLength = 5;
+            this.txtCode.MaximumSize = new System.Drawing.Size(1300, 44);
+            this.txtCode.MinimumSize = new System.Drawing.Size(10, 22);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Padding = new System.Windows.Forms.Padding(0, 17, 0, 0);
+            this.txtCode.PascalCase = false;
+            this.txtCode.RangeInQueryMode = false;
+            this.txtCode.ReadOnly = false;
+            this.txtCode.RegularExpressionValidator = "^[0-9a-zA-Z .]+$";
+            this.txtCode.Size = new System.Drawing.Size(119, 42);
+            this.txtCode.TabIndex = 0;
+            this.txtCode.Title = "Code";
+            this.txtCode.ToolTipLookupField = "information";
+            this.txtCode.ValueText = null;
+            // 
+            // dtmEffectiveRange
+            // 
+            this.dtmEffectiveRange.DiscreteInQueryMode = true;
+            this.dtmEffectiveRange.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtmEffectiveRange.FillDefailtValuesInInsertMode = true;
+            this.dtmEffectiveRange.FromDate = null;
+            this.dtmEffectiveRange.FromDateFieldBindingKey = "effective_from";
+            this.dtmEffectiveRange.FromDateMandatory = true;
+            this.dtmEffectiveRange.FromDateTitle = "Effective From";
+            this.dtmEffectiveRange.Location = new System.Drawing.Point(337, 194);
+            this.dtmEffectiveRange.Margin = new System.Windows.Forms.Padding(50, 3, 50, 3);
+            this.dtmEffectiveRange.Name = "dtmEffectiveRange";
+            this.dtmEffectiveRange.ReadOnly = false;
+            this.dtmEffectiveRange.Size = new System.Drawing.Size(335, 315);
+            this.dtmEffectiveRange.TabIndex = 4;
+            this.dtmEffectiveRange.TitleInQueryMode = "Effective On";
+            this.dtmEffectiveRange.ToDate = null;
+            this.dtmEffectiveRange.ToDateFieldBindingKey = "effective_till";
+            this.dtmEffectiveRange.ToDateMandatory = true;
+            this.dtmEffectiveRange.ToDateTitle = "Effective Till";
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.AllowsNew = false;
+            this.txtDescription.AllowsReference = false;
+            this.txtDescription.AllowsUpdate = false;
+            this.txtDescription.ApplicationIdForDbConnection = null;
+            this.txtDescription.BackColor = System.Drawing.Color.Transparent;
+            this.txtDescription.CalledScreenApplicationId = null;
+            this.txtDescription.CalledScreenTypeName = null;
+            this.txtDescription.CallingScreenType = null;
+            this.tableLayoutPanel1.SetColumnSpan(this.txtDescription, 3);
+            this.txtDescription.DisplayText = "";
+            this.txtDescription.DisplayTextBindingKey = "description";
+            this.txtDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDescription.EditingControlDataGridView = null;
+            this.txtDescription.EditingControlFormattedValue = "";
+            this.txtDescription.EditingControlRowIndex = 0;
+            this.txtDescription.EditingControlValueChanged = false;
+            this.txtDescription.EnableToolTip = false;
+            this.txtDescription.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescription.IdText = null;
+            this.txtDescription.IdTextBindingKey = "";
+            this.txtDescription.Location = new System.Drawing.Point(164, 143);
+            this.txtDescription.Lookup = false;
+            this.txtDescription.LookupColumns = null;
+            this.txtDescription.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.txtDescription.LookupResult = null;
+            this.txtDescription.Mandatory = false;
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtDescription.MaxCharacterLength = 50;
+            this.txtDescription.MaximumSize = new System.Drawing.Size(1300, 44);
+            this.txtDescription.MinimumSize = new System.Drawing.Size(10, 22);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Padding = new System.Windows.Forms.Padding(0, 17, 0, 0);
+            this.txtDescription.PascalCase = false;
+            this.txtDescription.RangeInQueryMode = false;
+            this.txtDescription.ReadOnly = false;
+            this.txtDescription.RegularExpressionValidator = "^[0-9a-zA-Z .]+$";
+            this.txtDescription.Size = new System.Drawing.Size(635, 44);
+            this.txtDescription.TabIndex = 3;
+            this.txtDescription.Title = "Description";
+            this.txtDescription.ToolTipLookupField = "information";
+            this.txtDescription.ValueText = null;
+            //this.txtDescription.Load += new System.EventHandler(this.txtDescription_Load);
+            // 
+            // grdList
+            // 
+            this.grdList.AllowRowSorting = false;
+            this.grdList.AllowUserToAddRows = false;
+            this.grdList.AutoAddNewRowForUser = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.grdList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.qlfctn_subject_id,
+            this.qlfctn_subject_nm,
+            this.qlfctn_subject_cd,
+            this.Effective_From,
+            this.Effective_Till,
+            this.description});
+            this.grdList.DeleteRowMenuEnabled = true;
+            this.grdList.DeleteVisible = true;
+            this.grdList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.grdList.ExportToExcelVisible = true;
+            this.grdList.InsertAfterVisible = true;
+            this.grdList.InsertBeforeVisible = true;
+            this.grdList.InsertLastVisible = true;
+            this.grdList.InsertRowsMenuItemsEnabled = true;
+            this.grdList.Location = new System.Drawing.Point(0, 0);
+            this.grdList.Mandatory = false;
+            this.grdList.MoveDownVisible = false;
+            this.grdList.MoveUpVisible = false;
+            this.grdList.MultiSelect = false;
+            this.grdList.Name = "grdList";
+            this.grdList.ReadOnly = true;
+            this.grdList.RowHeadersWidth = 15;
+            this.grdList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.grdList.ShowCommandStrip = false;
+            this.grdList.Size = new System.Drawing.Size(96, 100);
+            this.grdList.TabIndex = 0;
+            this.grdList.Title = null;
+            this.grdList.UserMode = DCC.UMB.CDF.UIControls.Grid.UserModes.Program;
+            this.grdList.VirtualMode = true;
+            // 
+            // qlfctn_subject_id
+            // 
+            this.qlfctn_subject_id.BindingKey = "qlfctn_subject_id";
+            this.qlfctn_subject_id.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.LongInteger;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.qlfctn_subject_id.DefaultCellStyle = dataGridViewCellStyle2;
+            this.qlfctn_subject_id.HeaderText = "Id";
+            this.qlfctn_subject_id.Lookup = false;
+            this.qlfctn_subject_id.LookupColumns = "";
+            this.qlfctn_subject_id.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.qlfctn_subject_id.Mandatory = true;
+            this.qlfctn_subject_id.MaxValue = ((long)(9223372036854775807));
+            this.qlfctn_subject_id.MinValue = ((long)(-9223372036854775808));
+            this.qlfctn_subject_id.Name = "qlfctn_subject_id";
+            this.qlfctn_subject_id.PercentageWidth = 5;
+            this.qlfctn_subject_id.ReadOnly = true;
+            this.qlfctn_subject_id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.qlfctn_subject_id.ToolTipLookupField = "information";
+            this.qlfctn_subject_id.Width = 5;
+            // 
+            // qlfctn_subject_nm
+            // 
+            this.qlfctn_subject_nm.BindingKey = "qlfctn_subject_nm";
+            this.qlfctn_subject_nm.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.TextField;
+            this.qlfctn_subject_nm.HeaderText = "Name";
+            this.qlfctn_subject_nm.Lookup = false;
+            this.qlfctn_subject_nm.LookupColumns = "";
+            this.qlfctn_subject_nm.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.qlfctn_subject_nm.Mandatory = true;
+            this.qlfctn_subject_nm.MaxCharacterLength = 2147483647;
+            this.qlfctn_subject_nm.Name = "qlfctn_subject_nm";
+            this.qlfctn_subject_nm.PercentageWidth = 30;
+            this.qlfctn_subject_nm.ReadOnly = true;
+            this.qlfctn_subject_nm.RegularExpressionValidator = "";
+            this.qlfctn_subject_nm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.qlfctn_subject_nm.ToolTipLookupField = "information";
+            this.qlfctn_subject_nm.Width = 24;
+            // 
+            // qlfctn_subject_cd
+            // 
+            this.qlfctn_subject_cd.BindingKey = "qlfctn_subject_cd";
+            this.qlfctn_subject_cd.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.TextField;
+            this.qlfctn_subject_cd.HeaderText = "Code";
+            this.qlfctn_subject_cd.Lookup = false;
+            this.qlfctn_subject_cd.LookupColumns = "";
+            this.qlfctn_subject_cd.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.qlfctn_subject_cd.Mandatory = false;
+            this.qlfctn_subject_cd.MaxCharacterLength = 2147483647;
+            this.qlfctn_subject_cd.Name = "qlfctn_subject_cd";
+            this.qlfctn_subject_cd.PercentageWidth = 10;
+            this.qlfctn_subject_cd.ReadOnly = true;
+            this.qlfctn_subject_cd.RegularExpressionValidator = "";
+            this.qlfctn_subject_cd.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.qlfctn_subject_cd.ToolTipLookupField = "information";
+            this.qlfctn_subject_cd.Width = 8;
+            // 
+            // Effective_From
+            // 
+            this.Effective_From.BindingKey = "effective_from";
+            this.Effective_From.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.Date;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Effective_From.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Effective_From.HeaderText = "Effective From";
+            this.Effective_From.Lookup = false;
+            this.Effective_From.LookupColumns = "";
+            this.Effective_From.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.Effective_From.Mandatory = false;
+            this.Effective_From.MaxValue = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.Effective_From.MinValue = new System.DateTime(((long)(0)));
+            this.Effective_From.Name = "Effective_From";
+            this.Effective_From.PercentageWidth = 10;
+            this.Effective_From.ReadOnly = true;
+            this.Effective_From.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Effective_From.ToolTipLookupField = "information";
+            this.Effective_From.Width = 8;
+            // 
+            // Effective_Till
+            // 
+            this.Effective_Till.BindingKey = "effective_till";
+            this.Effective_Till.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.Date;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Effective_Till.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Effective_Till.HeaderText = "Effective Till";
+            this.Effective_Till.Lookup = false;
+            this.Effective_Till.LookupColumns = "";
+            this.Effective_Till.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.Effective_Till.Mandatory = false;
+            this.Effective_Till.MaxValue = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.Effective_Till.MinValue = new System.DateTime(((long)(0)));
+            this.Effective_Till.Name = "Effective_Till";
+            this.Effective_Till.PercentageWidth = 10;
+            this.Effective_Till.ReadOnly = true;
+            this.Effective_Till.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Effective_Till.ToolTipLookupField = "information";
+            this.Effective_Till.Width = 8;
+            // 
+            // description
+            // 
+            this.description.BindingKey = "description";
+            this.description.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.TextField;
+            this.description.HeaderText = "description";
+            this.description.Lookup = false;
+            this.description.LookupColumns = "";
+            this.description.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.description.Mandatory = false;
+            this.description.MaxCharacterLength = 2147483647;
+            this.description.Name = "description";
+            this.description.PercentageWidth = 35;
+            this.description.ReadOnly = true;
+            this.description.RegularExpressionValidator = "";
+            this.description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.description.ToolTipLookupField = "information";
+            this.description.Width = 28;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Controls.Add(this.dccTextField1, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(200, 100);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // dccTextField1
+            // 
+            this.dccTextField1.AllowsNew = false;
+            this.dccTextField1.AllowsReference = false;
+            this.dccTextField1.AllowsUpdate = false;
+            this.dccTextField1.ApplicationIdForDbConnection = null;
+            this.dccTextField1.BackColor = System.Drawing.Color.Transparent;
+            this.dccTextField1.CalledScreenApplicationId = null;
+            this.dccTextField1.CalledScreenTypeName = null;
+            this.dccTextField1.CallingScreenType = null;
+            this.dccTextField1.DisplayText = "";
+            this.dccTextField1.DisplayTextBindingKey = null;
+            this.dccTextField1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dccTextField1.EditingControlDataGridView = null;
+            this.dccTextField1.EditingControlFormattedValue = "";
+            this.dccTextField1.EditingControlRowIndex = 0;
+            this.dccTextField1.EditingControlValueChanged = false;
+            this.dccTextField1.EnableToolTip = false;
+            this.dccTextField1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dccTextField1.IdText = null;
+            this.dccTextField1.IdTextBindingKey = null;
+            this.dccTextField1.Location = new System.Drawing.Point(150, 3);
+            this.dccTextField1.Lookup = false;
+            this.dccTextField1.LookupColumns = null;
+            this.dccTextField1.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccTextField1.LookupResult = null;
+            this.dccTextField1.Mandatory = true;
+            this.dccTextField1.Margin = new System.Windows.Forms.Padding(150, 3, 50, 3);
+            this.dccTextField1.MaxCharacterLength = 8;
+            this.dccTextField1.MaximumSize = new System.Drawing.Size(1300, 44);
+            this.dccTextField1.MinimumSize = new System.Drawing.Size(10, 22);
+            this.dccTextField1.Name = "dccTextField1";
+            this.dccTextField1.Padding = new System.Windows.Forms.Padding(0, 17, 0, 0);
+            this.dccTextField1.PascalCase = false;
+            this.dccTextField1.RangeInQueryMode = false;
+            this.dccTextField1.ReadOnly = false;
+            this.dccTextField1.RegularExpressionValidator = "^[0-9a-zA-Z .]+$";
+            this.dccTextField1.Size = new System.Drawing.Size(10, 44);
+            this.dccTextField1.TabIndex = 0;
+            this.dccTextField1.Title = "Country Code";
+            this.dccTextField1.ToolTipLookupField = "information";
+            this.dccTextField1.ValueText = null;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dccGrid1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(200, 52);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(200, 3, 200, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1, 253);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Subjects";
+            // 
+            // dccGrid1
+            // 
+            this.dccGrid1.AllowRowSorting = false;
+            this.dccGrid1.AllowUserToAddRows = false;
+            this.dccGrid1.AutoAddNewRowForUser = false;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dccGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dccGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dccGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dccTextFieldGridColumn1,
+            this.dccTextFieldGridColumn2,
+            this.dccDateGridColumn1,
+            this.dccDateGridColumn2,
+            this.dccDateGridColumn3,
+            this.dccDateGridColumn4});
+            this.dccGrid1.DeleteRowMenuEnabled = true;
+            this.dccGrid1.DeleteVisible = true;
+            this.dccGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dccGrid1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dccGrid1.ExportToExcelVisible = true;
+            this.dccGrid1.InsertAfterVisible = true;
+            this.dccGrid1.InsertBeforeVisible = true;
+            this.dccGrid1.InsertLastVisible = true;
+            this.dccGrid1.InsertRowsMenuItemsEnabled = true;
+            this.dccGrid1.Location = new System.Drawing.Point(3, 16);
+            this.dccGrid1.Mandatory = false;
+            this.dccGrid1.MoveDownVisible = false;
+            this.dccGrid1.MoveUpVisible = false;
+            this.dccGrid1.MultiSelect = false;
+            this.dccGrid1.Name = "dccGrid1";
+            this.dccGrid1.RowHeadersWidth = 15;
+            this.dccGrid1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dccGrid1.ShowCommandStrip = false;
+            this.dccGrid1.Size = new System.Drawing.Size(0, 234);
+            this.dccGrid1.TabIndex = 3;
+            this.dccGrid1.Title = null;
+            this.dccGrid1.UserMode = DCC.UMB.CDF.UIControls.Grid.UserModes.Auto;
+            this.dccGrid1.VirtualMode = true;
+            // 
+            // dccTextFieldGridColumn1
+            // 
+            this.dccTextFieldGridColumn1.BindingKey = "qlfctn_subject_id";
+            this.dccTextFieldGridColumn1.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.TextField;
+            this.dccTextFieldGridColumn1.HeaderText = "SubjectID";
+            this.dccTextFieldGridColumn1.Lookup = false;
+            this.dccTextFieldGridColumn1.LookupColumns = "";
+            this.dccTextFieldGridColumn1.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccTextFieldGridColumn1.Mandatory = false;
+            this.dccTextFieldGridColumn1.MaxCharacterLength = 2147483647;
+            this.dccTextFieldGridColumn1.Name = "dccTextFieldGridColumn1";
+            this.dccTextFieldGridColumn1.PercentageWidth = 5;
+            this.dccTextFieldGridColumn1.RegularExpressionValidator = "";
+            this.dccTextFieldGridColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dccTextFieldGridColumn1.ToolTipLookupField = "information";
+            this.dccTextFieldGridColumn1.Visible = false;
+            this.dccTextFieldGridColumn1.Width = 25;
+            // 
+            // dccTextFieldGridColumn2
+            // 
+            this.dccTextFieldGridColumn2.BindingKey = "qlfctn_subject_nm";
+            this.dccTextFieldGridColumn2.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.TextField;
+            this.dccTextFieldGridColumn2.HeaderText = "Subject";
+            this.dccTextFieldGridColumn2.Lookup = true;
+            this.dccTextFieldGridColumn2.LookupColumns = resources.GetString("dccTextFieldGridColumn2.LookupColumns");
+            this.dccTextFieldGridColumn2.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccTextFieldGridColumn2.Mandatory = true;
+            this.dccTextFieldGridColumn2.MaxCharacterLength = 2147483647;
+            this.dccTextFieldGridColumn2.Name = "dccTextFieldGridColumn2";
+            this.dccTextFieldGridColumn2.PercentageWidth = 50;
+            this.dccTextFieldGridColumn2.RegularExpressionValidator = "";
+            this.dccTextFieldGridColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dccTextFieldGridColumn2.ToolTipLookupField = "information";
+            this.dccTextFieldGridColumn2.Width = 5;
+            // 
+            // dccDateGridColumn1
+            // 
+            this.dccDateGridColumn1.BindingKey = "effective_from";
+            this.dccDateGridColumn1.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.Date;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dccDateGridColumn1.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dccDateGridColumn1.HeaderText = "Effective From";
+            this.dccDateGridColumn1.Lookup = false;
+            this.dccDateGridColumn1.LookupColumns = "";
+            this.dccDateGridColumn1.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccDateGridColumn1.Mandatory = false;
+            this.dccDateGridColumn1.MaxValue = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.dccDateGridColumn1.MinValue = new System.DateTime(((long)(0)));
+            this.dccDateGridColumn1.Name = "dccDateGridColumn1";
+            this.dccDateGridColumn1.PercentageWidth = 25;
+            this.dccDateGridColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dccDateGridColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dccDateGridColumn1.ToolTipLookupField = "information";
+            this.dccDateGridColumn1.Width = 5;
+            // 
+            // dccDateGridColumn2
+            // 
+            this.dccDateGridColumn2.BindingKey = "effective_from";
+            this.dccDateGridColumn2.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.Date;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dccDateGridColumn2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dccDateGridColumn2.HeaderText = "OldEffectiveFrom";
+            this.dccDateGridColumn2.Lookup = false;
+            this.dccDateGridColumn2.LookupColumns = "";
+            this.dccDateGridColumn2.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccDateGridColumn2.Mandatory = false;
+            this.dccDateGridColumn2.MaxValue = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.dccDateGridColumn2.MinValue = new System.DateTime(((long)(0)));
+            this.dccDateGridColumn2.Name = "dccDateGridColumn2";
+            this.dccDateGridColumn2.PercentageWidth = 25;
+            this.dccDateGridColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dccDateGridColumn2.ToolTipLookupField = "information";
+            this.dccDateGridColumn2.Visible = false;
+            this.dccDateGridColumn2.Width = 126;
+            // 
+            // dccDateGridColumn3
+            // 
+            this.dccDateGridColumn3.BindingKey = "effective_till";
+            this.dccDateGridColumn3.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.Date;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dccDateGridColumn3.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dccDateGridColumn3.HeaderText = "OldEffectiveTill";
+            this.dccDateGridColumn3.Lookup = false;
+            this.dccDateGridColumn3.LookupColumns = "";
+            this.dccDateGridColumn3.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccDateGridColumn3.Mandatory = false;
+            this.dccDateGridColumn3.MaxValue = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.dccDateGridColumn3.MinValue = new System.DateTime(((long)(0)));
+            this.dccDateGridColumn3.Name = "dccDateGridColumn3";
+            this.dccDateGridColumn3.PercentageWidth = 25;
+            this.dccDateGridColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dccDateGridColumn3.ToolTipLookupField = "information";
+            this.dccDateGridColumn3.Visible = false;
+            this.dccDateGridColumn3.Width = 126;
+            // 
+            // dccDateGridColumn4
+            // 
+            this.dccDateGridColumn4.BindingKey = "effective_till";
+            this.dccDateGridColumn4.ColumnCellType = DCC.UMB.CDF.UIControls.DCCGridCellTypes.Date;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dccDateGridColumn4.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dccDateGridColumn4.HeaderText = "Effective Till";
+            this.dccDateGridColumn4.Lookup = false;
+            this.dccDateGridColumn4.LookupColumns = "";
+            this.dccDateGridColumn4.LookupDialogSize = DCC.UMB.CDF.Lookup.LookupDialogSizes.Normal;
+            this.dccDateGridColumn4.Mandatory = false;
+            this.dccDateGridColumn4.MaxValue = new System.DateTime(9999, 12, 31, 23, 59, 59, 999);
+            this.dccDateGridColumn4.MinValue = new System.DateTime(((long)(0)));
+            this.dccDateGridColumn4.Name = "dccDateGridColumn4";
+            this.dccDateGridColumn4.PercentageWidth = 25;
+            this.dccDateGridColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dccDateGridColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dccDateGridColumn4.ToolTipLookupField = "information";
+            this.dccDateGridColumn4.Width = 5;
+            // 
+            // QualificationSubjects
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(956, 512);
+            this.Controls.Add(this.scListOrBrowse);
+            this.Name = "QualificationSubjects";
+            this.Text = "Zonal Sewadar Management - [QUALIFICATION SUBJECTS]";
+            this.scListOrBrowse.Panel1.ResumeLayout(false);
+            this.scListOrBrowse.Panel2.ResumeLayout(false);
+            this.scListOrBrowse.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdList)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dccGrid1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.SplitContainer scListOrBrowse;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private DCC.UMB.CDF.UIControls.Grid.DCCGrid grdList;
+        private DCC.UMB.CDF.UIControls.TextControls.DCCTextField txtName;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private DCC.UMB.CDF.UIControls.TextControls.DCCTextField dccTextField1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private DCC.UMB.CDF.UIControls.Grid.DCCGrid dccGrid1;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn dccTextFieldGridColumn1;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn dccTextFieldGridColumn2;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn dccDateGridColumn1;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn dccDateGridColumn2;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn dccDateGridColumn3;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn dccDateGridColumn4;
+        private DCC.UMB.CDF.UIControls.TextControls.DateRangePair dtmEffectiveRange;
+        private DCC.UMB.CDF.UIControls.TextControls.DCCLongIntegerField intID;
+        private DCC.UMB.CDF.UIControls.TextControls.DCCTextField txtCode;
+        private DCC.UMB.CDF.UIControls.TextControls.DCCTextField txtDescription;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCLongIntegerGridColumn qlfctn_subject_id;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn qlfctn_subject_nm;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn qlfctn_subject_cd;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn Effective_From;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCDateGridColumn Effective_Till;
+        private DCC.UMB.CDF.UIControls.Grid.Column.DCCTextFieldGridColumn description;
+    }
+}

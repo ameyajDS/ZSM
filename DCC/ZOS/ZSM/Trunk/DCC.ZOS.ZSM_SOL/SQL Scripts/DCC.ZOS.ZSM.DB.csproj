@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B719A183-208E-43B1-9A9E-6B3216322A2F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.ZOS.ZSM.DB</RootNamespace>
+    <AssemblyName>DCC.ZOS.ZSM.DB</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="100_Schema\00_use_zsm.sql" />
+    <None Include="100_Schema\01_primitives.sql" />
+    <None Include="100_Schema\11_schema_setup.sql" />
+    <None Include="100_Schema\12_schema_entities.sql" />
+    <None Include="100_Schema\13_schema.sql" />
+    <None Include="100_Schema\14_drop_schema_rpts.sql.exclude" />
+    <None Include="100_Schema\14_schema_rpts.sql" />
+    <None Include="100_Schema\15_schema_scanning.sql" />
+    <None Include="100_Schema\19_schema_audit.sql" />
+    <None Include="100_Schema\21_triggers_setup.sql" />
+    <None Include="100_Schema\22_triggers_entitites.sql" />
+    <None Include="100_Schema\23_triggers.sql" />
+    <None Include="100_Schema\29_triggers_DML.sql" />
+    <None Include="100_Schema\31_setup_system_codes.sql" />
+    <None Include="100_Schema\32_setup_data.sql" />
+    <None Include="100_Schema\33_setup_reports.sql" />
+    <None Include="100_Schema\34_setup_departments.sql" />
+    <None Include="100_Schema\35_setup_scanning_jobs.sql.exclude" />
+    <None Include="100_Schema\36_setup_attributes.sql" />
+    <None Include="100_Schema\41_procs_core.sql" />
+    <None Include="100_Schema\42_procs_reports.sql" />
+    <None Include="100_Schema\42_procs_reports_1.sql" />
+    <None Include="100_Schema\42_procs_reports_2.sql" />
+    <None Include="100_Schema\42_procs_reports_3.sql" />
+    <None Include="100_Schema\47_procedures.sql" />
+    <None Include="100_Schema\migration.exclude\09_sub_departments.sql" />
+    <None Include="100_Schema\migration.exclude\10_sms_data_issues.sql" />
+    <None Include="100_Schema\migration.exclude\10_sms_data_issues_fixes.sql.exclude" />
+    <None Include="100_Schema\migration.exclude\13_schema_migration.sql" />
+    <None Include="100_Schema\migration.exclude\sms_migration_script.sql" />
+    <None Include="200_AppSetup\00_use_SysAdmin.sql" />
+    <None Include="200_AppSetup\10_Setup_Package_And_Applications.sql" />
+    <None Include="200_AppSetup\20_SetupPackageRoles.sql" />
+    <None Include="200_AppSetup\30_SetupPackageScreens.sql" />
+    <None Include="200_AppSetup\40_SetupPackageScreenPrivileges.sql" />
+    <None Include="200_AppSetup\50_SetupPackageActions.sql" />
+    <None Include="200_AppSetup\60_SetupPackageActionPrivileges.sql" />
+    <None Include="200_AppSetup\70_SetupPackageMenus.sql" />
+    <None Include="300_AppObjects\20_ProcsAndViews\Reports\Report_Procedures.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\70_SetupPackageMenus_for5.02.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\70_SetupPackageMenus_for5.03.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\70_SetupPackageMenus_for5.05.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\70_SetupPackageMenus_for5.07.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\90_SetupAnotherApplication.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\91_SetupForCentre.sql.exclude" />
+    <None Include="300_AppObjects\40_AppSetup\92_SetupForCentre.sql.exclude" />
+    <None Include="400_Procedures\00_CMN\SewadarHeader.sql" />
+    <None Include="400_Procedures\00_CMN\Sewadarstxnts.sql" />
+    <None Include="400_Procedures\00_CMN\ViewSatsangCentreDetails.sql" />
+    <None Include="400_Procedures\00_use_zsm.sql" />
+    <None Include="400_Procedures\ACT\MergeSewadarInformation.sql" />
+    <None Include="400_Procedures\ACT\SewadarLists.sql" />
+    <None Include="400_Procedures\ACT\sewadars.sql" />
+    <None Include="400_Procedures\ACT\SewadarsDetails.sql" />
+    <None Include="400_Procedures\ACT\SewadarsInformation.sql" />
+    <None Include="400_Procedures\ACT\SewaTeams.sql" />
+    <None Include="400_Procedures\ATT\10_Sewadar_Wise_Sewa_Summaries.sql" />
+    <None Include="400_Procedures\ATT\20_Arbitrary_Daily_Presences.sql" />
+    <None Include="400_Procedures\ATT\30_Arbitrary_Summarised_Exemptions.sql" />
+    <None Include="400_Procedures\ATT\SewaTeamAttendence.sql" />
+    <None Include="400_Procedures\Entities\CDB\00_use_cdb.sql" />
+    <None Include="400_Procedures\Entities\CDB\10_Countrie.sql" />
+    <None Include="400_Procedures\Entities\CDB\15_Qualifications.sql" />
+    <None Include="400_Procedures\Entities\CDB\20_Districts or Cities.sql" />
+    <None Include="400_Procedures\Entities\CDB\25_QualificationSubjects.sql" />
+    <None Include="400_Procedures\Entities\CDB\30_Initiation Places.sql" />
+    <None Include="400_Procedures\Entities\CDB\40_Occupations.sql" />
+    <None Include="400_Procedures\Entities\CDB\50_Relations.sql" />
+    <None Include="400_Procedures\Entities\CDB\60_Skills.sql" />
+    <None Include="400_Procedures\Entities\CDB\70_States.sql" />
+    <None Include="400_Procedures\Entities\CDB\99_use_zsm.sql" />
+    <None Include="400_Procedures\Entities\ZSM\10_post_offices_or_cities.sql" />
+    <None Include="400_Procedures\Entities\ZSM\11_SatSangCentresDetails.sql" />
+    <None Include="400_Procedures\Entities\ZSM\30_Sewa_Exemptions.sql" />
+    <None Include="400_Procedures\MSC\History.sql" />
+    <None Include="400_Procedures\MSC\SewadarHistory.sql" />
+    <None Include="400_Procedures\Recording\SewadarAttributes.sql" />
+    <None Include="400_Procedures\Recording\SewadarsParticulars.sql" />
+    <None Include="400_Procedures\Setup\Sewas.sql" />
+    <None Include="400_Procedures\Setup\SewaTeams.sql" />
+    <None Include="400_Procedures\Setup\SystemInformationCodes.sql" />
+    <None Include="600_Audit_Procedures\00_use_cdb.sql" />
+    <None Include="600_Audit_Procedures\01_CDBLogOperation.sql" />
+    <None Include="600_Audit_Procedures\10_use_zsm.sql" />
+    <None Include="600_Audit_Procedures\11_ZSMLogOperation.sql" />
+    <None Include="Build Automation.exclude\dbbuild.bat" />
+    <None Include="Build Automation.exclude\LocalBuild\CompleteDbBuild.bat" />
+    <None Include="Build Automation.exclude\LocalBuild\InvokeFromCompleteDbBuild.bat" />
+    <None Include="Build Automation.exclude\LocalBuild\InvokeFromProceduresOnlyDbBuild.bat" />
+    <None Include="Build Automation.exclude\LocalBuild\postConsolidatedBuild.sql" />
+    <None Include="Build Automation.exclude\LocalBuild\ProceduresOnlyDbBuild.bat" />
+    <None Include="Build Automation.exclude\LocalBuild\ReCreateDatabases.sql" />
+    <None Include="Build Automation.exclude\LocalBuild\RMS Medical QA Setup.doc" />
+    <None Include="Build Automation.exclude\postConsolidatedBuild.sql" />
+    <None Include="Build Automation.exclude\ReCreateDatabases.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="100_Schema\migration.exclude\00_README.txt" />
+    <Content Include="300_AppObjects\10_Core\00_use_zsm.sql" />
+    <Content Include="300_AppObjects\10_Core\20_triggers_drop.sql" />
+    <Content Include="300_AppObjects\10_Core\21_triggers_setup.sql" />
+    <Content Include="300_AppObjects\10_Core\22_triggers_entitites.sql" />
+    <Content Include="300_AppObjects\10_Core\23_triggers.sql" />
+    <Content Include="300_AppObjects\10_Core\25_triggers_scanning.sql" />
+    <Content Include="300_AppObjects\10_Core\29_triggers_DML.sql" />
+    <Content Include="300_AppObjects\10_Core\33_setup_reports.sql" />
+    <Content Include="300_AppObjects\10_Core\40_funcs.sql" />
+    <Content Include="300_AppObjects\10_Core\41_procs_core.sql" />
+    <Content Include="300_AppObjects\10_Core\42_procs_reports.sql" />
+    <Content Include="300_AppObjects\10_Core\43_procs_other_reports.sql" />
+    <Content Include="300_AppObjects\10_Core\44_procs_scanning.sql" />
+    <Content Include="300_AppObjects\10_Core\47_procedures.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\00_CMN\10_ViewSatsangCentreDetails.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\00_CMN\20_SewadarHeader.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\00_CMN\30_Sewadarstxnts.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\00_CMN\40_StringManipulation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\00_use_zsm.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\10_Sewadars.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\20_SewadarsDetails.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\30_SewadarsInformation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\40_DepartmentTransfer.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\50_SatsangCentreTransfers.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\90_SewadarLists.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\95_MergeSewadarInformation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\BadgeScanning.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\ScanningControlDates.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ACT\SewaTeams.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ATT\10_Sewadar_Wise_Sewa_Summaries.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ATT\20_Arbitrary_Daily_Presences.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ATT\30_Arbitrary_Summarised_Exemptions.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ATT\40_Arbitrary_Shift_Presences.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\ATT\SewaTeamAttendence.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\00_use_cdb.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\10_Countrie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\15_Qualifications.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\20_Districts or Cities.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\25_QualificationSubjects.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\30_Initiation Places.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\40_Occupations.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\50_Relations.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\60_Skills.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\70_States.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\CDB\99_use_zsm.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\10_post_offices_or_cities.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\11_SatSangCentresDetails.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\12_WeeklySewaLocations.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\13_BadgeTemplates.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\14_CreditSpecifications.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\30_Sewa_Exemptions.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\40_Departments.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\ZSM\50_Colours.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\MSC\History.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\MSC\SewadarHistory.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Recording\SewadarAttributes.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Recording\SewadarsParticulars.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\RPT\BadgePrinting.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Setup\GenericAttributes.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Setup\ScanningBadgesValidations.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Setup\ScanningJobs.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Setup\Sewas.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Setup\SewaTeams.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Setup\SystemInformationCodes.sql" />
+    <Content Include="300_AppObjects\30_Audit\00_use_cdb.sql" />
+    <Content Include="300_AppObjects\30_Audit\01_CDBLogOperation.sql" />
+    <Content Include="300_AppObjects\30_Audit\10_use_zsm.sql" />
+    <Content Include="300_AppObjects\30_Audit\11_ZSMLogOperation.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\00_use_SysAdmin.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\20_SetupPackageRoles.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\30_SetupPackageScreens.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\40_SetupPackageScreenPrivileges.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\50_SetupPackageActions.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\60_SetupPackageActionPrivileges.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\70_SetupPackageMenus.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DUMMY_CLASS_TO_FORCE_COMPILE.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

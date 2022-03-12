@@ -1,0 +1,69 @@
+/* ==================================================================================
+	Source File		:	07_sms_data_issues_fixes.sql.exclude
+	Author(s)		:	Manish Saluja, Jiten Loyal
+	Started On		:	Mon Jan 05, 2011
+	Version			:	0.01
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	05-Jan-2011
+	Reviewed By		:
+	Reviewed On		:
+	==================================================================================
+																		   Usage Notes
+	----------------------------------------------------------------------------------
+		This script fixes data issues in sms database to enable migration
+
+	==================================================================================
+																	  Revision History
+	----------------------------------------------------------------------------------
+	v0.01 MS	* 05-Jan-2010
+				* Initial version moved from 10_sms_data_issues_fixes.sql.exclude, the fixing of
+					- specialisation_areas
+	==================================================================================*/
+
+DECLARE 
+	@cnt1			INT;
+
+-- ====================================================================================================
+--	Specialisation Areas
+-- ====================================================================================================
+
+UPDATE specialisation_areas SET specialisation_nm = 'AIRCONDITION MECH.' WHERE specialisation_nm = 'AIRCONDITIONING MECHANIC';
+UPDATE specialisation_areas SET specialisation_nm = 'Aircraft Maint.' WHERE specialisation_nm = 'Aircraft Maintainance';
+UPDATE specialisation_areas SET specialisation_nm = 'Anodise&Powder Coat.' WHERE specialisation_nm = 'Anodising & Powder Coating';
+UPDATE specialisation_areas SET specialisation_nm = 'Anti Corrupt. Bureau' WHERE specialisation_nm = 'Anti Corruption Bureau';
+UPDATE specialisation_areas SET specialisation_nm = 'ARCHITECT' WHERE specialisation_nm = 'ARCHITECT & PROFESSOR';
+UPDATE specialisation_areas SET specialisation_nm = 'Asst Comm. of ITAX' WHERE specialisation_nm = 'ASST. COMMISSIONER OF I.TAX';
+UPDATE specialisation_areas SET specialisation_nm = 'DIRECTOR of SERIALS' WHERE specialisation_nm = 'ASST. DIRECTOR T.V. SERIALS';
+UPDATE specialisation_areas SET specialisation_nm = 'Audit Excise Dept.' WHERE specialisation_nm = 'Auditing Excise Department';
+UPDATE specialisation_areas SET specialisation_nm = 'BPO' WHERE specialisation_nm = 'Business Process Outsourcing';
+UPDATE specialisation_areas SET specialisation_nm = 'Cold Drink Bussiness' WHERE specialisation_nm = 'Cold Drink Related Bussiness';
+UPDATE specialisation_areas SET specialisation_nm = 'URO-RADIOLOGIST' WHERE specialisation_nm = 'CONS. URO-RADIOLOGIST';
+UPDATE specialisation_areas SET specialisation_nm = 'CORP.CONSULTANT' WHERE specialisation_nm = 'CORP.CONSULTANT CO. DIRECTOR';
+UPDATE specialisation_areas SET specialisation_nm = 'DIAMOND CUTTING' WHERE specialisation_nm = 'ELECT.& DIAMOND CUTTING TOOLS';
+UPDATE specialisation_areas SET specialisation_nm = 'Forwarding & Clearin' WHERE specialisation_nm = 'Forwarding & Clearing Agent';
+UPDATE specialisation_areas SET specialisation_nm = 'Indian Revenue Serv.' WHERE specialisation_nm = 'Indian Revenue Service';
+UPDATE specialisation_areas SET specialisation_nm = 'Industrial Gas Tradr' WHERE specialisation_nm = 'Industrial Gas Trader';
+UPDATE specialisation_areas SET specialisation_nm = 'JCB,Escavator Supplr' WHERE specialisation_nm = 'JCB, Escavator Supplier';
+UPDATE specialisation_areas SET specialisation_nm = 'MACHINE MFG.' WHERE specialisation_nm = 'MACHINERY MANUFACTURER';
+UPDATE specialisation_areas SET specialisation_nm = 'Med.& Disposbl Equip' WHERE specialisation_nm = 'Medical and Disposable Equip';
+UPDATE specialisation_areas SET specialisation_nm = 'Med. Representative' WHERE specialisation_nm = 'MEDICAL REPRESENTATIVE';
+UPDATE specialisation_areas SET specialisation_nm = 'Music Instrmt Repair' WHERE specialisation_nm = 'Music Instrument Repairer';
+UPDATE specialisation_areas SET specialisation_nm = 'OCCUPATION THERAPIST' WHERE specialisation_nm = 'OCCUPATIONAL THERAPIST';
+UPDATE specialisation_areas SET specialisation_nm = 'OIL PAINT MFG.' WHERE specialisation_nm = 'OIL PAINT MANUFACTURER';
+UPDATE specialisation_areas SET specialisation_nm = 'Onion Potato Trdr' WHERE specialisation_nm = 'Onion Potatoes Trader';
+UPDATE specialisation_areas SET specialisation_nm = 'PURCHASE SUPERVISOR' WHERE specialisation_nm = 'PURCHASED STORE SUPERVISOR';
+UPDATE specialisation_areas SET specialisation_nm = 'Rgnl. Transport Auth' WHERE specialisation_nm = 'Regional Transport Authority';
+UPDATE specialisation_areas SET specialisation_nm = 'Research & Devlpmt' WHERE specialisation_nm = 'Research and Development';
+UPDATE specialisation_areas SET specialisation_nm = 'Search Eng.Optimise' WHERE specialisation_nm = 'Search Engine Optimising';
+UPDATE specialisation_areas SET specialisation_nm = 'Self Emp.HAWKER' WHERE specialisation_nm = 'SEF EMPLOYED (HAWKER)';
+UPDATE specialisation_areas SET specialisation_nm = 'Textile Comm. Dept' WHERE specialisation_nm = 'Textile Commission Department';
+UPDATE specialisation_areas SET specialisation_nm = 'MOTORMAN' WHERE specialisation_nm = 'TRAIN OPERATOR/MOTORMAN';
+UPDATE specialisation_areas SET specialisation_nm = 'VEGETABLE VENDOR' WHERE specialisation_nm = 'VEGETABLE OR FLOWER VENDOR';
+UPDATE specialisation_areas SET specialisation_nm = 'Instructional Dsgnr.' WHERE specialisation_nm = 'Instructional Designer';
+
+SELECT @cnt1 = COUNT(*) FROM specialisation_areas WHERE LEN(specialisation_nm) > 20
+IF (@cnt1 > 20)
+	RAISERROR ('There are some specialization_nm in sms..specialisation_areas that have length greater than 20', 16, 0);
+
+-- ====================================================================================================

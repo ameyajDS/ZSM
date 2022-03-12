@@ -1,0 +1,108 @@
+/* ==================================================================================
+	Source File		:	35_setup_scanning_jobs.sql
+	Author(s)		:	Ameya Jadhav
+	Started On		:	Fri 10 Dec 18:21:00 IST 2010
+	Version			:	1.00
+	Module ID		:	ZSM
+	Language		:	TRANSACT-SQL
+	Last updated	:	10-Nov-2010
+	Reviewed By		:	
+	Reviewed On		:	
+	==================================================================================
+																	  Revision History
+	----------------------------------------------------------------------------------
+     AJ : 10-Dec-2010
+		*   Initial versions
+	==================================================================================*/
+
+
+----------------------------------For Scanning Jobs------------------------------------------
+DECLARE
+	@scanning_job_id		scanning_job_id,
+	@sewadar_list_id		sewadar_list_id,
+	@satsang_centre_id		satsang_centre_id,
+	@shift_I_sub_job_id		scanning_job_id,
+	@shift_II_sub_job_id	scanning_job_id,
+	@shift_III_sub_job_id	scanning_job_id,
+	@sewa_id				sewa_id
+
+		
+	SELECT @satsang_centre_id = satsang_centre_id
+	FROM	satsang_centres_details 
+	WHERE	centre_nm		= 'Nagpur'
+	AND		is_main_centre	= 'Yes';
+
+
+	
+	SET @sewa_id 			= 100000001
+	SET @sewadar_list_id	= 100000033
+	
+	INSERT INTO scanning_jobs
+		(	satsang_centre_id, scanning_job_nm, scanning_job_type_cd, remarks,
+			effective_from, effective_till, sewadar_list_id, sewa_id,
+			is_deleting_allowed, status_system_info_cd
+		)
+	VALUES
+		(	@satsang_centre_id, 'Construction Sewa 2012-13', 'Cnstrctn Sewa', 'Scanning Job for Nagpur, Construction Sewa for 2012-13',
+			'01-Jan-2012', '31-Mar-2013', @sewadar_list_id, @sewa_id,
+			'Yes', 'SttsCnstSewa'
+		)
+		
+	
+	SET @scanning_job_id = SCOPE_IDENTITY();
+	
+	INSERT INTO scanning_jobs_periods VALUES	(@scanning_job_id, '01-Jan-2012', '31-Mar-2013');
+
+	--------For Scanning Sub Jobs----------------------------------
+	INSERT INTO scanning_sub_jobs	(scanning_job_id, scanning_sub_job_nm, scanning_sub_job_sq)
+		VALUES						(@scanning_job_id, '8am - 1pm (1)', 1)
+	SET @shift_I_sub_job_id = SCOPE_IDENTITY();
+
+	INSERT INTO scanning_sub_jobs	(scanning_job_id, scanning_sub_job_nm, scanning_sub_job_sq)
+		VALUES						(@scanning_job_id, '8am - 6.30pm(2)', 2)
+	SET @shift_II_sub_job_id = SCOPE_IDENTITY();
+
+	INSERT INTO scanning_sub_jobs	(scanning_job_id, scanning_sub_job_nm, scanning_sub_job_sq)
+		VALUES						(@scanning_job_id, '2pm - 6.30pm(3)', 3)
+	SET @shift_III_sub_job_id = SCOPE_IDENTITY();
+
+-----------------FOR SCANNING SUB JOBS VALIDATIONS------------------
+		
+	---For Shift I
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_I_sub_job_id, @shift_I_sub_job_id, 'No Action')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_I_sub_job_id, @shift_II_sub_job_id, 'Move')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_I_sub_job_id, @shift_III_sub_job_id, 'Add')
+	
+	---For Shift II
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_II_sub_job_id, @shift_I_sub_job_id, 'Move')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_II_sub_job_id, @shift_II_sub_job_id, 'No Action')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_II_sub_job_id, @shift_III_sub_job_id, 'Error')
+
+	---For Shift III
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_III_sub_job_id, @shift_I_sub_job_id, 'Error')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_III_sub_job_id, @shift_II_sub_job_id, 'Error')
+	
+	INSERT	scanning_sub_jobs_validations
+		( recorded_sub_job_id, recording_sub_job_id, validating_action )
+	VALUES	(@shift_III_sub_job_id, @shift_III_sub_job_id, 'No Action')

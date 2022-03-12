@@ -1,0 +1,113 @@
+IF EXISTS (SELECT 1 FROM sysobjects WHERE NAME = 'GenericReportPortrait' AND TYPE = 'P')
+DROP PROCEDURE GenericReportPortrait
+GO
+CREATE PROCEDURE GenericReportPortrait
+(
+	@SessionId INT	
+)
+WITH ENCRYPTION
+AS
+	 SELECT 
+		 sewadars.current_sewadar_grno
+		 , generic_report_details.extra_information
+		 , generic_report_headers.session_id
+		 , sewadars.gender
+		 , sewadars.middle_nm
+		 , sewadars.first_nm
+		 , sewadars.last_nm
+		 , generic_report_headers.extra_information_header
+		 , generic_report_headers.report_header
+		 , generic_report_headers.prepare_dtm
+		 , departments.department_nm
+		 , sub_departments.sub_department_nm
+		 , sewadars_registrations.sub_department_id
+	 FROM   ((ZSM.dbo.sewadars sewadars 
+	 INNER JOIN ((ZSM.dbo.generic_report_details generic_report_details 
+	 INNER JOIN ZSM.dbo.generic_report_headers generic_report_headers ON generic_report_details.session_id=generic_report_headers.session_id) 
+	 INNER JOIN ZSM.dbo.sewadars_registrations sewadars_registrations ON (generic_report_details.satsang_centre_id=sewadars_registrations.satsang_centre_id) AND (generic_report_details.sewadar_grno=sewadars_registrations.sewadar_grno)) ON (sewadars.current_satsang_centre_id=sewadars_registrations.satsang_centre_id) AND (sewadars.current_sewadar_grno=sewadars_registrations.sewadar_grno)) 
+	 LEFT OUTER JOIN ZSM.dbo.sub_departments sub_departments ON sewadars_registrations.sub_department_id=sub_departments.sub_department_id) 
+	 INNER JOIN ZSM.dbo.departments departments ON sewadars_registrations.department_id=departments.department_id
+	 WHERE  generic_report_headers.session_id = @SessionId
+	ORDER BY generic_report_headers.session_id
+GO
+
+
+IF EXISTS (SELECT 1 FROM sysobjects WHERE NAME = 'GenericSummaryPortrait' AND TYPE = 'P')
+DROP PROCEDURE GenericSummaryPortrait
+GO
+CREATE PROCEDURE GenericSummaryPortrait
+(
+	@SessionId INT	
+)
+WITH ENCRYPTION
+AS
+	SELECT	generic_report_summaries.major_information
+			, generic_report_summaries.gents_cnt
+			, generic_report_summaries.ladies_cnt
+			, generic_report_headers.session_id
+			, generic_report_headers.extra_information_header
+			, generic_report_headers.report_header
+			, generic_report_headers.prepare_dtm
+	FROM   ZSM.dbo.generic_report_summaries generic_report_summaries 
+	INNER JOIN ZSM.dbo.generic_report_headers generic_report_headers 
+		ON generic_report_summaries.session_id = generic_report_headers.session_id
+	WHERE  generic_report_headers.session_id = @SessionId
+	ORDER BY generic_report_headers.session_id
+		
+GO
+
+
+ 
+IF EXISTS (SELECT 1 FROM sysobjects WHERE NAME = 'GenericReportSynopsis' AND TYPE = 'P')
+DROP PROCEDURE GenericReportSynopsis
+GO
+CREATE PROCEDURE GenericReportSynopsis
+(
+	@SessionId INT	
+)
+WITH ENCRYPTION
+AS
+ 
+	 SELECT generic_report_synopsis.major_information
+			, generic_report_synopsis.extra_information
+			, generic_report_headers.session_id
+			, generic_report_headers.report_header
+			, generic_report_headers.extra_information_header
+			, generic_report_headers.prepare_dtm
+			, generic_report_headers.major_information_header
+	 FROM   ZSM.dbo.generic_report_synopsis generic_report_synopsis 
+	 INNER JOIN ZSM.dbo.generic_report_headers generic_report_headers 
+		ON generic_report_synopsis.session_id = generic_report_headers.session_id
+	 WHERE  generic_report_headers.session_id = @SessionId
+	 ORDER BY generic_report_headers.session_id
+GO
+
+---FOR ALL THE REPORT PROCEDURES BELOW WILL FIND IN THIS LOCATION
+---ZSM\Trunk\DCC.ZOS.ZSM_SOL\SQL Scripts\300_AppObjects\10_Core\43_procs_other_reports.sql
+
+--- FOR HorizontalSewadarBack.rpt 
+--- GetHorizontalSewadarBackInfo
+
+--- FOR HorizontalSewadarFront.rpt
+--- GetHorizontalSewadarFrontInfo
+
+--- FOR HorizontalSpecialFront.rpt
+--- GetHorizontalSpecialFrontInfo
+
+---FOR SewadarRoster.rpt
+---GetSewadarRosterDetails & GetSewadarRosterHeaders
+
+---FOR TriangularSewadarBack
+---GetTriangularSewadarBackInfo
+
+---FOR TriangularSewadarFront
+---GetTriangularSewadarFrontInfo
+
+---FOR VerticalSewadarBack
+---GetVerticalSewadarBackInfo
+
+---FOR VerticalSewadarFront
+---GetVerticalSewadarFrontInfo
+
+--- FOR ConstructionSewaBadge
+--- GetConstructionSewaBadgeInfo

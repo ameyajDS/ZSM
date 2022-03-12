@@ -1,0 +1,7 @@
+EXEC sp_grantdbaccess 'ZSM_PC','ZSM_PC'
+EXEC sp_grantdbaccess 'ZSM_ATM','ZSM_ATM'
+EXEC sp_grantdbaccess 'ZSM_RDR','ZSM_RDR'
+EXEC sp_grantdbaccess 'ZSM_USR','ZSM_USR'
+EXEC sp_grantdbaccess 'ZSM_ADM','ZSM_ADM'
+EXEC sp_grantdbaccess 'ZSM_SUP','ZSM_SUP'
+EXEC sp_grantdbaccess 'ZSM_CU','ZSM_CU'

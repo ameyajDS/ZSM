@@ -1,0 +1,85 @@
+STEPS to Copy ZSM and ZSM_Photos (copy of Zone db only. Not for Centre db copy)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	ZSM first
+	~~~~~~~~~
+
+* Ensure that the current database is ZSM
+* Execute the following scripts
+	+ ..\10_procs_on_zsm_tables.sql
+	+ procs_expimp.sql
+* EXEC _Create_ZSM_tables_table
+* EXEC _CountZoneRecordsBefore 'Copy', <remarks if any> OR NULL
+* EXEC _Drop_ZSM_tables_table
+* EXEC _DropProcedures
+* Take the backup of ZSM db.
+* Restore a New Database by the name ZSM_OLD FROM ZSM.
+* DROP the ZSM db.
+* Create a new db ZSM.
+* Ensure that the current database is ZSM
+* Execute the following scripts
+	+ 01_primitives.sql
+	+ 11_schema_setup.sql
+	+ 12_schema_entities.sql
+	+ 13_schema.sql
+	+ 14_schema_rpts.sql
+	+ 15_schema_centre.sql
+	+ 16_1_audit_logs_tbl.sql
+	+ 16_2_schema_adt_tables.sql
+	+ 38_centre_migration_schema.sql...... this is to be dropped at a later stage... to be checked everytime whether it needs to be executed.
+* Execute the following scripts
+	+ ..\10_procs_on_zsm_tables.sql
+	+ procs_expimp.sql
+* EXEC _Create_ZSM_tables_table
+* Take a backup of this database as ZSM_Blank_<>.bak. This might be needed to redo operation if required.
+-- sp_unbindrule 'Boolean'
+-- sp_unbindrule 'Separator'
+* ALTER	TABLE	sewadars DROP Sewadars_FK_CurrentSatsangCentreID_CurrentSewadarGRNo;
+* EXEC _ExecProcOn_ZSMTables_AtZone 'XXX', '_CopyZSMTable', 'Yes', '%', '%', '%'
+* EXEC _CountZoneRecordsAfter 'Copy', <date_of_starting_copy>, <operation_id> OR NULL		--- <operation_id> will be needed when multiple copies are attempted on same day to identify it distinctly.
+* ALTER	TABLE	sewadars
+	ADD	CONSTRAINT	Sewadars_FK_CurrentSatsangCentreID_CurrentSewadarGRNo
+		FOREIGN KEY	(	current_satsang_centre_id, current_sewadar_grno	)
+			REFERENCES	sewadars_registrations;
+* EXEC _Drop_ZSM_tables_table
+* EXEC _DropProcedures
+-- sp_bindrule 'Boolean', 'Boolean'
+-- sp_bindrule 'Separator', 'Separator'
+* Execute the following:
+	+ EXEC sp_adduser 'ZSM_ADM'
+	+ EXEC sp_adduser 'ZSM_ATM'
+	+ EXEC sp_adduser 'ZSM_CU'
+	+ EXEC sp_adduser 'ZSM_PC'
+	+ EXEC sp_adduser 'ZSM_RDR'
+	+ EXEC sp_adduser 'ZSM_SUP'
+	+ EXEC sp_adduser 'ZSM_USR'
+
+	ZSM_Photos Next
+	~~~~~~~~~~~~~~~
+
+* Take the backup of ZSM_Photos db.
+* Restore a New Database by the name ZSM_OLD_Photos FROM ZSM_Photos.
+* DROP the ZSM_Photos db.
+* Create a new db ZSM_Photos.
+* Ensure that the current database is ZSM_Photos
+* Execute the following scripts:
+		+ 18_schema_photos
+		+ ..\10_procs_on_zsm_tables.sql
+		+ procs_photos_exp.sql
+
+* Execute the following:
+	+ EXEC _CopyPhotosDB
+	+ EXEC _DropProcedures
+	+ EXEC sp_adduser 'ZSM_ADM'
+	+ EXEC sp_adduser 'ZSM_ATM'
+	+ EXEC sp_adduser 'ZSM_CU'
+	+ EXEC sp_adduser 'ZSM_PC'
+	+ EXEC sp_adduser 'ZSM_RDR'
+	+ EXEC sp_adduser 'ZSM_SUP'
+	+ EXEC sp_adduser 'ZSM_USR'
+
+
+	Final step
+	~~~~~~~~~~
+* Execute ZSM_Procs_Only.sql (We might errors like 'Implicit conversion of varchar value to varchar cannot be performed because the collation of the value is unresolved due to a collation conflict.'. Need to see how to resolve this)
+

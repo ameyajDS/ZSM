@@ -1,0 +1,272 @@
+USE ZSM
+GO
+
+
+CREATE TABLE #processed
+(
+	district_id		INT,
+	PostOffice		VARCHAR(200)
+)
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 728 as district_id, [Post Office]
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\BARWANI_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [BARWANI$]');
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 305 as district_id, CASE [Post Office] WHEN 'GANDHI NAGAR (BHOPAL)' THEN 'GANDHI NAGAR'
+							WHEN 'KAMLA NAGAR    (BHOPAL)'	THEN	'KAMLA NAGAR'
+							WHEN 'RAJ BHAWAN    (BHOPAL)'	THEN	'RAJ BHAWAN'
+							WHEN 'RAVISHANKARNAGAR'			THEN	'RAVISHANKAR NAGAR'
+							WHEN 'SHASTRI NAGAR    (BHOPAL)' THEN	'SHASTRI NAGAR'
+							WHEN 'SONKACHH'					THEN	'SONKATCH'
+							WHEN 'UNIVERSITY    (BHOPAL)'	THEN	'UNIVERSITY'
+							WHEN 'JAMUSARKALAN'				THEN	'JAMUSAR KALAN'
+							
+	ELSE	[POST OFFICE]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\Bhopal_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [BHOPAL$]');
+
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 730 as district_id, CASE [Post Office] 
+					WHEN 'ANAND NAGAR   (EAST NIMAR)' THEN 'ANAND NAGAR'
+					WHEN 'BIR   (EAST NIMAR)'		  THEN 'BIR'
+					WHEN 'JAWAR   (EAST NIMAR)'		  THEN 'JAWAR'
+					WHEN 'NARMADA NAGAR   (EAST NIMAR)'		  THEN 'NARMADA NAGAR'
+					
+					
+
+
+
+	ELSE
+		[Post Office]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\BURHANPUR_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [BURHANPUR$]');
+
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 310 as district_id, CASE [Post Office] 
+							WHEN 'BILAVALI' THEN 'BILAWALI'
+							WHEN 'NIPANYA'	THEN 'NIPANIA'
+							WHEN 'PIPARI'	THEN 'PIPRI'
+							WHEN 'RICHHI'	THEN 'RICCHI'
+	ELSE	[POST OFFICE]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\dewas_pin.xls', 'SELECT DISTINCT [Post Office] FROM [DEWAS$]');
+
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 727 as district_id, [Post Office]
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\HARDA_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [HARDA$]');
+
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 318 as district_id, CASE [Post Office] 
+							WHEN 'BILAVALI'						THEN 'BILAWALI'
+							WHEN 'ANAND NAGAR   (EAST NIMAR)'	THEN 'ANAND NAGAR'
+							WHEN 'BIR   (EAST NIMAR)'			THEN 'BIR'
+							WHEN 'GANESH TALAI KHANDWA'			THEN 'GANESH TALAI'
+							WHEN 'GHASPURA KHANDWA'				THEN 'GHASPURA'
+							WHEN 'NARMADA NAGAR   (EAST NIMAR)' THEN 'NARMADA NAGAR'
+							WHEN 'PADAWA KHANDWA'				THEN 'PADAWA'
+							WHEN 'PIPLYA TAHAR'					THEN 'PIPALYA TAHAR'
+							WHEN 'SHEIKHPUR'					THEN 'SHEKHPUR'
+							WHEN 'SHAHPUR (NIMAR)'				THEN 'SHAHPUR'
+							WHEN 'VIDHYA NAGAR KHANDWA'			THEN 'VIDHYA NAGAR'
+	ELSE	[POST OFFICE]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\KHANDWA_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [KHANDWA$]');
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 321 as district_id, CASE [Post Office] 
+							WHEN 'ANKLI DEEWAN'								THEN 'AANKALI DEEWAN'
+							WHEN 'NARAYANGARH     (MANDSAUR)'				THEN 'NARAYANGARH'
+							WHEN 'KHETYA'									THEN 'KHETIYA'
+							WHEN 'BARKHEDI DANGI'							THEN 'BARKHEDA DANGI'
+							WHEN 'DHABALA MADHOSINGH'						THEN 'DHABLA MADHO SINGH'
+							WHEN 'KHETA KHEDA'								THEN 'KHATIA KHEDI'
+							WHEN 'SARAFA MANDSAUR'							THEN 'SARAFA'
+							WHEN 'SHRI RAMTEKRI MANDSAUR'					THEN 'SHRI RAMTEKRI'
+							WHEN 'SUWASRA'									THEN 'SUWASARA'
+	ELSE [Post Office]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\MANDSAUR_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [MANDSAUR$]');
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 561 as district_id, CASE [Post Office]
+	WHEN	'Pipliya Ghota'			THEN	'Piplia Ghota'
+	WHEN	'Pipliyaraoji'			THEN	'Piplia Raoji'
+	ELSE
+		[Post Office]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\neemuch_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [neemuch$]');
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 326 as district_id, CASE [Post Office]
+					WHEN    'NARMALSCHOOL'			THEN	'NARMAL SCHOOL'
+					WHEN	'NIPANIYAGARHI'			THEN	'NIPANIYAGARH'
+					WHEN	'NANDANIJAGIR'			THEN	'NANDANI JAGIR'
+					
+	ELSE [Post Office]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\RAJGARH_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [RAJGARH$]');
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 327 as district_id, CASE [Post Office]
+					WHEN	'AKKYADEH'					THEN 'AKYADEH'
+					WHEN	'BAJNA (RATLAM)'			THEN 'BAJNA'
+					WHEN	'BARKHEDAKALAN'				THEN 'BARAKHEDA KALAN'
+					WHEN	'JAWAHARNAGAR'				THEN 'JAWAHAR NAGAR'
+					WHEN	'RATLAM GHATLA COLONY'		THEN 'GHATLA COLONY'
+					WHEN	'KALUKHEDI'					THEN 'KALUKHEDA'
+	ELSE [Post Office]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\RATLAM_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [RATLAM$]');
+
+
+INSERT	INTO	#processed
+(
+	district_id, PostOffice	
+)
+SELECT 	DISTINCT 331 as district_id, CASE [Post Office]
+				WHEN	'ARNIYAGANJI'				THEN	'ARNIYAGANJ'
+				WHEN	'KHAJURIYA KASAM'			THEN	'KHAJURIA KASAM'
+				WHEN	'KHAJURIYAKALAN'			THEN	'KHAJURI KALAN'
+				WHEN	'BUDHNI'					THEN	'BUDNI'
+				WHEN	'NIPANIYA'					THEN	'NIPANIA'
+				WHEN	'SIDDHIK GANJ'				THEN	'SIDDIK GANJ'
+				WHEN	''					THEN	''
+	ELSE [Post Office]
+	END
+ 	FROM 
+	OPENROWSET('Microsoft.Jet.OLEDB.4.0', 'Excel 8.0; Database=E:\users\Indore\Post Offices\SEHORE_PIN.xls', 'SELECT DISTINCT [Post Office] FROM [SEHORE$]');
+
+
+	/*
+INSERT INTO ZSM..post_offices_or_cities
+    	( district_id, post_office_or_city_nm, post_office_or_city_cd)
+		*/
+	SELECT	district_id, PostOffice,
+				CASE WHEN (LEN(PostOffice) > 10)
+					 THEN SUBSTRING (REPLACE (REPLACE (REPLACE (REPLACE (REPLACE (REPLACE (REPLACE (PostOffice, ' ', ''), '.', ''), 'a', ''), 'e', ''), 'i', ''), 'o', ''), 'u', ''), 1, 10)
+				ELSE 
+					REPLACE (REPLACE (REPLACE (PostOffice, ' ', ''), '.', ''), '-', '')
+				END AS po_cd
+--				into tmp_pos
+	FROM	#processed a
+	WHERE	NOT EXISTS (	SELECT	1 
+							FROM	post_offices_or_cities	b
+							WHERE	a.district_id	= b.district_id
+							AND		b.post_office_or_city_nm = a.PostOffice
+						)
+	AND 	(	(	district_id = 305
+				AND PostOffice NOT IN ('1100 QRTS.', 'ANAND NAGAR    (BHOPAL)', 'BERASIA BHOPAL', 'BERASIA ROAD',
+									'BERSIYA BHOPAL', 'BAIRSIYA ROAD', 'BERSIYA ROAD', 'BAZARIA SHAHAJAHANABAD', 'HAMIDIA ROAD',
+									'JAHANGIRABAD    (BHOPAL)', 'MEGRAKALAN', 'MISORD', 'INDUSTRIAL ESTATE    (BHOPAL)', 
+									'GOVINDAPURA', 'SHAHJAHANABAD', 'SHIVAJI NAGAR    (BHOPAL)', 'SIKANDRISARAI',
+									'SIKANDRISARAY', 'SUBHASH NAGAR    (BHOPAL)', 'SUBHASHNAGAR', 'VIDHAVIHAR')
+				)
+			OR	(	district_id = 310 AND PostOffice NOT IN ('AGAROD', 'BILWLI', 'DANGARKHEDA', 'NIPANYAHURAHUR', 'RICHI', 'SONAKHEDI'))
+			OR	(	district_id = 318 AND PostOffice NOT IN ('ATAR', 'BADGAONMALI', 'BURHANPUR', 'BURHANPUR CITY', 'DEVALIKALA', 'DHAWDI',
+									'JAWAR   (EAST NIMAR)', 'KEHLARI', 'KHARKALA', 'KUMTHI', 'KHANDWA',
+									'MALGOAN', 'PADALYA MALL', 'RAJGARH', 'SHEIKHPURA', 'SURGAONJOSHI', 'TEMIKALA')
+				)
+			OR	(	district_id = 321 AND PostOffice NOT IN ('ANTRALIYA', 'BAGHUNIYA', 'BAHI PASHARWNATH', 'BALA GUDA', 'BARDIYA AMRA',
+									'BARDIYA ISTAMURAR', 'BARDIYA ISTMURAR', 'BARKHEDA DEV DUNGARI', 'BARKEHDA NAYAK', 'BHENSODA TOWN',
+									'BILLANTRI', 'BOTALGANJ', 'CHIKNIA', 'DALAWDA', 'DALODA RAIL', 'DHARIYAKHEDI', 'DHUANKHEDI', 'GANDHISAGAR',
+									'GUJAR BARDIYA', 'GUJARADA', 'GURADIALALMUNHA', 'GURJAR BARDIYA', 'HATHUNIA', 'HATUNIYA', 'KANTIYA', 'KANWALI',
+									'KANWLA', 'KHAJURIYA SARANG', 'KHEJDIA', 'LASUDIYA', 'LASUDIYA IIA', 'LASUDIYA RATHOR', 'LASUDIYA RATHORE',
+									'LASUDIA RATHORE', 'LODHA', 'LIMBAWAS', 'MAIKHEDA', 'MANDSOUR', 'MANDSOUR CITY', 'NAHAR GARH','PARASALI TEERTH', 'PIPALJATTI',
+									'PIPALYA KARADIYA', 'SEMLI', 'SHAMGARH GAON', 'SOMYA', 'SUWASARA GAON', 'UMARIYA BALODA', 'UMRIA BALODA',
+									'BHAVGARH', 'RANYARA', 'SARVANIYA', 'SOMIHA'))
+									
+			OR	(	district_id = 326 AND PostOffice NOT IN ('BHATKHEDI', 'JAMONIYAGOP CHOUHAN', 'HINOTYA', 'KHILCHIPUR TOWN', 'NANDNIJAGIR', 
+									'PUNARAKHEDI', 'TALEN'))
+		
+			OR	(	district_id = 327 AND PostOffice NOT IN ('BANJLA', 'BANJLI', 'CHNWARA', 'DANTODA', 'GHATIA COLONYJAORA FATAK', 'PATDI', 'RATLAM STN.ROAD',
+									'RATLAM RLY COLONY', 'RATLAM KASARA BAZAR', 'RATLAM JAWAHAR NAGAR', 'RATLAM IND.AREA', 'RATLAM COLLECTORATE',
+									'RATLAM', 'SEMALAKHEDI'))
+			OR	(	district_id = 331 AND PostOffice NOT IN ('AHMEDPUR   (SEHORE)', 'BAMULIYABHATI', 'BARKEDA', 'BEDA KHEDI', 'BHANWARIKALA',
+									'DORAHA   (SEHORE)', 'GURADIYAVARMA', 'JAWAR   (SEHORE)', 'KAJLAS', 'HARJIKHEDA', 'HARRAJIKHEDI', 'KOTHRI',
+									'KOTRI   (SEHORE)', 'LASUDIYA KHAS', 'NASRLLAGANJ', 'NIPANIYAKALA', 'NOUGAN', 'SEHORE', 'SEHORE TOWN', 
+									'SEHORE CITY', 'SHAHGANJ   (SEHORE)', 'SHYAMPUR   (SEHORE)', 'SIDDIKGANJ', 'SIDHHIKGANJ'))
+			OR	(	district_id = 561 AND PostOffice NOT IN ('Aakali', 'ATHVA', 'Bardiya', 'BHADVA', 'Borkhedi Pandi', 'Borkhedi Panedi',
+									'Chandra pura', 'Chokdi', 'Chukni', 'Devaran', 'Dhamniya', 'Dhradi', 'Hanumantya', 'Harkhiakhal', 
+									'Jamuniyakalan', 'Jaat', 'Kanavati', 'Kana kheda', 'Kankriya Talai', 'Karadiya Maharaj', 'KhADLI', 
+									'Kuchadoud', 'Lasudiya', 'Malakheda', 'Naya Gaon c f', 'Naya Malaheda', 'NayaMalaheda', 'Neemuch',
+									'Nevad', 'Pipliya  Ghota', 'Piplon', 'Rabadiya', 'Rabadia', 'Ramnagar', 'RAMPURA [NEEMUCH]',
+									'SARWANIA MAHARAJ', 'Thadoli'))
+			OR	(	district_id = 727 AND PostOffice NOT IN ('HARDA', 'KHIRHKIA' ))
+			OR	(	district_id = 728 AND PostOffice NOT IN ('AACHHLI'))
+			OR	(	district_id = 730 AND PostOffice NOT IN ('AWLIYA', 'BHAGANWA', 'CHANDNI', 'DHAMANGAON',
+									'DOIFODIYA', 'GANESH TALAI KHANDWA', 'GHAGRALA', 'KHANDWA H.O', 'KHANDWA RATAGARH',
+									'MAHALGURDA', 'MANJRODKALA', 'SHAHPUR (NIMAR)', 'SHEIKHPUR', 'SHEIKHAPUR'))
+			OR	(	district_id NOT IN (305, 310, 318, 321, 326, 327, 331, 561, 727, 728, 730))
+		)
+	ORDER BY 1,3,2 
+
+
+DROP TABLE #processed
+
+/*
+SELECT *
+FROM tmp_pos a JOIN (
+	select district_id, po_cd, count(*) AS CNT
+	from tmp_pos
+	group by district_id, po_cd
+	having count(*) > 1
+	) B
+		ON	a.district_id = b.district_id and a.po_cd = b.po_cd
+
+
+drop table tmp_pos
+*/

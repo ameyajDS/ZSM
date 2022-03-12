@@ -1,0 +1,1332 @@
+
+-- =============================================================================
+--	Table 	GENERIC_ATTRIBUTES_LIST_VALUES
+--	Trigger ensures that rows exist in this table only for such generic_attributes.attribute_type = List
+--			generic_attributes_list_values_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	generic_attributes_list_values i 
+		LEFT JOIN	generic_attributes	g
+			ON 	(	i.attribute_id 	= 	g.attribute_id	
+				)
+	WHERE	g.attribute_type	=	'List'
+	AND		g.attribute_id		IS NULL
+
+-- =============================================================================
+--	Table 	GENERIC_ATTRIBUTES_STATUS
+--	Trigger ensures that rows exist in this table only for such generic_attributes.is_status_applicable = Yes
+--			generic_attributes_status_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	generic_attributes_status i 
+		LEFT JOIN	generic_attributes	g
+			ON 	(	i.attribute_id 	= 	g.attribute_id	
+				)
+	WHERE	g.is_status_applicable	=	'Yes'
+	AND		g.attribute_id			IS NULL
+
+-- =============================================================================
+--	Table 	CREDIT_SPECIFICATIONS_SEWAS
+--	Trigger ensures that satsang_centre_id of credit_specifications matches with that of sewas
+--			credit_specifications_sewas_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	credit_specifications_sewas i 
+		LEFT JOIN	credit_specifications	c
+			ON 	(	i.credit_specification_id 	= 	c.credit_specification_id	)
+		LEFT JOIN	sewas	s
+			ON	(	i.sewa_id	=	s.sewa_id	)			
+	WHERE	c.satsang_centre_id	=	s.satsang_centre_id
+	AND		s.sewa_id			IS NULL
+
+-- =============================================================================
+--	Table 	CREDIT_SPECIFICATIONS_SEWAS
+--	Trigger ensures that 'is_exemption_considered' MUST be No when sewas.is_exemption_allowed is No
+--			credit_specifications_sewas_b_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	credit_specifications_sewas i 
+		LEFT JOIN	sewas	s
+			ON	(	i.sewa_id	=	s.sewa_id	
+				AND	i.is_exemption_considered	=	s.is_exemption_allowed
+				)			
+	WHERE	s.is_exemption_allowed	=	'No'
+	AND		s.sewa_id			IS NULL
+
+-- =============================================================================
+--	Table 	SUB_DEPARTMENTS
+--	Trigger ensures that the departments.has_sub_departments = 'Yes'
+--			sub_departments_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sub_departments i 
+		JOIN	departments	d
+			ON	(	i.department_id	=	d.department_id	)			
+	WHERE	d.has_sub_departments	=	'No'
+
+-- =============================================================================
+--	Table 	SUB_DEPARTMENTS_SATSANG_CENTRES
+--	Trigger ensures that the effective_period (effective_from and effective_till) is 
+--				a sub-set of the corresponding effective_period of the department.
+--			sub_departments_satsang_centres_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sub_departments_satsang_centres i 
+		JOIN	sub_departments	sd
+			ON	(	i.sub_department_id	= sd.sub_department_id	)
+		LEFT OUTER JOIN	departments_satsang_centres	dsc
+			ON	(	sd.department_id	 =	dsc.department_id	
+				AND	i.effective_from	>=	dsc.effective_from
+				AND	i.effective_till	<=	dsc.effective_till
+				)			
+	WHERE	dsc.department_id			IS NULL
+
+-- =============================================================================
+--	Table 	POST_OFFICES_OR_CITIES
+--	Trigger ensures that the district_id exists in CDB..districts_or_cities
+--			post_offices_or_cities_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	post_offices_or_cities i 
+		LEFT OUTER JOIN	CDB..districts_or_cities	d
+			ON	(	i.district_id	=	d.district_or_city_id	)			
+	WHERE	d.district_or_city_id			IS NULL
+
+-- =============================================================================
+--	Table 	SATSANG_CENTRES_DETAILS
+--	 Trigger ensures that satsang_centre_id exists in cdb..satsang_centres
+--			satsang_centres_details_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	satsang_centres_details i 
+		LEFT OUTER JOIN	CDB..satsang_centres	s
+			ON	(	i.satsang_centre_id	=	s.satsang_centre_id	)			
+	WHERE	s.satsang_centre_id			IS NULL
+
+-- =============================================================================
+--	Table 	SATSANG_CENTRE_FUNCTIONARIES
+--	Trigger should ensure that only one centre_functionary for a Centre is set as current; there should NOT be two more current functionaries for a Centre.
+--			satsang_centre_functionaries_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	satsang_centre_functionaries i 
+		LEFT OUTER JOIN	satsang_centre_functionaries	s
+			ON	(	i.satsang_centre_id	=	s.satsang_centre_id	)			
+	WHERE	i.centre_functionary_id		<>	s.centre_functionary_id
+	AND		i.centre_functionary		=	s.centre_functionary
+	AND		i.is_current				=	'Yes'
+	AND		s.is_current				=	'Yes'
+	AND		s.satsang_centre_id			IS NOT NULL
+
+-- =============================================================================
+--	Table 	SEQUENCE_CONTROLLING_INFORMATION
+--	Trigger ensures that the satsang_centre_id has is_main_centre set to Yes
+--			sequence_controlling_information_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sequence_controlling_information i 
+		LEFT OUTER JOIN	satsang_centres_details	s
+			ON	(	i.satsang_centre_id	=	s.satsang_centre_id	)			
+	WHERE	s.is_main_centre		=	'Yes'
+	AND		s.satsang_centre_id		IS  NULL
+
+-- =============================================================================
+--	Table 	SEWAS
+--	Trigger ensures that a maximum of only one Sewa for a Satsang Centre can be specified as default
+--			sewas_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewas i 
+		LEFT OUTER JOIN	sewas	s
+			ON	(	i.satsang_centre_id	=	s.satsang_centre_id	)	
+	WHERE	s.is_default_sewa		=	'Yes'
+	AND		s.sewa_id				<>	i.sewa_id
+	AND		s.satsang_centre_id		IS  NOT NULL
+
+-- =============================================================================
+--	Table 	SEWAS
+--	Trigger ensures that a maximum of only one Sewa for a Satsang Centre can be specified as default
+--			sewas_b_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewas i 
+		LEFT OUTER JOIN	sewas	s
+			ON	(	i.referred_sewa_id	=	s.sewa_id	)			
+	WHERE	i.referred_sewa_id		IS NOT NULL
+	AND		i.sewa_frequency		=	s.sewa_frequency
+	AND		i.attendance_unit		=	s.attendance_unit
+	AND		i.is_leave_allowed		=	s.is_leave_allowed
+	AND		i.is_exemption_allowed	=	s.is_exemption_allowed
+	AND		i.start_dt				<	s.start_dt
+	AND		i.finish_dt				<	s.finish_dt
+	AND		s.attendance_marking	<>	'Summary'
+	AND		s.sewa_id				IS  NULL
+
+-- =============================================================================
+--	Table 	SEWAS_SEWA_SHIFTS
+--	Trigger ensures that shifts for a Sewa are specified for sewas.attendance_unit = 'Shift'
+--			sewas_sewa_shifts_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewas_sewa_shifts i 
+		LEFT OUTER JOIN	sewas	s
+			ON	(	i.sewa_id	=	s.sewa_id	)			
+	WHERE	s.attendance_unit		=	'Shift'
+	AND		s.sewa_id				IS  NULL
+
+-- =============================================================================
+--	Table 	SEWA_EXEMPTIONS_APPLICABLE_SEWAS
+--	Trigger ensures that the sewa.attendance_marking != Computed
+--			sewa_exemptions_applicable_sewas_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewa_exemptions_applicable_sewas i 
+		LEFT OUTER JOIN	sewas	s
+			ON	(	i.sewa_id	=	s.sewa_id	)			
+	WHERE	s.attendance_marking	<>	'Computed'
+	AND		s.sewa_id				IS  NULL
+
+-- =============================================================================
+--	Table 	SEWA_EXEMPTIONS_APPLICABLE_SEWAS
+--	Trigger ensures that the sewa.attendance_marking != Computed
+--			sewa_exemptions_applicable_sewas_b_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewa_exemptions_applicable_sewas i 
+		LEFT OUTER JOIN	sewa_exemptions	s
+			ON	(	i.sewa_exemption_id		=	s.sewa_exemption_id	)			
+	WHERE	i.exemption_days		IS NOT NULL
+	AND		s.is_computed			=	'Yes'
+	AND		s.sewa_exemption_id		IS  NULL
+
+
+----- LATER: Some triggers (sewadars_a_iu, sewadars_b_iu, sewadars_qualifications_a_iu, sewadars_skills_a_iu, 
+----						reference_1_relationship, reference_2_relationship) are missed out here from 23_triggers.sql .... JL
+
+-- =============================================================================
+--	Table 	SEWADARS
+--	Trigger ensures that the sewadar_status.is_global = Yes
+--			sewadars_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars i 
+		LEFT OUTER JOIN	sewadar_status	swst
+			ON 	(	swst.sewadar_status_cd	= i.global_sewadar_status_cd	)
+	WHERE	swst.is_global			= 'Yes'
+	AND		swst.sewadar_status_cd	IS NULL
+
+-- =============================================================================
+--	Table 	SEWADARS
+--	Trigger ensures that status and status date change together (only one of these cannot be changed)
+--		Hence, it is only an UPDATE event trigger.
+--			sewadars_d_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars i 
+--		JOIN	deleted	d
+--			ON 	(	d.sewadar_id	= i.sewadar_id	)
+--	--	values can be changing from NULL to NOT NULL or vice versa, hence COALESCE
+--	WHERE	(	
+--				(	COALESCE (i.global_sewadar_status_cd,'X')			!= 	COALESCE (d.global_sewadar_status_cd,'X')	
+--				AND	COALESCE (i.global_sewadar_status_dt, GETDATE () )	 =	COALESCE (d.global_sewadar_status_dt, GETDATE() )
+--				)
+--			OR
+--				(	COALESCE (i.global_sewadar_status_cd,'X')			 = 	COALESCE (d.global_sewadar_status_cd,'X')	
+--				AND	COALESCE (i.global_sewadar_status_dt, GETDATE() ) 	!=	COALESCE (d.global_sewadar_status_dt, GETDATE() )
+--				)
+--			)
+
+-- =============================================================================
+--	Table 	SEWADARS
+--	Trigger ensures that status change is as per sewadar_status_transitions
+--		Hence, it is only an UPDATE event trigger.
+--			sewadars_e_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars i 
+--		JOIN	deleted	d
+--			ON 	(	d.sewadar_id	= i.sewadar_id	
+--				--	to ensure that the sewadar status code is actually changing, if not, no need to check the validity of transitions
+--				AND	COALESCE (d.global_sewadar_status_cd,'X')	!= COALESCE (i.global_sewadar_status_cd,'X')	
+--				)
+--		LEFT OUTER JOIN	sewadar_status_valid_transitions	ssvt
+--		--	doing COALESCE operations to ensure status transitions from NULL or to NULL, do not result in an error
+--			ON	(	COALESCE (d.global_sewadar_status_cd,'X')	= COALESCE (ssvt.old_sewadar_status_cd,'X')
+--				AND	COALESCE (i.global_sewadar_status_cd,'X')	= COALESCE (ssvt.new_sewadar_status_cd,'X')
+--				)
+--	--	only when both the fields are NULL, then the record is not present, since both columns are NULLable
+--	WHERE	ssvt.new_sewadar_status_cd	IS	NULL
+--	AND		ssvt.old_sewadar_status_cd	IS 	NULL
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that the satsang_centre_id has is_main_centre set to Yes
+--			sewadars_registrations_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_registrations i 
+		LEFT OUTER JOIN	satsang_centres_details	scdt
+			ON 	(	scdt.satsang_centre_id	= i.satsang_centre_id	)
+	WHERE	scdt.is_main_centre				= 'Yes'
+	AND		scdt.satsang_centre_id			IS NULL
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that sub_department_id is specified when departments.sub_department_mandatory = Yes
+--			sewadars_registrations_b_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_registrations i 
+		LEFT OUTER JOIN	departments_satsang_centres		dpsc
+			ON 	(	dpsc.satsang_centre_id	= i.satsang_centre_id	
+				AND	dpsc.department_id		= i.department_id
+				)
+	WHERE	dpsc.sub_department_mandatory	= 'Yes'
+	AND		i.sub_department_id				IS NULL	
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that department_id is same as it is in sub_departments
+--			sewadars_registrations_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_registrations i 
+		LEFT OUTER JOIN	sub_departments		sbdp
+			ON 	(	sbdp.sub_department_id	= i.sub_department_id
+				AND	sbdp.department_id		= i.department_id
+				)
+	--	sub department is present (NOT NULL)
+	--	but its department is not present in the sub departments table
+	WHERE	i.sub_department_id		IS NOT	NULL
+	AND		sbdp.sub_department_id	IS 		NULL
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that in an update, the changed date is later than the previous one.
+--			sewadars_registrations_d_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON 	(	i.satsang_centre_id	= d.satsang_centre_id
+--				AND	i.sewadar_grno		= d.sewadar_grno
+--				)
+--	WHERE	i.department_dt	<=	d.department_dt
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that the sewadar_status.is_global = No
+--			sewadars_registrations_e_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_registrations i 
+		LEFT OUTER JOIN	sewadar_status	swst
+			ON 	(	swst.sewadar_status_cd	= i.sewadar_status_cd	)
+	WHERE	swst.is_global			= 'No'
+	AND		swst.sewadar_status_cd	IS NULL
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that if sewadars.global_sewadar_status_cd is NOT NULL, status can not be changed
+--			sewadars_registrations_f_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON	(	i.satsang_centre_id	 = 	d.satsang_centre_id
+--				AND	i.sewadar_grno		 = 	d.sewadar_grno
+--				AND	i.sewadar_status_cd	!=	d.sewadar_status_cd	
+--				)
+--		JOIN	sewadars	swds
+--			ON	(	swds.sewadar_id		 = 	i.sewadar_id	
+--				AND	swds.global_sewadar_status_cd	IS NOT	NULL
+--				)		
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that status and status date change together (only one of these cannot be changed)
+--			sewadars_registrations_g_iu
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON 	(	i.satsang_centre_id	 = 	d.satsang_centre_id
+--				AND	i.sewadar_grno		 = 	d.sewadar_grno
+--				)
+--	--	values can be changing from NULL to NOT NULL or vice versa, hence COALESCE
+--	WHERE	(	
+--				(	COALESCE (i.sewadar_status_cd,'X')			!= 	COALESCE (d.sewadar_status_cd,'X')	
+--				AND	COALESCE (i.sewadar_status_dtm, GETDATE() ) =	COALESCE (d.sewadar_status_dtm, GETDATE() )
+--				)
+--			OR
+--				(	COALESCE (i.sewadar_status_cd,'X')			 = 	COALESCE (d.sewadar_status_cd,'X')	
+--				AND	COALESCE (i.sewadar_status_dtm, GETDATE() ) !=	COALESCE (d.sewadar_status_dtm, GETDATE() )
+--				)
+--			)
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that status change is as per sewadar_status_transitions
+--		ASSUMPTION: it will be applicable only during UPDATE event
+--			sewadars_registrations_h_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON 	(	i.satsang_centre_id	 = 	d.satsang_centre_id
+--				AND	i.sewadar_grno		 = 	d.sewadar_grno	
+--				)
+--		LEFT OUTER JOIN	sewadar_status_valid_transitions	ssvt
+--		--	doing COALESCE operations to ensure status transitions from NULL, or to NULL, do not result in an error
+--			ON	(	COALESCE (d.sewadar_status_cd,'X')	= COALESCE (ssvt.old_sewadar_status_cd,'X')
+--				AND	COALESCE (i.sewadar_status_cd,'X')	= COALESCE (ssvt.new_sewadar_status_cd,'X')
+--				)
+--	--	only when both the fields are NULL, then the record is not present, since both columns are NULLable
+--	WHERE	ssvt.new_sewadar_status_cd	IS	NULL
+--	AND		ssvt.old_sewadar_status_cd	IS 	NULL
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that it does not result in multiple sewadar_grno for sewadar_id having the sewadar_status_cd where sewadar_status.is_multiple = No
+--			sewadars_registrations_i_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_registrations i 
+		LEFT OUTER JOIN	sewadar_status	si
+			ON 	(	i.sewadar_status_cd	=	si.sewadar_status_cd	)
+		LEFT OUTER JOIN	sewadars_registrations r
+			ON	(	i.sewadar_id		=	r.sewadar_id
+				AND	(	i.satsang_centre_id	<>	r.satsang_centre_id
+					OR	i.sewadar_grno		<>	r.sewadar_grno
+					)
+				)
+		LEFT OUTER JOIN	sewadar_status	sr
+			ON 	(	r.sewadar_status_cd	=	sr.sewadar_status_cd	)
+	WHERE	si.is_multiple	=	'No'
+	AND		sr.is_multiple	=	'No'
+	AND		r.sewadar_id	IS NOT NULL
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that in an update, the changed date is later than the previous one.
+--			sewadars_registrations_j_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON 	(	i.satsang_centre_id	= d.satsang_centre_id
+--				AND	i.sewadar_grno		= d.sewadar_grno
+--				)
+--	WHERE	i.sewadar_status_dtm	<=	d.sewadar_status_dtm
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that responsibility and responsibility date change together (only one of these cannot be changed);
+----		note that changing from NULL values or to NULL values is a change.
+--			sewadars_registrations_k_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON 	(	i.satsang_centre_id	 = 	d.satsang_centre_id
+--				AND	i.sewadar_grno		 = 	d.sewadar_grno
+--				)
+--	--	values can be changing from NULL to NOT NULL or vice versa, hence COALESCE
+--	WHERE	(	
+--				(	COALESCE (i.responsibility,'X')					!= 	COALESCE (d.responsibility,'X')	
+--				AND	COALESCE (i.responsibility_dtm, GETDATE () )	 =	COALESCE (d.responsibility_dtm, GETDATE() )
+--				)
+--			OR
+--				(	COALESCE (i.responsibility,'X')					 = 	COALESCE (d.responsibility,'X')	
+--				AND	COALESCE (i.responsibility_dtm, GETDATE() ) 	!=	COALESCE (d.responsibility_dtm, GETDATE() )
+--				)
+--			)
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that in an update, the changed date is later than the previous one.
+--			sewadars_registrations_l_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_registrations i 
+--		JOIN	deleted	d
+--			ON 	(	i.satsang_centre_id	= d.satsang_centre_id
+--				AND	i.sewadar_grno		= d.sewadar_grno
+--				)
+--	WHERE	i.responsibility_dtm	<=	d.responsibility_dtm
+
+
+-- =============================================================================
+--	Table 	sewadars_registrations
+--	Trigger ensures that Sponsorer's Status in sewadars_registrations.sewadar_status_cd (as per the Current GR No)
+---- is one of General Use (system_info_cd = SttsGenUse)
+--			sewadars_registrations_o_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_registrations i 
+		JOIN	sewadars	swds
+			ON	(	swds.sewadar_id		= i.sponsorer_id	)
+		LEFT OUTER JOIN	sewadars_registrations	swrg
+			ON	(	swrg.satsang_centre_id	= swds.current_satsang_centre_id	
+				AND	swrg.sewadar_grno		= swds.current_sewadar_grno
+				)
+	WHERE	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+											FROM	system_information_values
+											WHERE	system_info_cd	= 'SttsGenUse'
+										)
+	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record
+	AND		swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	sewadars_transfers
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			sewadars_transfers_a_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_transfers i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewadars_transfers
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			sewadars_transfers_b_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_transfers i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record			
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	sewadars_transfers
+--	Trigger ensures that old_department_id (and old_sub_department_id), if specified, match
+--		the corresponding values in sewadars_registrations using sewadars.current_{satsang_centre_id | sewadar_grno]
+--			sewadars_transfers_c_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_transfers i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	i.old_department_id			IS NOT 	NULL	-- to ensure that the old department details have been specified
+--				)
+--		JOIN	sewadars		swds
+--			ON	(	swds.sewadar_id				= swrg.sewadar_id	)
+--		LEFT OUTER JOIN	sewadars_registrations	swrgdpt
+--			ON	(	swrgdpt.satsang_centre_id	= swds.current_satsang_centre_id
+--				AND	swrgdpt.sewadar_grno		= swds.current_sewadar_grno
+--				AND	i.old_department_id			= swrgdpt.department_id
+--				AND	i.old_sub_department_id		= swrgdpt.sub_department_id
+--				)
+--	WHERE	swrgdpt.satsang_centre_id	IS	NULL	
+
+-- =============================================================================
+--	Table	sewadars_transfers
+--	Trigger ensures that sub_department_id is specified when departments.sub_department_mandatory = Yes
+--			sewadars_transfers_d_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_transfers i 
+		LEFT OUTER JOIN	departments_satsang_centres		dpsc
+			ON 	(	dpsc.satsang_centre_id	= i.satsang_centre_id	
+				AND	dpsc.department_id		= i.old_department_id
+				)
+	WHERE	dpsc.sub_department_mandatory	= 'Yes'
+	AND		i.old_sub_department_id				IS NULL	
+
+-- =============================================================================
+--	Table	sewadars_transfers
+--	Trigger ensures that sub_department_id is specified when departments.sub_department_mandatory = Yes
+--			sewadars_transfers_e_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_transfers i 
+		LEFT OUTER JOIN	departments_satsang_centres		dpsc
+			ON 	(	dpsc.satsang_centre_id	= i.satsang_centre_id	
+				AND	dpsc.department_id		= i.department_id
+				)
+	WHERE	dpsc.sub_department_mandatory	= 'Yes'
+	AND		i.sub_department_id				IS NULL	
+
+-- =============================================================================
+--	Table	sewadars_status_changes
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			sewadars_status_changes_a_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_status_changes i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewadars_responsibility_changes
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			sewadars_responsibility_changes_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_responsibility_changes i 
+		JOIN	sewadars_registrations	swrg
+			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+				AND	swrg.sewadar_grno		= i.sewadar_grno
+				)	
+		LEFT OUTER JOIN	sewadars	swdr
+			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+				)
+	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewadars_responsibility_changes
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			sewadars_responsibility_changes_b_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_responsibility_changes i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record			
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	sewadars_particulars	
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			sewadars_particulars_a_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_particulars i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewadars_attributes
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			sewadars_attributes_a_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadars_attributes i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewadars_attributes
+--	Trigger ensures that one of these values are set on the basis of attribute_type
+--			sewadars_attributes_b_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_attributes i 
+		LEFT JOIN	generic_attributes g
+				ON	(	i.attribute_id	=	g.attribute_id	
+					AND	(	( g.attribute_type	=	'Boolean'	AND i.boolean_value	IS NOT NULL)
+						OR	( g.attribute_type	=	'Date'		AND i.date_value	IS NOT NULL)
+						OR	( g.attribute_type	=	'Timestamp'	AND i.date_value	IS NOT NULL)
+						OR	( g.attribute_type	=	'String'	AND i.string_value	IS NOT NULL)
+						OR	( g.attribute_type	=	'Integer'	AND i.int_value		IS NOT NULL)
+						OR	( g.attribute_type	=	'Number'	AND i.number_value	IS NOT NULL)
+						OR	( g.attribute_type	=	'List'		AND i.list_value	IS NOT NULL)
+						)
+
+					)
+		WHERE	g.attribute_id	IS NULL						
+
+-- =============================================================================
+--	Table	sewadars_attributes
+--	Trigger ensures that (a) these two columns are set, and (b) not set on the basis of is_temporal
+--			sewadars_attributes_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadars_attributes i 
+		LEFT JOIN	generic_attributes g
+				ON	(	i.attribute_id	=	g.attribute_id	
+					AND	(	( i.effective_from	IS NOT NULL	AND i.effective_till IS NOT NULL AND g.is_temporal = 'Yes')
+						OR	( i.effective_from	IS NULL	AND i.effective_till IS NULL AND g.is_temporal = 'No')
+						)
+
+					)
+		WHERE	g.attribute_id	IS NULL						
+
+-- =============================================================================
+--	Table	sewa_teams
+--	Trigger ensures that the (a) sewa_id has sewa.attendance_marking = Team-wise
+--			sewa_teams_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewa_teams i 
+		JOIN	sewas	sws
+			ON	(	sws.sewa_id	= i.sewa_id	
+				AND	sws.attendance_marking	= 'Team-wise'
+				)
+	WHERE	sws.sewa_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewa_team_wise_sewadars
+--	Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+--			sewa_team_wise_sewadars_a_iud
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewa_team_wise_sewadars i 
+--		JOIN	sewa_teams	swtm
+--			ON	(	i.sewa_team_id	= swtm.sewa_team_id	)
+--		JOIN	sewas	sws
+--			ON	(	swtm.sewa_id	= sws.sewa_id	
+--				AND	sws.locked_dtm	IS NOT	NULL
+--				)
+
+-- =============================================================================
+--	Table	sewa_team_wise_sewadars
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			sewa_team_wise_sewadars_b_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewa_team_wise_sewadars i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	sewa_team_wise_sewadars
+--	Trigger ensures that attendance_dt (if any) >= transfer_in_dt
+--			sewa_team_wise_sewadars_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewa_team_wise_sewadars i 
+		LEFT OUTER JOIN	team_wise_daily_attendance	twda
+			ON	(	twda.sewa_team_id	= i.sewa_team_id
+				AND	twda.serial_id		= i .serial_id								
+				AND	twda.attendance_dt	IS NOT NULL
+				)
+	WHERE	i.transfer_in_dt	IS NOT	NULL
+	AND		twda.attendance_dt	<	i.transfer_in_dt
+		
+
+-- =============================================================================
+--	Table	sewa_team_wise_sewadars
+--	Trigger ensures that attendance_dt (if any) <= transfer_out_dt
+--			sewa_team_wise_sewadars_d_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewa_team_wise_sewadars i 
+		LEFT OUTER JOIN	team_wise_daily_attendance	twda
+			ON	(	twda.sewa_team_id	= i.sewa_team_id
+				AND	twda.serial_id		= i .serial_id
+				AND	twda.attendance_dt	IS NOT NULL
+				)
+	WHERE	i.transfer_out_dt	IS NOT	NULL
+	AND		twda.attendance_dt	>	i.transfer_out_dt
+		
+
+-- =============================================================================
+--	Table	team_wise_daily_attendance
+--	Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+--			team_wise_daily_attendance_a_iud
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	team_wise_daily_attendance i
+--		JOIN	sewa_teams		swtm
+--			ON	(	swtm.sewa_team_id	= i.sewa_team_id	)	
+--		JOIN	sewas	sws
+--			ON	(	sws.sewa_id			= swtm.sewa_id	
+--				AND	sws.locked_dtm		IS NOT	NULL
+--				)
+
+-- =============================================================================
+--	Table	team_wise_daily_attendance
+--	Trigger ensures that
+---			(a) sewas.is_leave_allowed to record attendance as Leave
+---			(b) sewas.is_exemption_allowed to record attendance as Exemption
+--			team_wise_daily_attendance_b_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	team_wise_daily_attendance i
+		JOIN	sewa_teams		swtm
+			ON	(	i.sewa_team_id		= swtm.sewa_team_id	
+				AND	i.attendance		= 'L'
+				)	
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	swtm.sewa_id			= sws.sewa_id	
+				AND	sws.is_leave_allowed	= 'Yes'
+				)
+	WHERE	sws.sewa_id	IS	NULL
+
+	SELECT *
+	FROM 	team_wise_daily_attendance i
+		JOIN	sewa_teams		swtm
+			ON	(	i.sewa_team_id		= swtm.sewa_team_id	
+				AND	i.attendance		= 'E'
+				)	
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	swtm.sewa_id				= sws.sewa_id	
+				AND	sws.is_exemption_allowed	= 'Yes'
+				)
+	WHERE	sws.sewa_id	IS	NULL
+
+-- =============================================================================
+--	Table	team_wise_daily_attendance
+--	Trigger ensures that is_scanned can be set to Yes only if sewas.is_scanner_used is set to Yes
+--			team_wise_daily_attendance_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	team_wise_daily_attendance i
+		JOIN	sewa_teams		swtm
+			ON	(	i.sewa_team_id		= swtm.sewa_team_id	
+				AND	i.is_scanned		= 'Yes'
+				)	
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	swtm.sewa_id		= sws.sewa_id	
+				AND	sws.is_scanner_used	= 'Yes'
+				)
+	WHERE	sws.sewa_id	IS	NULL
+
+-- =============================================================================
+--	Table	arbitrary_daily_presences
+--	Trigger ensures that the sewa_id has sewa.attendance_marking = Arbitrary and attendance_unit = Day
+--			arbitrary_daily_presences_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_daily_presences i
+		JOIN	sewas	sws
+			ON	(	i.sewa_id	= sws.sewa_id
+				AND	sws.attendance_marking 	= 'Arbitrary'
+				AND	sws.attendance_unit		= 'Day'
+				)	
+	WHERE	sws.sewa_id	IS	NULL	
+
+-- =============================================================================
+--	Table	arbitrary_daily_presences	
+--	Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+--			arbitrary_daily_presences_b_iud
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_daily_presences i 
+		JOIN	sewas	sws
+			ON	(	sws.sewa_id	= i.sewa_id	
+				AND	sws.locked_dtm	IS NOT	NULL
+				)
+
+-- =============================================================================
+--	Table	arbitrary_daily_presences	
+--	Trigger ensures that the sewa's satsang centre is same as specified as the column in column satsang_centre
+--			arbitrary_daily_presences_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_daily_presences i
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id	= sws.sewa_id	
+				AND	i.satsang_centre_id	= sws.satsang_centre_id
+				)	
+	WHERE	sws.sewa_id	IS 	NULL
+
+-- =============================================================================
+--	Table	arbitrary_daily_presences
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			arbitrary_daily_presences_d_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	arbitrary_daily_presences i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	arbitrary_daily_presences
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			arbitrary_daily_presences_e_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	arbitrary_daily_presences i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record			
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	arbitrary_daily_presences
+--	Trigger ensures that is_scanned can be set to Yes only if sewas.is_scanner_used is set to Yes
+--			arbitrary_daily_presences_f_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_daily_presences i
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id		= sws.sewa_id
+				AND	sws.is_scanner_used	= 'Yes'
+				)
+	WHERE	i.is_scanned	= 'Yes'
+	AND		sws.sewa_id	IS	NULL
+
+-- =============================================================================
+--	Table	arbitrary_shift_presences
+--	Trigger ensures that the sewa_id has sewa.attendance_marking = Arbitrary and attendance_unit = Shift
+--			arbitrary_shift_presences_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_shift_presences i
+		JOIN	sewas	sws
+			ON	(	i.sewa_id	= sws.sewa_id
+				AND	sws.attendance_marking 	= 'Arbitrary'
+				AND	sws.attendance_unit		= 'Shift'
+				)	
+	WHERE	sws.sewa_id	IS	NULL	
+
+-- =============================================================================
+--	Table	arbitrary_shift_presences
+--	Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+--			arbitrary_shift_presences_b_iud
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_shift_presences i 
+		JOIN	sewas	sws
+			ON	(	sws.sewa_id	= i.sewa_id	
+				AND	sws.locked_dtm	IS NOT	NULL
+				)
+
+-- =============================================================================
+--	Table	arbitrary_shift_presences
+--	Trigger ensures that the sewa's satsang centre is same as specified as the column in column satsang_centre
+--			arbitrary_shift_presences_c_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_shift_presences i
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id	= sws.sewa_id	
+				AND	i.satsang_centre_id	= sws.satsang_centre_id
+				)	
+	WHERE	sws.sewa_id	IS 	NULL
+
+-- =============================================================================
+--	Table	arbitrary_shift_presences
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			arbitrary_shift_presences_d_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	arbitrary_shift_presences i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	arbitrary_shift_presences
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			arbitrary_shift_presences_e_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	arbitrary_shift_presences i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record			
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	arbitrary_shift_presences
+--	Trigger ensures that is_scanned can be set to Yes only if sewas.is_scanner_used is set to Yes
+--			arbitrary_shift_presences_f_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_shift_presences i
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id		= sws.sewa_id
+				AND	i.is_scanned	IS NOT 	NULL	
+				AND	sws.is_scanner_used	= 'Yes'
+				)
+	WHERE	sws.sewa_id	IS	NULL
+
+-- =============================================================================
+--	Table	arbitrary_summarised_exemptions
+--	Trigger ensures that the sewa_id has sewa.attendance_marking = Arbitrary
+--			arbitrary_summarised_exemptions_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_summarised_exemptions i
+		JOIN	sewas	sws
+			ON	(	i.sewa_id	= sws.sewa_id
+				AND	sws.attendance_marking 	= 'Arbitrary'
+				)	
+	WHERE	sws.sewa_id	IS	NULL	
+
+-- =============================================================================
+--	Table	arbitrary_summarised_exemptions
+--	Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+--			arbitrary_summarised_exemptions_b_iud
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_summarised_exemptions i 
+		JOIN	sewas	sws
+			ON	(	sws.sewa_id	= i.sewa_id	
+				AND	sws.locked_dtm	IS NOT	NULL
+				)
+
+-- =============================================================================
+--	Table	arbitrary_summarised_exemptions
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			arbitrary_summarised_exemptions_c_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	arbitrary_summarised_exemptions i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	arbitrary_summarised_exemptions
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			arbitrary_summarised_exemptions_d_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	arbitrary_summarised_exemptions i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record			
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	arbitrary_summarised_exemptions
+--	Trigger ensures that when sewa_exemptions.sewa_applicability = Yes, the exemption exists in sewa_exemptions_applicable_sewas
+--			arbitrary_summarised_exemptions_e_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	arbitrary_summarised_exemptions i 
+		LEFT OUTER JOIN	sewa_exemptions	e
+			ON	(	i.sewa_exemption_id		=	e.sewa_exemption_id )
+		LEFT OUTER JOIN sewa_exemptions_applicable_sewas eas
+			ON	(	i.sewa_id				=	eas.sewa_id
+				AND	i.sewa_exemption_id		=	eas.sewa_exemption_id
+				)
+	WHERE	e.sewa_applicability	=	'Yes'
+	AND		eas.sewa_id				IS NULL
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that a row is neither updated, inserted or deleted if sewa is locked
+--			sewadar_wise_sewa_summaries_a_iud
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadar_wise_sewa_summaries i 
+--		JOIN	sewas	sws
+--			ON	(	i.sewa_id	= sws.sewa_id	)								
+--		WHERE sws.locked_dtm	IS NOT	NULL
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that (current_satsang_centre_id, current_sewadar_grno) matches with satsang_centre_id, sewadar_grno.
+--			sewadar_wise_sewa_summaries_b_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadar_wise_sewa_summaries i 
+--		JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id	= i.satsang_centre_id
+--				AND	swrg.sewadar_grno		= i.sewadar_grno
+--				)	
+--		LEFT OUTER JOIN	sewadars	swdr
+--			ON	(	swdr.sewadar_id			= swrg.sewadar_id	
+--				AND	swdr.current_satsang_centre_id	= i.satsang_centre_id
+--				AND	swdr.current_sewadar_grno		= i.sewadar_grno
+--				)
+--	WHERE	swdr.sewadar_id	IS	NULL
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that the sewadar_status is one of specified in System Info Code SttsActv.
+--			sewadar_wise_sewa_summaries_c_iu
+-- =============================================================================
+-- The migrated cannot be tested for this trigger
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadar_wise_sewa_summaries i 
+--		LEFT OUTER JOIN	sewadars_registrations	swrg
+--			ON	(	swrg.satsang_centre_id		= i.satsang_centre_id
+--				AND	swrg.sewadar_grno			= i.sewadar_grno
+--				AND	swrg.sewadar_status_cd	IN	(	SELECT	system_info_value
+--													FROM	system_information_values
+--													WHERE	system_info_cd	= 'SttsActv'
+--												)
+--				)
+--	--	any NOT NULL column checking to NULL, would ensure the left outer join does not have the right hand side record			
+--	WHERE	swrg.satsang_centre_id	IS 	NULL
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that exempt_cnt > 0 only when sewas.is_exemption_allowed is Yes
+--			sewadar_wise_sewa_summaries_d_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadar_wise_sewa_summaries i 
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id					= sws.sewa_id
+				AND	sws.is_exemption_allowed	= 'Yes'
+				)
+	WHERE	i.exempt_cnt	> 0
+	AND		sws.sewa_id	IS	NULL			
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that leave_cnt > 0 only when sewas.is_leave_allowed is Yes
+--			sewadar_wise_sewa_summaries_e_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadar_wise_sewa_summaries i 
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id					= sws.sewa_id								
+				AND	sws.is_leave_allowed		= 'Yes'
+				)
+	WHERE	i.leave_cnt		> 0
+	AND		sws.sewa_id		IS NULL
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that absent_cnt > 0 only when sewas.attendance_marking is one of Team-wise or Computed
+--			sewadar_wise_sewa_summaries_f_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadar_wise_sewa_summaries i 
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	i.sewa_id				= sws.sewa_id								
+				AND	sws.attendance_marking 	IN	('Team-wise', 'Computed')
+				)
+	WHERE	i.absent_cnt	> 0
+	AND		sws.sewa_id		IS NULL
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that (a) overwriting system generated values is not permitted (in other words, updates are not allowed)
+--			sewadar_wise_sewa_summaries_g_u
+-- =============================================================================
+
+--	SELECT *
+--	FROM 	sewadar_wise_sewa_summaries i
+--		JOIN deleted d
+--			ON (	i.sewa_id				= d.sewa_id
+--				AND	i.satsang_centre_id		= d.satsang_centre_id
+--				AND	i.sewadar_grno			= d.sewadar_grno
+--				)
+--		WHERE	i.is_system_recorded = 'Yes'
+
+-- =============================================================================
+--	Table	sewadar_wise_sewa_summaries
+--	Trigger ensures that (b) is_system_recorded can be No only for sewas where attendance_marking = "Summary"
+--			sewadar_wise_sewa_summaries_h_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	sewadar_wise_sewa_summaries i 
+		LEFT OUTER JOIN	sewas	sws
+			ON	(	sws.sewa_id				= i.sewa_id
+				AND	sws.attendance_marking 	= 'Summary'
+				)
+	WHERE	i.is_system_recorded 	= 'No'
+	AND		sws.sewa_id				IS NULL
+
+-- =============================================================================
+--	Table	generic_sewadar_lists
+--	Trigger ensures that the satsang_centre_id has is_main_centre set to Yes
+--			generic_sewadar_lists_a_iu
+-- =============================================================================
+
+	SELECT *
+	FROM 	generic_sewadar_lists i 
+		LEFT OUTER JOIN	satsang_centres_details		stcd
+			ON	(	i.satsang_centre_id	= stcd.satsang_centre_id	
+				AND	stcd.is_main_centre	= 'Yes'
+				)
+	WHERE	stcd.satsang_centre_id	IS	NULL
+
