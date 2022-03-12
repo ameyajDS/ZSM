@@ -1,0 +1,27 @@
+﻿@using DCC.UMB.WDF.Views
+@model CDBModel.RelationsViewModel
+
+<div ng-controller="RelationController">
+
+    <form class="classRelation" novalidate name="frmRelation" >
+        <label>&nbsp;</label>
+        <div class="row-fluid span10 ">
+            <fieldset class="fieldset">
+                <legend class="panel"><b>Relation Details</b></legend>
+
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.relation_id, span: 3, isConditionallyVisible: true, addRangeSupplementForQueryMode: true, tooltipMessage: "Relation Number", placeholderText: "Enter relation code", readOnly: false)
+                </div>
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.relation_nm, cssClassesForInputTag: "first-focus", span: 3, required: true)
+                </div>
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.effective_from, span: 3)
+                </div>
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.effective_till, span: 3)
+                </div>
+            </fieldset>
+        </div>
+    </form>
+</div>

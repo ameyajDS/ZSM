@@ -1,0 +1,4 @@
+﻿--Fill data from here.
+--http://en.wikipedia.org/wiki/Category:Cities_and_towns_in_India_by_district
+
+//http://en.wikipedia.org/wiki/Amritsar_district

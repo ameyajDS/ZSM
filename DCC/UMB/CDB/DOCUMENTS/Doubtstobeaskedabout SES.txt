@@ -1,0 +1,9 @@
+   In Persons screen
+1  Initiation Date,Initiated by and Place fields details need to be asked
+
+2  The user is allowed to enter Data like :te76798766eettt in Celll phone no.  Field 
+
+3 Unable to understand the unique constraint :
+CONSTRAINT	UK_Representatives_Person
+		UNIQUE	NONCLUSTERED	(person_id, effective_from)
+in the schema of Representative screen.

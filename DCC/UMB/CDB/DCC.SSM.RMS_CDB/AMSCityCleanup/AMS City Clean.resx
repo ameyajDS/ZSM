@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="selectCity.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="City.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="State.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="StateID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="totalCount.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="selectvisitor.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="visitorID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="VisitorName.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="age.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="gender.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="address.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="vstCity.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="vstState.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="vstStateID.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="txtCDBCountryName.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT * FROM countries where effective_from &amp;lt;= getDate() and effective_till &amp;gt;= getDate()"&gt;
+  &lt;LookupColumn caption="Country Id" sqlName="country_id" aliasName="country_id" percentageWidth="25" toolTipText="Country Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Country Name" sqlName="country_nm" aliasName="country_nm" percentageWidth="25" toolTipText="Country Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Isd Code" sqlName="isd_code" aliasName="isd_code" percentageWidth="25" toolTipText="Isd Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective From" sqlName="effective_from" aliasName="effective_from" percentageWidth="25" toolTipText="Effective From" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective Till" sqlName="effective_till" aliasName="effective_till" percentageWidth="25" toolTipText="Effective Till" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+  <data name="txtCDBStateName.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT * FROM cdb..level_1_address_components WHERE (effective_from &amp;lt;= GETDATE() AND effective_till &amp;gt;= GETDATE()) AND  ?"&gt;
+  &lt;LookupColumn caption="Level 1 Address Component Id" sqlName="level_1_address_component_id" aliasName="level_1_address_component_id" percentageWidth="25" toolTipText="Level 1 Address Component Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 1 Address Component Code" sqlName="level_1_address_component_cd" aliasName="level_1_address_component_cd" percentageWidth="25" toolTipText="Level 1 Address Component Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 1 Address Component Name" sqlName="level_1_address_component_nm" aliasName="level_1_address_component_nm" percentageWidth="25" toolTipText="Level 1 Address Component Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Country Id" sqlName="country_id" aliasName="country_id" percentageWidth="25" toolTipText="Country Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Is Authentic" sqlName="is_authentic" aliasName="is_authentic" percentageWidth="25" toolTipText="Is Authentic" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective From" sqlName="effective_from" aliasName="effective_from" percentageWidth="25" toolTipText="Effective From" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective Till" sqlName="effective_till" aliasName="effective_till" percentageWidth="25" toolTipText="Effective Till" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+  <data name="txtCDBDisttName.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT l2.* FROM [CDB].[dbo].[level_2_address_components] l2&amp;#xD;&amp;#xA;LEFT OUTER JOIN level_1_address_components l1 ON l2.level_1_address_component_id = l1.level_1_address_component_id&amp;#xD;&amp;#xA;WHERE (l2.effective_from &amp;lt;= GETDATE() AND l2.effective_till &amp;gt;= GETDATE()) AND   ?"&gt;
+  &lt;LookupColumn caption="Level 2 Address Component Id" sqlName="level_2_address_component_id" aliasName="level_2_address_component_id" percentageWidth="25" toolTipText="Level 2 Address Component Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 2 Address Component Code" sqlName="level_2_address_component_cd" aliasName="level_2_address_component_cd" percentageWidth="25" toolTipText="Level 2 Address Component Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 2 Address Component Name" sqlName="level_2_address_component_nm" aliasName="level_2_address_component_nm" percentageWidth="25" toolTipText="Level 2 Address Component Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 1 Address Component Id" sqlName="level_1_address_component_id" aliasName="level_1_address_component_id" percentageWidth="25" toolTipText="Level 1 Address Component Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Is Authentic" sqlName="is_authentic" aliasName="is_authentic" percentageWidth="25" toolTipText="Is Authentic" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Txn Ts" sqlName="txn_ts" aliasName="txn_ts" percentageWidth="25" toolTipText="Txn Ts" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective From" sqlName="effective_from" aliasName="effective_from" percentageWidth="25" toolTipText="Effective From" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective Till" sqlName="effective_till" aliasName="effective_till" percentageWidth="25" toolTipText="Effective Till" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="District Id" sqlName="district_id" aliasName="district_id" percentageWidth="25" toolTipText="District Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+  <metadata name="txtCDBCityName.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="txtCDBCityName.LookupColumns" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Root LookupSqlQuery="SELECT l3.* FROM [CDB].[dbo].[level_3_address_components] l3&amp;#xD;&amp;#xA;LEFT OUTER JOIN level_2_address_components l2 ON l3.level_2_address_component_id = l2.level_2_address_component_id&amp;#xD;&amp;#xA;WHERE (l3.effective_from &amp;lt;= GETDATE() AND l3.effective_till &amp;gt;= GETDATE()) AND    ?"&gt;
+  &lt;LookupColumn caption="Level 3 Address Component Id" sqlName="level_3_address_component_id" aliasName="level_3_address_component_id" percentageWidth="25" toolTipText="Level 3 Address Component Id" isDisplayMemberColumn="False" isValueMemberColumn="True" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 3 Address Component Code" sqlName="level_3_address_component_cd" aliasName="level_3_address_component_cd" percentageWidth="25" toolTipText="Level 3 Address Component Code" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 3 Address Component Name" sqlName="level_3_address_component_nm" aliasName="level_3_address_component_nm" percentageWidth="25" toolTipText="Level 3 Address Component Name" isDisplayMemberColumn="True" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Level 2 Address Component Id" sqlName="level_2_address_component_id" aliasName="level_2_address_component_id" percentageWidth="25" toolTipText="Level 2 Address Component Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Is Authentic" sqlName="is_authentic" aliasName="is_authentic" percentageWidth="25" toolTipText="Is Authentic" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Txn Ts" sqlName="txn_ts" aliasName="txn_ts" percentageWidth="25" toolTipText="Txn Ts" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective From" sqlName="effective_from" aliasName="effective_from" percentageWidth="25" toolTipText="Effective From" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Effective Till" sqlName="effective_till" aliasName="effective_till" percentageWidth="25" toolTipText="Effective Till" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+  &lt;LookupColumn caption="Post Office Id" sqlName="post_office_id" aliasName="post_office_id" percentageWidth="25" toolTipText="Post Office Id" isDisplayMemberColumn="False" isValueMemberColumn="False" isCodeMemberColumn="False" tablePrefix="" /&gt;
+&lt;/Root&gt;</value>
+  </data>
+</root>

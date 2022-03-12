@@ -1,0 +1,11 @@
+1. In Cameras Screen for Picture Quality field, a drop down should be provided with the values :
+	1 Good
+	2 Better
+	3 Best
+so that the user can choose any one among them, instead of manually typing in one of these.
+
+2 . In Cameras screen for Flash Mode field, a drop down should be provided with the values:
+	1 On
+	2 Off
+	3 Auto 
+so that the user can choose any one among tham, instead of manually typing in one of them.

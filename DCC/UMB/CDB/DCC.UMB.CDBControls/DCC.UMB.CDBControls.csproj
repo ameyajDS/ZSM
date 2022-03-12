@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{71442424-D2C6-46FC-AD3B-3C39DA76FAE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.UMB.CDBControls</RootNamespace>
+    <AssemblyName>DCC.UMB.CDBControls</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/DCC.UMB.CDBLookups/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DropDown\ActiveInactiveCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\ActiveInactiveCombo.Designer.cs">
+      <DependentUpon>ActiveInactiveCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropDown\BaseCDBMasterCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\SocietiesCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\SocietiesCombo.Designer.cs">
+      <DependentUpon>SocietiesCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropDown\PatronCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\PatronCombo.Designer.cs">
+      <DependentUpon>PatronCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropDown\YesNoCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\YesNoCombo.Designer.cs">
+      <DependentUpon>YesNoCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropDown\SewadarTypesCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\SewadarTypesCombo.Designer.cs">
+      <DependentUpon>SewadarTypesCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropDown\GenderCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\GenderCombo.Designer.cs">
+      <DependentUpon>GenderCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropDown\MaritalStatusCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropDown\MaritalStatusCombo.Designer.cs">
+      <DependentUpon>MaritalStatusCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\CountriesListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\CountriesListBox.Designer.cs">
+      <DependentUpon>CountriesListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\DepartmentOrOrganizationListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\DepartmentOrOrganizationListBox.Designer.cs">
+      <DependentUpon>DepartmentOrOrganizationListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\SatsangCentresListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\SatsangCentresListBox.Designer.cs">
+      <DependentUpon>SatsangCentresListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\StatesListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\StatesListBox.Designer.cs">
+      <DependentUpon>StatesListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\DistrictOrCitiesListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\DistrictOrCitiesListBox.Designer.cs">
+      <DependentUpon>DistrictOrCitiesListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\DepartmentListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\DepartmentListBox.Designer.cs">
+      <DependentUpon>DepartmentListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lists\SewadarTypesListBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lists\SewadarTypesListBox.Designer.cs">
+      <DependentUpon>SewadarTypesListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookups\BaseCDBMasterLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\DesignationsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\DesignationsLookup.Designer.cs">
+      <DependentUpon>DesignationsLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lookups\DocumentTypesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\HospitalUnitsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\PartiesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\PhoneTypesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\QualificationSubjectsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\SewadarStatusLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\SewadarTypesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\LanguagesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\QualificationsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\InitiationPlacesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\MeasuringUnitsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\DeptGroupsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\OccupationsLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\DistrictorCitiesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\SatsangCentresLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\StatesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\CountriesLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\DepartmentLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\WorkingUnitLookup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lookups\WorkingUnitLookup.Designer.cs">
+      <DependentUpon>WorkingUnitLookup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Utility.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DropDown\SocietiesCombo.resx">
+      <DependentUpon>SocietiesCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropDown\PatronCombo.resx">
+      <DependentUpon>PatronCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropDown\SewadarTypesCombo.resx">
+      <DependentUpon>SewadarTypesCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropDown\GenderCombo.resx">
+      <DependentUpon>GenderCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropDown\MaritalStatusCombo.resx">
+      <DependentUpon>MaritalStatusCombo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\CountriesListBox.resx">
+      <DependentUpon>CountriesListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\DepartmentOrOrganizationListBox.resx">
+      <DependentUpon>DepartmentOrOrganizationListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\SatsangCentresListBox.resx">
+      <DependentUpon>SatsangCentresListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\StatesListBox.resx">
+      <DependentUpon>StatesListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\DistrictOrCitiesListBox.resx">
+      <DependentUpon>DistrictOrCitiesListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\DepartmentListBox.resx">
+      <DependentUpon>DepartmentListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lists\SewadarTypesListBox.resx">
+      <DependentUpon>SewadarTypesListBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\BaseCDBMasterLookup.resx">
+      <DependentUpon>BaseCDBMasterLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\DesignationsLookup.resx">
+      <DependentUpon>DesignationsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\DocumentTypesLookup.resx">
+      <DependentUpon>DocumentTypesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\HospitalUnitsLookup.resx">
+      <DependentUpon>HospitalUnitsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\PartiesLookup.resx">
+      <DependentUpon>PartiesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\PhoneTypesLookup.resx">
+      <DependentUpon>PhoneTypesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\QualificationSubjectsLookup.resx">
+      <DependentUpon>QualificationSubjectsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\SewadarStatusLookup.resx">
+      <DependentUpon>SewadarStatusLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\SewadarTypesLookup.resx">
+      <DependentUpon>SewadarTypesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\LanguagesLookup.resx">
+      <DependentUpon>LanguagesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\QualificationsLookup.resx">
+      <DependentUpon>QualificationsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\InitiationPlacesLookup.resx">
+      <DependentUpon>InitiationPlacesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\MeasuringUnitsLookup.resx">
+      <DependentUpon>MeasuringUnitsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\DeptGroupsLookup.resx">
+      <DependentUpon>DeptGroupsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\OccupationsLookup.resx">
+      <DependentUpon>OccupationsLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\DistrictorCitiesLookup.resx">
+      <DependentUpon>DistrictorCitiesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\SatsangCentresLookup.resx">
+      <DependentUpon>SatsangCentresLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\StatesLookup.resx">
+      <DependentUpon>StatesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\CountriesLookup.resx">
+      <DependentUpon>CountriesLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\DepartmentLookup.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DepartmentLookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lookups\WorkingUnitLookup.resx">
+      <DependentUpon>WorkingUnitLookup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Misc\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CDF\DCC.UMB.CDF_SOL\DCC.UMB.CDF\DCC.UMB.CDF.csproj">
+      <Project>{b630abdd-90d9-4d4d-9b7b-02df342efcf0}</Project>
+      <Name>DCC.UMB.CDF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

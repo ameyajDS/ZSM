@@ -1,0 +1,36 @@
+Steps for Setting up and Migrating CDB
+--------------------------------------
+
+1. Restore the most recent version of the CDB Database (if it is a test env), Else the existing production version works good.
+
+2. Restore the most recent version of the SWS database
+
+3. Execute the following CDB Scripts to create the structure for CDB Database by virtue of RMS
+	a. 00_00_use_cdb			- to set the CDB as the default database
+	b. 00_CDB_pre_migration_cleanup.sql	- to cleanup any unnecesary table in the old CDB Schema
+	c. 01_CDB_primitives.sql		- to create the primitives reqd for the new set of tables
+	d. 02_CDB_schema.sql			- to create the new set of CDB tables - by virtue of RMS
+	e. 03_CDB_setup_data.sql		- to insert data in the new CDB tables
+	f. 04_CDB_audit_schema.sql		- to create the audit tables for CDB
+	
+4. Execute the following script to migrate the data from existing to new CDB tables	
+	g. 05_CDB_Migration_Restructuring.sql	- makes any changes to tables before migrating
+	h. 06_CDB_Migration.sql
+	i. 07_CDB_Restructuring.sql		
+	j. 08_CDB_Migration.sql			
+
+-- until this point, we have 
+	- the new set of CDB tables added to the existing CDB database
+	- the data has been populated on the new set of CDB tables
+	- the data has been migrated from the old set of CDB tables to the new ones
+
+-- Next we need to migrate CDB data from SWS
+
+5. Execute the following two CBD Migration scripts, in order to migrate data from SWS to CDB
+	k. 21_CDB_script.sql			- migrates data from SWS to CDB
+	
+6. Once the Migration is complete, we can now create the necessary triggers for the CDB , with foll script
+	l. 09_CDB_Triggers.sql			
+
+
+

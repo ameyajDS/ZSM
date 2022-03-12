@@ -1,0 +1,1 @@
+"..\..\..\CDF\Trunk\DCC.UMB.CDF_SOL\DCC.UMB.CDF.Tools\bin\Debug\DCC.UMB.CDF.Tools.exe" "GENERATE_FACADE_COMMAND_LINE" "-UN=CDB_GNRC" "-PW=password" "-SN=.\SQL" "-AID=CDB_APP" "-FFP=DBFacade\CDB_APPDbFacade.cs"

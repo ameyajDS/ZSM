@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{684F22DD-12B2-44ED-9711-06A62E975046}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DCC.UMB.CDB.DB</RootNamespace>
+    <AssemblyName>DCC.UMB.CDB.DB</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="200_AppSetup\00_use_sysadmin.sql" />
+    <Content Include="200_AppSetup\10_SetupPackageAndApp.sql" />
+    <Content Include="200_AppSetup\20_SetupPackageRoles.sql" />
+    <Content Include="200_AppSetup\30_PostODSSetup.sql" />
+    <Content Include="300_AppObjects\10_Core\00_use_edn.sql" />
+    <Content Include="300_AppObjects\10_Core\core_functions.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\10_Common\Views\ViewDonations.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Countries\DeleteCountrie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Countries\InsertCountrie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Countries\QueryCountrie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Countries\UpdateCountrie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Countries\ViewCountrie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level1State\DeleteLevel1AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level1State\InsertLevel1AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level1State\QueryLevel1AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level1State\UpdateLevel1AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level1State\ViewLevel1AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level2Districts\DeleteLevel2AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level2Districts\InsertLevel2AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level2Districts\QueryLevel2AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level2Districts\UpdateLevel2AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level2Districts\ViewLevel2AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level3City\DeleteLevel3AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level3City\InsertLevel3AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level3City\QueryLevel3AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level3City\UpdateLevel3AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Level3City\ViewLevel3AddressComponent.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\QualificationSubjects\ViewQualificationSubjects.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Relations\DeleteRelation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Relations\InsertRelation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Relations\QueryRelation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Relations\UpdateRelation.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Relations\ViewRelations.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_units\DeleteWorkingUnit.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_units\InsertWorkingUnit.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_units\QueryWorkingUnit.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_units\UpdateWorkingUnit.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_units\ViewWorkingUnit.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_unit_entities\DeleteWorkingUnitEntitie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_unit_entities\InsertWorkingUnitEntitie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_unit_entities\QueryWorkingUnitEntitie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_unit_entities\UpdateWorkingUnitEntitie.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\Entities\Working_unit_entities\ViewWorkingUnitEntities.sql" />
+    <Content Include="300_AppObjects\20_ProcsAndViews\SatsangCentres\ViewSatsangCentres.sql" />
+    <Content Include="300_AppObjects\30_Audit\00_use_edn.sql" />
+    <Content Include="300_AppObjects\40_AppSetup\00_use_SysAdmin.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="300_AppObjects\40_AppSetup\30_CDB_SetupApplication.ods" />
+    <None Include="300_AppObjects\40_AppSetup\GenerateAppSetupScript.bat" />
+    <None Include="300_AppObjects\GenerateProcsOnlyScript.bat" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,28 @@
+﻿@using DCC.UMB.WDF.Views
+@model CDBModel.Level1StateViewModel
+
+<div ng-controller="Level1StateController">
+
+    <form class="classLevel1State" novalidate name="frmLevel1State" >
+        <label>&nbsp;</label>
+        <div class="row-fluid span10 ">
+            <fieldset class="fieldset">
+                <legend class="panel">Level 1 Address Details</legend>
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.level_1_address_component_id, span: 4)
+                    @Html.WDFEditorFor(m => m.level_1_address_component_nm, cssClassesForInputTag: "first-focus", span: 5, forceUpperCase: true)
+                </div>
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.level_1_address_component_cd, span: 4, forceUpperCase: true)
+                    @Html.WDFEditorFor(m => m.country_id_lookup, span: 6)
+                    @Html.WDFEditorFor(m => m.is_authentic, span: 2)
+                </div>
+                <div class="row-fluid span10">
+                    @Html.WDFEditorFor(m => m.effective_from, span: 4)
+                    @Html.WDFEditorFor(m => m.effective_till, span: 5)
+                </div>
+
+            </fieldset>
+        </div>
+    </form>
+</div>

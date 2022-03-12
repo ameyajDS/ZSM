@@ -1,0 +1,6 @@
+0. Execute 01_use_cdb.sql
+1. Execute 10_upgrade.sql
+2. Execute ../SQL_Scripts RV.01/60_triggers_dml.sql
+3. Execute ../SQL_Scripts RV.01/50_views.sql.sql
+4. Execute 30_countries_setup.sql
+ 

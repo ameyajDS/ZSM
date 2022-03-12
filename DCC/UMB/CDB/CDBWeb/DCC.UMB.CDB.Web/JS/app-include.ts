@@ -1,0 +1,14 @@
+/// <reference path="../../../../../../umb/wdf/trunk/DCC.UMB.WDF.Auth/c/js/3p/wdf/wdf-defs.ts"/>
+/// <reference path="./Countries/CountriesController.ts"/>
+/// <reference path="./Countries/CountriesViewModel.ts"/>
+/// <reference path="./0_Main/01_cdb.ts"/>
+/// <reference path="./Relation/RelationController.ts"/>
+/// <reference path="./Relation/RelationViewModel.ts"/>
+/// <reference path="./Level1State/Level1StateController.ts"/>
+/// <reference path="./Level1State/Level1StateViewModel.ts"/>
+/// <reference path="./Level2District/Level2DistrictController.ts"/>
+/// <reference path="./Level2District/Level2DistrictViewModel.ts"/>
+/// <reference path="./Level3City/Level3CityController.ts"/>
+/// <reference path="./Level3City/Level3CityViewModel.ts"/>
+/// <reference path="./WorkingUnits/WorkingUnitController.ts"/>
+/// <reference path="./WorkingUnits/WorkingUnitViewModel.ts"/>
